@@ -628,7 +628,13 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <div class="ulist">
 <ul>
 <li>
-<p>has a need to manage a significant number of contacts</p>
+<p>has a need to manage a significant number of tasks</p>
+</li>
+<li>
+<p>needs reminders to take breaks or move on to cover all their work</p>
+</li>
+<li>
+<p>prefers to be more organized with their time and tasks</p>
 </li>
 <li>
 <p>prefer desktop apps over other types</p>
@@ -645,7 +651,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </ul>
 </div>
 <div class="paragraph">
-<p><strong>Value proposition</strong>: manage contacts faster than a typical mouse/GUI driven app</p>
+<p><strong>Value proposition</strong>: manage time and tasks more efficiently than a typical mouse/GUI driven app</p>
 </div>
 </div>
 </div>
@@ -718,25 +724,28 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <h2 id="use-cases"><a class="link" href="#use-cases">Appendix C: Use Cases</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>(For all use cases below, the <strong>System</strong> is the <code>AddressBook</code> and the <strong>Actor</strong> is the <code>user</code>, unless specified otherwise)</p>
+<p>(For all use cases below, the <strong>System</strong> is <code>ELISA</code> and the <strong>Actor</strong> is the <code>user</code>, unless specified otherwise)</p>
 </div>
-<h3 id="use-case-delete-person" class="discrete">Use case: Delete person</h3>
+<h3 id="use-case-001-marking-a-task-as-done" class="discrete">Use Case 001: Marking a task as done</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests to list persons</p>
+<p>User enters the command to show the task list.</p>
 </li>
 <li>
-<p>AddressBook shows a list of persons</p>
+<p>ELISA shows the task list to the user.</p>
 </li>
 <li>
-<p>User requests to delete a specific person in the list</p>
+<p>User marks the task as done by using the index of the task.</p>
 </li>
 <li>
-<p>AddressBook deletes the person</p>
+<p>ELISA updates the task list.</p>
+</li>
+<li>
+<p>ELISA shows the updated task list to the user.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -749,17 +758,17 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>2a. The list is empty.</p>
+<p>2a. The task list is empty.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
 </li>
 <li>
 <p>3a. The given index is invalid.</p>
-<div class="ulist none">
-<ul class="none">
+<div class="ulist">
+<ul>
 <li>
-<p>3a1. AddressBook shows an error message.</p>
+<p>3a1. ELISA shows an error message.</p>
 <div class="paragraph">
 <p>Use case resumes at step 2.</p>
 </div>
@@ -768,6 +777,153 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </li>
 </ul>
+</div>
+<h3 id="use-case-002-adding-a-task" class="discrete">Use Case 002: Adding a task</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User creates a new task with a description.</p>
+</li>
+<li>
+<p>ELISA informs the user that the task has been added.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>1a. User can add deadline.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>1a1. ELISA informs the user that a deadline has been added to that task.</p>
+<div class="paragraph">
+<p>Use case ends</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>1b. User can add a reminder date.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>1b1. ELISA informs the user that a reminder has been added to that task.</p>
+<div class="paragraph">
+<p>Use case ends</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>1c. User enters an empty description.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>1c1. ELISA informs the user that the description cannot be empty.</p>
+</li>
+<li>
+<p>1c2. User enters a non-empty description</p>
+<div class="paragraph">
+<p>Use case resumes at step 2</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>a. At any time, User can view the task from the task list or the calendar view.</p>
+</li>
+<li>
+<p>b. At any time, User can add a deadline to the task</p>
+</li>
+<li>
+<p>c. At any time, User can add a reminder to the task</p>
+</li>
+</ul>
+</div>
+<h3 id="use-case-003-deleting-a-task" class="discrete">Use Case 003: Deleting a task</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User enters the command to show the task list.</p>
+</li>
+<li>
+<p>ELISA shows the task list.</p>
+</li>
+<li>
+<p>User request to delete a task based on its index.</p>
+</li>
+<li>
+<p>ELISA deletes the task from the task list.</p>
+</li>
+<li>
+<p>ELISA shows the updated task list.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>2a. The task list is empty.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+<li>
+<p>3a. The given index is invalid.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>3a1. ELISA shows an error message.</p>
+<div class="paragraph">
+<p>Use case resumes at step 2.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-004-find-upcoming-reminders" class="discrete">Use Case 004: Find upcoming reminders.</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User enters the command to show the reminder list.</p>
+</li>
+<li>
+<p>ELISA shows the reminder list.</p>
+</li>
+<li>
+<p>User enters command to sort reminders by date and time.</p>
+</li>
+<li>
+<p>ELISA shows the updated list of reminders sorted by date and time.</p>
+</li>
+</ol>
 </div>
 <div class="paragraph">
 <p><em>{More to be added}</em></p>
@@ -958,4 +1114,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-02 16:00:19 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-02 16:09:00 UTC</div></div></div></body></html>
