@@ -107,15 +107,15 @@ public class ItemModelManager implements ItemModel {
      */
     private void addToSeparateList(Item item) {
         if (item.hasTask()) {
-            taskList.add(item);
+            taskList.doAdd(taskList.size(), item);
         }
 
         if (item.hasEvent()) {
-            eventList.add(item);
+            eventList.doAdd(eventList.size(), item);
         }
 
         if (item.hasReminder()) {
-            reminderList.add(item);
+            reminderList.doAdd(reminderList.size(), item);
         }
     }
 

@@ -116,13 +116,13 @@ public class MainWindow extends UiPart<Stage> {
             viewsPlaceholder.getSelectionModel().select(0);
             break;
         case "E":
-            viewsPlaceholder.getSelectionModel().select(1);
+            viewsPlaceholder.getSelectionModel().select(0);
             break;
         case "R":
-            viewsPlaceholder.getSelectionModel().select(2);
+            viewsPlaceholder.getSelectionModel().select(0);
             break;
         case "C":
-            viewsPlaceholder.getSelectionModel().select(3);
+            viewsPlaceholder.getSelectionModel().select(0);
             break;
         default:
             break;

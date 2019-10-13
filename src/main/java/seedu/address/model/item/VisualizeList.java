@@ -9,10 +9,10 @@ import seedu.address.commons.core.item.Item;
  * An object to hold items. Parent class for TaskList, EventList and ReminderList.
  */
 public abstract class VisualizeList extends ModifiableObservableListBase<Item> {
-    protected ArrayList<Item> list;
+    protected final ArrayList<Item> list = new ArrayList<>();
 
     public VisualizeList() {
-        this.list = new ArrayList<>();
+        //this.list = new ArrayList<>();
     }
 
     /**
