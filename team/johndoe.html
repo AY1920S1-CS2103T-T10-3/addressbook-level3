@@ -147,13 +147,16 @@ Format: <code>delete INDEX</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p>Deletes the person at the specified <code>INDEX</code>.</p>
+<p>Deletes the item at the specified <code>INDEX</code> of the current list shown.</p>
 </li>
 <li>
 <p>The index refers to the index number shown in the list.</p>
 </li>
 <li>
 <p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+<li>
+<p>No flags should be given with this command.</p>
 </li>
 </ul>
 </div>
@@ -165,7 +168,7 @@ Format: <code>delete INDEX</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>show -R</code><br>
+<p><code>show r</code><br>
 <code>delete 2</code><br>
 Deletes the 2nd reminder in the shown reminder list.</p>
 </li>
@@ -173,7 +176,66 @@ Deletes the 2nd reminder in the shown reminder list.</p>
 </div>
 </div>
 <div class="sect2">
+<h3 id="undoing-the-latest-modification-s-code-undo-code"><a class="link" href="#undoing-the-latest-modification-s-code-undo-code">Undoing the latest modification(s) : <code>undo</code></a></h3>
+<div class="paragraph">
+<p>Reverts the latest commands given on the ELISA.<br>
+Format: <code>undo [number of commands]</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Omitting the number reverts the last one command</p>
+</li>
+<li>
+<p>The number of commands must be <strong>at most 20</strong></p>
+</li>
+<li>
+<p>The number <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>undo</code><br>
+Undoes the last command</p>
+</li>
+<li>
+<p><code>undo 2</code><br>
+Undoes the last 2 commands</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">Exiting the program : <code>exit</code></a></h3>
+<div class="paragraph">
+<p>Exits the program.<br>
+Format: <code>exit</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">Saving the data</a></h3>
+<div class="paragraph">
+<p>ELISA saves the data in the hard disk automatically after any command that changes the data.
+There is no need to save manually.</p>
+</div>
+</div>
+<div class="sect2">
 <h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">Encrypting data files <code>[coming in v2.0]</code></a></h3>
+<div class="paragraph">
+<p><em>{explain how the user can enable/disable data encryption}</em></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="encrypting-data-files-code-coming-in-v2-0-code-2"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code-2">Encrypting data files <code>[coming in v2.0]</code></a></h3>
 <div class="paragraph">
 <p><em>{explain how the user can enable/disable data encryption}</em></p>
 </div>
@@ -423,4 +485,4 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <p><em>{Optionally, you may include other projects in your portfolio.}</em></p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-18 17:51:46 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-19 12:35:37 UTC</div></div></div></body></html>
