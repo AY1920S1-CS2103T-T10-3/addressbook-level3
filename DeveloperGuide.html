@@ -22,11 +22,12 @@
 </li>
 <li><a href="#implementation">3. Implementation</a>
 <ul class="sectlevel2">
-<li><a href="#proposed-undo-redo-feature">3.1. [Proposed] Undo/Redo feature</a></li>
-<li><a href="#priority-mode">3.2. Priority Mode</a></li>
-<li><a href="#proposed-data-encryption">3.3. [Proposed] Data Encryption</a></li>
-<li><a href="#logging">3.4. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.5. Configuration</a></li>
+<li><a href="#implemented-undo-feature">3.1. [Implemented] Undo Feature</a></li>
+<li><a href="#proposed-undo-redo-feature">3.2. [Proposed] Undo/Redo feature</a></li>
+<li><a href="#priority-mode">3.3. Priority Mode</a></li>
+<li><a href="#proposed-data-encryption">3.4. [Proposed] Data Encryption</a></li>
+<li><a href="#logging">3.5. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.6. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a></li>
@@ -331,9 +332,51 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book<
 <p>This section describes some noteworthy details on how certain features are implemented.</p>
 </div>
 <div class="sect2">
-<h3 id="proposed-undo-redo-feature"><a class="link" href="#proposed-undo-redo-feature">3.1. [Proposed] Undo/Redo feature</a></h3>
+<h3 id="implemented-undo-feature"><a class="link" href="#implemented-undo-feature">3.1. [Implemented] Undo Feature</a></h3>
 <div class="sect3">
-<h4 id="proposed-implementation"><a class="link" href="#proposed-implementation">3.1.1. Proposed Implementation</a></h4>
+<h4 id="current-implementation-logic"><a class="link" href="#current-implementation-logic">3.1.1. Current Implementation Logic</a></h4>
+<div class="paragraph">
+<p>The undo function uses the revert command method without using states and history, unlike the proposed method.
+This is because an issue was encountered with referencing lists and firing reminders multiple times when the state history method was used.</p>
+</div>
+<div class="paragraph">
+<p>In this implementation, the commands that can be undone; that is, all the commands except <code>UndoCommand</code>, <code>ExitCommand</code>,
+<code>UpCommand</code> and <code>DownCommand</code> now extend from an abstract class <code>UndoableCommand</code>, which is a subclass of Command.
+Subclasses of <code>UndoableCommand</code> must implement a method <code>reverse(ItemModel model)</code>, which should do the exact opposite
+of the <code>execute(ItemModel model)</code> in that Command.</p>
+</div>
+<div class="paragraph">
+<p>The command execution history is stored in a stack, which is maintained in <code>ElisaCommandHistory</code>.</p>
+</div>
+<div class="paragraph">
+<p>Below is a possible usage scenario and the app behaviour.</p>
+</div>
+<div class="paragraph">
+<p>Step 1. The user executes <code>task eat</code>. A task with description "eat" is added and then the command is pushed into the commands stack.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/UndoStackStep1.png" alt="UndoStackStep1">
+</div>
+</div>
+<div class="paragraph">
+<p>Step 2. The user realises that adding the task was a mistake, and decides to undo by entering <code>undo</code> into ELISA. The <code>undo</code> command
+will pop the <code>AddTaskCommand</code> from the stack and reverse the effects of that command, in this case by deleting the task "eat" from the <code>TaskList</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/UndoStackStep2.png" alt="UndoStackStep2">
+</div>
+</div>
+<div class="paragraph">
+<p>Step 3. After successful execution of the <code>UndoCommand</code> a confirmation message is displayed in the chat box.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="proposed-undo-redo-feature"><a class="link" href="#proposed-undo-redo-feature">3.2. [Proposed] Undo/Redo feature</a></h3>
+<div class="sect3">
+<h4 id="proposed-implementation"><a class="link" href="#proposed-implementation">3.2.1. Proposed Implementation</a></h4>
 <div class="paragraph">
 <p>The undo/redo mechanism is facilitated by <code>VersionedAddressBook</code>.
 It extends <code>AddressBook</code> with an undo/redo history, stored internally as an <code>addressBookStateList</code> and <code>currentStatePointer</code>.
@@ -475,7 +518,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">3.1.2. Design Considerations</a></h4>
+<h4 id="design-considerations"><a class="link" href="#design-considerations">3.2.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-undo-redo-executes"><a class="link" href="#aspect-how-undo-redo-executes">Aspect: How undo &amp; redo executes</a></h5>
 <div class="ulist">
@@ -545,9 +588,9 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </div>
 <div class="sect2">
-<h3 id="priority-mode"><a class="link" href="#priority-mode">3.2. Priority Mode</a></h3>
+<h3 id="priority-mode"><a class="link" href="#priority-mode">3.3. Priority Mode</a></h3>
 <div class="sect3">
-<h4 id="implementation-2"><a class="link" href="#implementation-2">3.2.1. Implementation</a></h4>
+<h4 id="implementation-2"><a class="link" href="#implementation-2">3.3.1. Implementation</a></h4>
 <div class="paragraph">
 <p>The priority mode is used to aid the user in focusing on the most pressing task that they have especially when they have many tasks in their list. As priority mode is only for clearing of tasks, the priority mode can only be activated at the task pane of the application.</p>
 </div>
@@ -579,7 +622,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </div>
 <div class="sect3">
-<h4 id="example-run-of-code"><a class="link" href="#example-run-of-code">3.2.2. Example run of code</a></h4>
+<h4 id="example-run-of-code"><a class="link" href="#example-run-of-code">3.3.2. Example run of code</a></h4>
 <div class="paragraph">
 <p>In the following section, we will be showing a run of the priority mode and the behaviour of the mechanism at each step. In particular, we will be showing how the <code><code>ScheduledPriorityMode</code></code> works as it requires more step through the sequence diagram as compared to the <code><code>PriorityMode</code></code>.</p>
 </div>
@@ -605,7 +648,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </div>
 <div class="sect3">
-<h4 id="internal-working-of-the-command"><a class="link" href="#internal-working-of-the-command">3.2.3. Internal working of the command</a></h4>
+<h4 id="internal-working-of-the-command"><a class="link" href="#internal-working-of-the-command">3.3.3. Internal working of the command</a></h4>
 <div class="paragraph">
 <p>Referring to <em>Fig 3.2.2.a</em>, we will be going through step by step the internal mechanism of the execution of the <code><code>ScheduledPriorityCommand</code></code>.</p>
 </div>
@@ -644,7 +687,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-consideration"><a class="link" href="#design-consideration">3.2.4. Design Consideration</a></h4>
+<h4 id="design-consideration"><a class="link" href="#design-consideration">3.3.4. Design Consideration</a></h4>
 <div class="paragraph">
 <p>Aspect: How to turn off the priority mode after a fixed time</p>
 </div>
@@ -683,7 +726,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </div>
 <div class="sect3">
-<h4 id="possible-extension"><a class="link" href="#possible-extension">3.2.5. Possible extension</a></h4>
+<h4 id="possible-extension"><a class="link" href="#possible-extension">3.3.5. Possible extension</a></h4>
 <div class="paragraph">
 <p>As of this moment, there is no way to display the status of the priority mode within the <code><code>Ui</code></code> other than through the list. One possible extension is turning have a label to signify that the user is in the priority mode.</p>
 </div>
@@ -693,20 +736,20 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.3. [Proposed] Data Encryption</a></h3>
+<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.4. [Proposed] Data Encryption</a></h3>
 <div class="paragraph">
 <p><em>{Explain here how the data encryption feature will be implemented}</em></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.4. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.5. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.5, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.6, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -737,7 +780,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.5. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.6. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -830,7 +873,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">add a new task</p></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">record tasks that need to be done 'some day'</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
@@ -846,9 +889,45 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">student</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add deadline to a task</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">remember my task deadlines</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">find upcoming tasks</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">decide what needs to be done</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">find a task by description</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">find only the tasks that are relevant to me at that point in time</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">new user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">view more information about a command</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">learn how to use various commands</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">forgetful student</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">be reminded of deadlines</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">remember to complete them before they are due</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">type my commands in the text</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">use the app without needing the mouse</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">use the undo function</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">reverse any changes I made by mistake</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
@@ -861,6 +940,42 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <td class="tableblock halign-left valign-top"><p class="tableblock">user with many tasks</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">sort tasks by priority</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">identify which tasks require my immediate attention</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">student</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">turn on priority mode</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">focus on only one pressing issue at a time</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">have a software that saves after every action</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">will not lose information even if I close the program by accident</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">look at a summary of all deadlines in the calendar</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">see when I am free</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">edit the date of a deadline</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fix my mistakes if I type the wrong command</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">stressed student</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ask ELISA to tell a joke</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">feel less stressed when my assistant has a sense of humour</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">colour code my calendar events</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">easily categorise and differentiate between them</p></td>
 </tr>
 </tbody>
 </table>
@@ -1074,6 +1189,123 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </li>
 </ol>
 </div>
+<h3 id="use-case-005-search-for-a-task-by-its-description" class="discrete">Use Case 005: Search for a task by its description</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User enters the command to show the task list.</p>
+</li>
+<li>
+<p>ELISA shows the reminder list.</p>
+</li>
+<li>
+<p>User enters command to find all matching tasks with the given search term(s)</p>
+</li>
+<li>
+<p>ELISA shows a list of tasks with descriptions matching the search term(s)</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>4a. There are no matching tasks</p>
+<div class="ulist">
+<ul>
+<li>
+<p>4a1. ELISA shows that there are 0 items listed</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-006-undo-the-last-command" class="discrete">Use Case 006: Undo the last command</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User enters the undo command.</p>
+</li>
+<li>
+<p>ELISA reverts the last executed command.</p>
+</li>
+<li>
+<p>ELISA displays a confirmation message.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>2a. There are no commands to be undone</p>
+<div class="ulist">
+<ul>
+<li>
+<p>2a1. ELISA displays an error message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-007-using-priority-mode" class="discrete">Use Case 007: Using Priority Mode</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User enters the command to enter priority mode.</p>
+</li>
+<li>
+<p>ELISA hides all tasks except the one with the highest priority.</p>
+</li>
+<li>
+<p>User enters command to set that task as done once they finish it.</p>
+</li>
+<li>
+<p>ELISA shows the next highest priority task.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>1a. User is not viewing the task list</p>
+<div class="ulist">
+<ul>
+<li>
+<p>1a1. ELISA displays an error message</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
 <div class="paragraph">
 <p><em>{More to be added}</em></p>
 </div>
@@ -1263,4 +1495,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-23 14:37:12 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-23 14:59:22 UTC</div></div></div></body></html>
