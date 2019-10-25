@@ -283,13 +283,10 @@ The lifeline for <code>DeleteCommandParser</code> should end at the destroy mark
 <p>stores a <code>UserPref</code> object that represents the user&#8217;s preferences.</p>
 </li>
 <li>
-<p>stores the Address Book data.</p>
+<p>stores the Item Storage data</p>
 </li>
 <li>
-<p>exposes an unmodifiable <code>ObservableList&lt;Person&gt;</code> that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.</p>
-</li>
-<li>
-<p>does not depend on any of the other three components.</p>
+<p>exposes four observable lists that can be viewed by the Ui and will cause an update in the Ui when it is updated</p>
 </li>
 </ul>
 </div>
@@ -300,9 +297,7 @@ The lifeline for <code>DeleteCommandParser</code> should end at the destroy mark
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book</code>, which <code>Person</code> can reference. This would allow <code>Address Book</code> to only require one <code>Tag</code> object per unique <code>Tag</code>, instead of each <code>Person</code> needing their own <code>Tag</code> object. An example of how such a model may look like is given below.<br>
-<br>
-<span class="image"><img src="images/BetterModelClassDiagram.png" alt="BetterModelClassDiagram"></span>
+The reason for using four observable list as opposed to having one observable list that is filtered every time we update the list is because we believe that this will lead to faster loading time every time we switch view as it is just a change in the Visualization List pointer. This is better than the O(n) method of filtering a single VisualizeList as it will require going through all the items in the list.
 </td>
 </tr>
 </table>
@@ -328,7 +323,7 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book<
 <p>can save <code>UserPref</code> objects in json format and read it back.</p>
 </li>
 <li>
-<p>can save the Address Book data in json format and read it back.</p>
+<p>can save the Item Storage data in json format and read it back.</p>
 </li>
 </ul>
 </div>
@@ -658,9 +653,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <div class="content">
 <img src="images/PriorityMode.png" alt="PriorityMode">
 </div>
-</div>
-<div class="paragraph">
-<p><em>Fig 3.2.2.a Sequence diagram for priority mode</em></p>
+<div class="title">Figure 9. Sequence diagram for priority mode</div>
 </div>
 </div>
 <div class="sect3">
@@ -691,6 +684,12 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 <div class="paragraph">
 <p>(At this point, a normal <code><code>PriorityCommand</code></code> will end the sequence diagram here and will only be deactivated by the user&#8217;s input of <code><code>priority</code></code> again.)</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/PriorityMode2.png" alt="PriorityMode2">
+</div>
+<div class="title">Figure 10. Sequence diagram for the scheduled turning off of priority mode</div>
 </div>
 <div class="paragraph">
 <p>Step 8. As the <code><code>Timer</code></code> within the <code><code>ItemModelManager</code></code> is still running on a separate thread, it will trigger the <code><code>TimerTask#run()</code></code> when the user defined time is reached.</p>
@@ -1539,4 +1538,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-25 02:27:12 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-25 03:12:45 UTC</div></div></div></body></html>
