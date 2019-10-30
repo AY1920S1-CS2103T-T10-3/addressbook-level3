@@ -179,20 +179,14 @@ Deletes the 2nd reminder in the shown reminder list.</p>
 <h3 id="undoing-the-latest-modification-s-code-undo-code"><a class="link" href="#undoing-the-latest-modification-s-code-undo-code">Undoing the latest modification(s) : <code>undo</code></a></h3>
 <div class="paragraph">
 <p>Reverts the latest commands given on the ELISA.<br>
-Format: <code>undo [number of commands]</code></p>
+Format: <code>undo</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>Omitting the number reverts the last one command</p>
-</li>
-<li>
-<p>The number of commands must be <strong>at most 20</strong></p>
-</li>
-<li>
-<p>The number <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+<p><code>undo</code> can only be done if commands have been executed</p>
 </li>
 </ul>
 </div>
@@ -207,9 +201,36 @@ Format: <code>undo [number of commands]</code></p>
 <p><code>undo</code><br>
 Undoes the last command</p>
 </li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="redoing-the-latest-undone-command-s-code-redo-code"><a class="link" href="#redoing-the-latest-undone-command-s-code-redo-code">Redoing the latest undone command(s) : <code>redo</code></a></h3>
+<div class="paragraph">
+<p>Re-executes the latest undone commands given on the ELISA.<br>
+Format: <code>redo</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
 <li>
-<p><code>undo 2</code><br>
-Undoes the last 2 commands</p>
+<p><code>redo</code> can only be done if undo has already been executed</p>
+</li>
+<li>
+<p>After <code>undo</code>, if a new command is executed then <code>redo</code> cannot be executed</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>redo</code><br></p>
 </li>
 </ul>
 </div>
@@ -644,4 +665,4 @@ Step 6. Upon the successful execution of AddCommand, a CommandResult is returned
 <p><em>{Optionally, you may include other projects in your portfolio.}</em></p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-30 05:44:27 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-30 06:43:26 UTC</div></div></div></body></html>
