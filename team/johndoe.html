@@ -215,6 +215,123 @@ Undoes the last 2 commands</p>
 </div>
 </div>
 <div class="sect2">
+<h3 id="sorting-elisa-out-code-sort-code"><a class="link" href="#sorting-elisa-out-code-sort-code">Sorting ELISA out: <code>sort</code></a></h3>
+<div class="paragraph">
+<p>Is ELISA getting too cluttered and disorganized? Do you want to sort your task by their priority? Or the events by their start date?</p>
+</div>
+<div class="paragraph">
+<p>ELISA comes in-built with a sort feature that allows you to sort your items within the different panel. And the best part of it? YOU can decide how you want to sort it.</p>
+</div>
+<div class="paragraph">
+<p>The simple sort command on the different panel sorts the list differently (just another sign of how smart ELISA is) and they are as follows:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>task panel - tasks are sorted from those that are incomplete to those that are completed. Within the two groups, they are sorted based on their priority, from high to medium and to low.</p>
+</li>
+<li>
+<p>event panel - events are sorted based on their start date and time.</p>
+</li>
+<li>
+<p>reminder - reminders are sorted based on their firing off date and time.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>But why stop there? You are also able to sort by priority and description within all the panels and even combine different sorting together! You are only limited by your imagination (and the items within your lists).</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>sort</code> or <code>sort &lt;criteria&gt;</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>sort</code> - a simple sort that follows the criteria mentioned above for the different panel.</p>
+</li>
+<li>
+<p><code>sort priority</code> - sorts the item within the panel by their priority (from high to low).</p>
+</li>
+<li>
+<p><code>sort desc</code> - sorts the item within the panel by their description (lexicographic order)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="finding-a-task-code-find-code"><a class="link" href="#finding-a-task-code-find-code">Finding a task: <code>find</code></a></h3>
+<div class="paragraph">
+<p>Is your task list getting too long and you are not able to find what you are looking for? Introducing the <code>find</code> function which will allow you to find what you want within the specific panel. Just type <code>find</code> and the keyword that you want to search for within the command box and ELISA will find the relevant items for you.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>find &lt;keyword&gt;</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>find CS2101</code> - find all items that have CS2101 in their description within that panel</p>
+</li>
+<li>
+<p><code>find CS2101 CS2103</code> - find items that contains either CS2101 or CS2103 within their description.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="entering-priority-mode-code-priority-code"><a class="link" href="#entering-priority-mode-code-priority-code">Entering priority mode: <code>priority</code></a></h3>
+<div class="paragraph">
+<p>Feeling stress? Too much task on your task list? Enter priority mode, a mode which will help you narrow down the most pressing task to be done.</p>
+</div>
+<div class="paragraph">
+<p>By simply typing <code>priority</code> into the command box, you will be given one single task of the highest priority among your task list. This task is chosen by ELISA base on priority and the order in which the task was added to the list.</p>
+</div>
+<div class="paragraph">
+<p>Feeling less stress? You can type <code>priority</code> again to bring you out of the priority mode and back into the normal task view. Or even better, finish all your undone task and you will be automatically brought out of priority mode.</p>
+</div>
+<div class="paragraph">
+<p>Feeling lazy? You can also opt to turn off priority mode at a specific time by typing <code>priority dd/mm/yyyy hh:mm</code> and ELISA will turn it off at that specific time for you.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>priority</code> or <code>priority dd/mm/yyyy hh:mm</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>priority</code> - activates or deactivates the priority mode</p>
+</li>
+<li>
+<p><code>priority 30/10/2019 1200</code> - activates the priority mode and ask ELISA to turn it off on 30/10/2019 at noon</p>
+</li>
+<li>
+<p><code>priority 2.hours.later</code> - activates the priority mode and ask ELISA to turn it off 2 hours later</p>
+</li>
+</ul>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Note that this command can only be called in the task panel.</p>
+</li>
+<li>
+<p>Note that all command such as <code>edit</code>, <code>undo</code> and <code>redo</code> still works in priority mode.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
 <h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Exits the program.<br>
@@ -527,4 +644,4 @@ Step 6. Upon the successful execution of AddCommand, a CommandResult is returned
 <p><em>{Optionally, you may include other projects in your portfolio.}</em></p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-29 14:38:31 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-30 01:11:37 UTC</div></div></div></body></html>

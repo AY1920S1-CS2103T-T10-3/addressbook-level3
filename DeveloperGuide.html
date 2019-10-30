@@ -635,7 +635,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <div class="sect3">
 <h4 id="example-run-of-code"><a class="link" href="#example-run-of-code">3.3.2. Example run of code</a></h4>
 <div class="paragraph">
-<p>In the following section, we will be showing a run of the priority mode and the behaviour of the mechanism at each step. In particular, we will be showing how the <code><code>ScheduledPriorityMode</code></code> works as it requires more step through the sequence diagram as compared to the <code><code>PriorityMode</code></code>.</p>
+<p>In the following section, we will be showing a run of the priority mode and the behaviour of the mechanism at each step. In particular, we will be showing how the <code><code>ScheduledPriorityMode</code></code> works as it has a more complicated implementation than the normal <code><code>PriorityMode</code></code>.</p>
 </div>
 <div class="paragraph">
 <p>Step 1. The user opens his ELISA software. The first screen that he observes will be the task screen which contains all the task of the user based on the time they were added into the list.</p>
@@ -644,10 +644,21 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <p>Step 2. The user types <code><code>priority 30.min.later</code></code> into the command box of ELISA and hits enter. The list is instantly shrink to show only the most pressing task (i.e. the task with the highest priority). If two tasks have the same priority, either of the task will be shown as there is no other way for ELISA to compare between the two task.</p>
 </div>
 <div class="paragraph">
-<p>Step 3. ELISA will automatically disable the priority mode after 30 minutes and show <strong>all</strong> the task that the user have in his task list currently.</p>
+<p>Step 3. The user can type <code><code>done 1</code></code> when he is done with the current task to retrieve the next task. This will carry on until there is no more undone task left to do. This is shown in the activity diagram below.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/PriorityModeActivityDiagram.png" alt="PriorityModeActivityDiagram">
+</div>
 </div>
 <div class="paragraph">
-<p>The figure below shows the sequence diagram on what happens from a simple execution of the <code><code>priority 30.min.later</code></code> command.</p>
+<p>Step 4. ELISA will automatically disable the priority mode after 30 minutes and show <strong>all</strong> the task that the user have in his task list currently.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="internal-working-of-the-command"><a class="link" href="#internal-working-of-the-command">3.3.3. Internal working of the command</a></h4>
+<div class="paragraph">
+<p>The figure below shows the sequence diagram on what happens from a simple execution of the <code><code>priority 30.min.later</code></code> command. We will be going through step by step the internal mechanism of the execution of the <code><code>ScheduledPriorityCommand</code></code>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -655,17 +666,14 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 <div class="title">Figure 9. Sequence diagram for priority mode</div>
 </div>
-</div>
-<div class="sect3">
-<h4 id="internal-working-of-the-command"><a class="link" href="#internal-working-of-the-command">3.3.3. Internal working of the command</a></h4>
-<div class="paragraph">
-<p>Referring to <em>Fig 3.2.2.a</em>, we will be going through step by step the internal mechanism of the execution of the <code><code>ScheduledPriorityCommand</code></code>.</p>
-</div>
 <div class="paragraph">
 <p>Step 1. When the user types in the command, the <code><code>LogicManager</code></code> takes in the command as a string and pass it to the <code><code>AddressBookParser</code></code></p>
 </div>
 <div class="paragraph">
-<p>Step 2. The <code><code>AddressBookParser</code></code> parses the string and determine whether the command is that of a normal <code><code>PriorityCommand</code></code> or a <code><code>ScheduledPriorityCommand</code></code>. In this case, the command is that of a <code><code>ScheduledPriorityCommand</code></code> and so a new <code><code>ScheduledPriorityCommand</code></code> is created. This <code><code>ScheduledPriorityCommand</code></code> is passed back to the <code><code>LogicManager</code></code>. (Despite the fact that this is a <code><code>ScheduledPriorityCommand</code></code>, the following steps marked with a * are also applicable to a normal <code><code>PriorityCommand</code></code>).</p>
+<p>Step 2. The <code><code>AddressBookParser</code></code> parses the string and determine whether the command is that of a normal <code><code>PriorityCommand</code></code> or a <code><code>ScheduledPriorityCommand</code></code>. In this case, the command is that of a <code><code>ScheduledPriorityCommand</code></code> and so a new <code><code>ScheduledPriorityCommand</code></code> is created. This <code><code>ScheduledPriorityCommand</code></code> is passed back to the <code><code>LogicManager</code></code>.</p>
+</div>
+<div class="paragraph">
+<p>(Despite the fact that this is a <code><code>ScheduledPriorityCommand</code></code>, the following steps marked with a * are also applicable to a normal <code><code>PriorityCommand</code></code>).</p>
 </div>
 <div class="paragraph">
 <p>Step 3*. Within the <code><code>LogicManager</code></code>, the <code><code>ScheduledPriorityCommand#execute()</code></code> method is called and the command is executed.</p>
@@ -743,7 +751,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <div class="sect3">
 <h4 id="possible-extension"><a class="link" href="#possible-extension">3.3.5. Possible extension</a></h4>
 <div class="paragraph">
-<p>As of this moment, there is no way to display the status of the priority mode within the <code><code>Ui</code></code> other than through the list. One possible extension is turning have a label to signify that the user is in the priority mode.</p>
+<p>As of this moment, there is no way to display the status of the priority mode within the <code><code>Ui</code></code> other than through the visualization list. One possible extension is changing the colour of Elisa to signify that the user is in the priority mode.</p>
 </div>
 <div class="paragraph">
 <p>At the moment, there is also no way to inform the user that the priority mode is disabled when it is scheduled to be off. However, this can be solved if the above extension is implemented as it will trigger the message when the mode switches.</p>
@@ -1552,4 +1560,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-29 14:38:31 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-30 01:11:37 UTC</div></div></div></body></html>
