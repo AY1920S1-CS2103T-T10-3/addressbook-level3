@@ -21,22 +21,28 @@ Licence: <code>NUS</code></p>
 <li><a href="#legend">3. Legend</a></li>
 <li><a href="#Features">4. Features</a>
 <ul class="sectlevel2">
-<li><a href="#viewing-help-code-help-code">4.1. Viewing help : <code>help</code></a></li>
-<li><a href="#adding-a-task-code-task-code">4.2. Adding a task: <code>task</code></a></li>
-<li><a href="#adding-an-event-code-event-code">4.3. Adding an event: <code>event</code></a></li>
-<li><a href="#adding-a-reminder-code-reminder-code">4.4. Adding a reminder: <code>reminder</code></a></li>
-<li><a href="#snoozing-a-reminder-code-snooze-code">4.5. Snoozing a reminder: <code>snooze</code></a></li>
-<li><a href="#show-the-specified-category-code-show-code">4.6. Show the specified category : <code>show</code></a></li>
-<li><a href="#editing-an-item-code-edit-code">4.7. Editing an item : <code>edit</code></a></li>
-<li><a href="#deleting-a-reminder-task-event-code-delete-code">4.8. Deleting a reminder/task/event : <code>delete</code></a></li>
-<li><a href="#undoing-the-latest-modification-s-code-undo-code">4.9. Undoing the latest modification(s) : <code>undo</code></a></li>
-<li><a href="#redoing-the-latest-undone-command-s-code-redo-code">4.10. Redoing the latest undone command(s) : <code>redo</code></a></li>
-<li><a href="#sorting-elisa-out-code-sort-code">4.11. Sorting ELISA out: <code>sort</code></a></li>
-<li><a href="#finding-a-task-code-find-code">4.12. Finding a task: <code>find</code></a></li>
-<li><a href="#entering-priority-mode-code-priority-code">4.13. Entering priority mode: <code>priority</code></a></li>
+<li><a href="#adding-a-task-code-task-code">4.1. Adding a task: <code>task</code></a></li>
+<li><a href="#adding-an-event-code-event-code">4.2. Adding an event: <code>event</code></a></li>
+<li><a href="#adding-a-reminder-code-reminder-code">4.3. Adding a reminder: <code>reminder</code></a></li>
+<li><a href="#snoozing-a-reminder-code-snooze-code">4.4. Snoozing a reminder: <code>snooze</code></a></li>
+<li><a href="#show-the-specified-category-code-show-code">4.5. Show the specified category : <code>show</code></a></li>
+<li><a href="#editing-an-item-code-edit-code">4.6. Editing an item : <code>edit</code></a></li>
+<li><a href="#deleting-a-reminder-task-event-code-delete-code">4.7. Deleting a reminder/task/event : <code>delete</code></a></li>
+<li><a href="#undoing-the-latest-modification-s-code-undo-code">4.8. Undoing the latest modification(s) : <code>undo</code></a></li>
+<li><a href="#redoing-the-latest-undone-command-s-code-redo-code">4.9. Redoing the latest undone command(s) : <code>redo</code></a></li>
+<li><a href="#sorting-elisa-out-code-sort-code">4.10. Sorting ELISA out: <code>sort</code></a></li>
+<li><a href="#finding-a-task-code-find-code">4.11. Finding a task: <code>find</code></a></li>
+<li><a href="#entering-priority-mode-code-priority-code">4.12. Entering priority mode: <code>priority</code></a></li>
+<li><a href="#expanding-an-item-in-the-view-code-open-code-code-close-code">4.13. Expanding an item in the view: <code>open</code> &amp; <code>close</code></a></li>
 <li><a href="#exiting-the-program-code-exit-code">4.14. Exiting the program : <code>exit</code></a></li>
 <li><a href="#saving-the-data">4.15. Saving the data</a></li>
 <li><a href="#encrypting-data-files-code-coming-in-v2-0-code">4.16. Encrypting data files <code>[coming in v2.0]</code></a></li>
+</ul>
+</li>
+<li><a href="#additional-notes">5. Additional Notes</a>
+<ul class="sectlevel2">
+<li><a href="#input">5.1. Input</a></li>
+<li><a href="#calendar">5.2. Calendar</a></li>
 </ul>
 </li>
 </ul>
@@ -60,7 +66,7 @@ Licence: <code>NUS</code></p>
 <p>Although I am <strong>optimized for those who prefer to work with a Command Line Interface</strong> (CLI), I also have a Graphical User Interface (GUI). If you can type fast, I can get your tasks done faster than traditional GUI apps.</p>
 </div>
 <div class="paragraph">
-<p>Interested? Jump to the <a href="#quick-start">Section 2, &#8220;Quick Start&#8221;</a> to get started. Enjoy!</p>
+<p>Enjoy!</p>
 </div>
 </div>
 </div>
@@ -287,16 +293,36 @@ Not all tags work for every command. Please check the specific command for more 
 </tr>
 </table>
 </div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="viewing-help-code-help-code"><a class="link" href="#viewing-help-code-help-code">4.1. Viewing help : <code>help</code></a></h3>
 <div class="paragraph">
-<p>Format: <code>help</code></p>
+<p>Here are the icons that will be used in the app:</p>
 </div>
+<div class="paragraph">
+<p><span class="image"><img src="images/Completed.PNG" alt="Done" title="Done"></span> shows that you&#8217;ve completed this task.<br>
+<span class="image"><img src="images/Uncompleted.PNG" alt="Not done" title="Not done"></span> shows that you have yet to complete this task.<br>
+<span class="image"><img src="images/EventIcon.PNG" alt="Event" title="Event"></span> shows that this is an Event with the date shown in its eyes.<br></p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+All time dependent elements such as deadline, reminder and calendar time are dependent on the <strong>system time</strong>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>If you face any issues, please check the <a href="#additional-notes">Section 5, &#8220;Additional Notes&#8221;</a>. If it is not mentioned there, then feel free to bring it up to us!</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Now we are ready to jump into the features itself!</p>
 </div>
 <div class="sect2">
-<h3 id="adding-a-task-code-task-code"><a class="link" href="#adding-a-task-code-task-code">4.2. Adding a task: <code>task</code></a></h3>
+<h3 id="adding-a-task-code-task-code"><a class="link" href="#adding-a-task-code-task-code">4.1. Adding a task: <code>task</code></a></h3>
 <div class="paragraph">
 <p>Adds a task to the task list<br>
 Format: <code>task DESCRIPTION [-d DATETIME] [-r REMINDER] [-p PRIORITY] [-t TAG]</code></p>
@@ -331,7 +357,7 @@ To create a task quickly, just include the description as Task can have no flags
 </div>
 </div>
 <div class="sect2">
-<h3 id="adding-an-event-code-event-code"><a class="link" href="#adding-an-event-code-event-code">4.3. Adding an event: <code>event</code></a></h3>
+<h3 id="adding-an-event-code-event-code"><a class="link" href="#adding-an-event-code-event-code">4.2. Adding an event: <code>event</code></a></h3>
 <div class="paragraph">
 <p>Adds an event to events list and calendar<br>
 Format: <code>event DESCRIPTION -d DATETIME [-r REMINDER] [-p PRIORITY] [-t TAG] [-auto PERIOD]</code></p>
@@ -357,7 +383,7 @@ Format: <code>event DESCRIPTION -d DATETIME [-r REMINDER] [-p PRIORITY] [-t TAG]
 </div>
 </div>
 <div class="sect2">
-<h3 id="adding-a-reminder-code-reminder-code"><a class="link" href="#adding-a-reminder-code-reminder-code">4.4. Adding a reminder: <code>reminder</code></a></h3>
+<h3 id="adding-a-reminder-code-reminder-code"><a class="link" href="#adding-a-reminder-code-reminder-code">4.3. Adding a reminder: <code>reminder</code></a></h3>
 <div class="paragraph">
 <p>Adds a reminder to the reminder list<br>
 Format: <code>reminder DESCRIPTION -r REMINDER [-t TAG]</code></p>
@@ -380,7 +406,7 @@ Format: <code>reminder DESCRIPTION -r REMINDER [-t TAG]</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="snoozing-a-reminder-code-snooze-code"><a class="link" href="#snoozing-a-reminder-code-snooze-code">4.5. Snoozing a reminder: <code>snooze</code></a></h3>
+<h3 id="snoozing-a-reminder-code-snooze-code"><a class="link" href="#snoozing-a-reminder-code-snooze-code">4.4. Snoozing a reminder: <code>snooze</code></a></h3>
 <div class="paragraph">
 <p>Snoozes a reminder that occurred since the application was open.<br>
 If an index is not provided, the most recently occurred reminder will be snoozed.<br>
@@ -407,7 +433,7 @@ It is not possible to snooze if no reminder has occurred yet.
 </div>
 </div>
 <div class="sect2">
-<h3 id="show-the-specified-category-code-show-code"><a class="link" href="#show-the-specified-category-code-show-code">4.6. Show the specified category : <code>show</code></a></h3>
+<h3 id="show-the-specified-category-code-show-code"><a class="link" href="#show-the-specified-category-code-show-code">4.5. Show the specified category : <code>show</code></a></h3>
 <div class="paragraph">
 <p>Shows the specified category by switching the view to the given list.<br>
 Format: `show [t] [e] [c] [r] (Exactly one flag must be used with this command)''</p>
@@ -433,7 +459,7 @@ Format: `show [t] [e] [c] [r] (Exactly one flag must be used with this command)'
 </div>
 </div>
 <div class="sect2">
-<h3 id="editing-an-item-code-edit-code"><a class="link" href="#editing-an-item-code-edit-code">4.7. Editing an item : <code>edit</code></a></h3>
+<h3 id="editing-an-item-code-edit-code"><a class="link" href="#editing-an-item-code-edit-code">4.6. Editing an item : <code>edit</code></a></h3>
 <div class="paragraph">
 <p>This command is used to edit any of the items that you might have.<br></p>
 </div>
@@ -487,7 +513,7 @@ Edits item 2 of the current list. Changes the description to <code>CS2103 team m
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-reminder-task-event-code-delete-code"><a class="link" href="#deleting-a-reminder-task-event-code-delete-code">4.8. Deleting a reminder/task/event : <code>delete</code></a></h3>
+<h3 id="deleting-a-reminder-task-event-code-delete-code"><a class="link" href="#deleting-a-reminder-task-event-code-delete-code">4.7. Deleting a reminder/task/event : <code>delete</code></a></h3>
 <div class="paragraph">
 <p>Deletes the reminder/task/event from ELISA.<br>
 Format: <code>delete INDEX</code></p>
@@ -526,7 +552,7 @@ Deletes the 2nd reminder in the shown reminder list.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="undoing-the-latest-modification-s-code-undo-code"><a class="link" href="#undoing-the-latest-modification-s-code-undo-code">4.9. Undoing the latest modification(s) : <code>undo</code></a></h3>
+<h3 id="undoing-the-latest-modification-s-code-undo-code"><a class="link" href="#undoing-the-latest-modification-s-code-undo-code">4.8. Undoing the latest modification(s) : <code>undo</code></a></h3>
 <div class="paragraph">
 <p>Reverts the latest commands given on the ELISA.<br>
 Format: <code>undo</code></p>
@@ -555,7 +581,7 @@ Undoes the last command</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="redoing-the-latest-undone-command-s-code-redo-code"><a class="link" href="#redoing-the-latest-undone-command-s-code-redo-code">4.10. Redoing the latest undone command(s) : <code>redo</code></a></h3>
+<h3 id="redoing-the-latest-undone-command-s-code-redo-code"><a class="link" href="#redoing-the-latest-undone-command-s-code-redo-code">4.9. Redoing the latest undone command(s) : <code>redo</code></a></h3>
 <div class="paragraph">
 <p>Re-executes the latest undone commands given on the ELISA.<br>
 Format: <code>redo</code></p>
@@ -586,7 +612,7 @@ Format: <code>redo</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="sorting-elisa-out-code-sort-code"><a class="link" href="#sorting-elisa-out-code-sort-code">4.11. Sorting ELISA out: <code>sort</code></a></h3>
+<h3 id="sorting-elisa-out-code-sort-code"><a class="link" href="#sorting-elisa-out-code-sort-code">4.10. Sorting ELISA out: <code>sort</code></a></h3>
 <div class="paragraph">
 <p>Is ELISA getting too cluttered and disorganized? Do you want to sort your task by their priority? Or the events by their start date?</p>
 </div>
@@ -633,7 +659,7 @@ Format: <code>redo</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="finding-a-task-code-find-code"><a class="link" href="#finding-a-task-code-find-code">4.12. Finding a task: <code>find</code></a></h3>
+<h3 id="finding-a-task-code-find-code"><a class="link" href="#finding-a-task-code-find-code">4.11. Finding a task: <code>find</code></a></h3>
 <div class="paragraph">
 <p>Is your task list getting too long and you are not able to find what you are looking for? Introducing the <code>find</code> function which will allow you to find what you want within the specific panel. Just type <code>find</code> and the keyword that you want to search for within the command box and ELISA will find the relevant items for you.</p>
 </div>
@@ -655,7 +681,7 @@ Format: <code>redo</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="entering-priority-mode-code-priority-code"><a class="link" href="#entering-priority-mode-code-priority-code">4.13. Entering priority mode: <code>priority</code></a></h3>
+<h3 id="entering-priority-mode-code-priority-code"><a class="link" href="#entering-priority-mode-code-priority-code">4.12. Entering priority mode: <code>priority</code></a></h3>
 <div class="paragraph">
 <p>Feeling stress? Too much task on your task list? Enter priority mode, a mode which will help you narrow down the most pressing task to be done.</p>
 </div>
@@ -703,6 +729,53 @@ Format: <code>redo</code></p>
 </div>
 </div>
 <div class="sect2">
+<h3 id="expanding-an-item-in-the-view-code-open-code-code-close-code"><a class="link" href="#expanding-an-item-in-the-view-code-open-code-code-close-code">4.13. Expanding an item in the view: <code>open</code> &amp; <code>close</code></a></h3>
+<div class="paragraph">
+<p>Want to see all the details of an item at one glance? Lazy to go to event list or reminder list to find them? We got you!</p>
+</div>
+<div class="paragraph">
+<p>You can now open up an item to see all its details, regardless of what list you are on.
+But remember to close it before opening another item!</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>open INDEX</code></p>
+</div>
+<div class="paragraph">
+<p>Example sequence:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>show T</code> - to switch to the task view</p>
+</li>
+<li>
+<p><code>open 2</code> - opens the second item on the list</p>
+</li>
+<li>
+<p><code>close</code> - closes the item</p>
+</li>
+<li>
+<p><code>open 3</code> - opens the third item on the list (Note: If you forgot to close previously, no worries as ELISA will prompt you to!)</p>
+</li>
+<li>
+<p><code>close</code> - closes the item</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Although, the ESC key can close too, we do not advise doing so as ELISA may be confused later on :(
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
 <h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">4.14. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Exits the program.<br>
@@ -723,4 +796,35 @@ There is no need to save manually.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-01 03:32:18 UTC</div></div></div></body></html>
+</div>
+<div class="sect1">
+<h2 id="additional-notes"><a class="link" href="#additional-notes">5. Additional Notes</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="input"><a class="link" href="#input">5.1. Input</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Currently, an empty input can be entered, but ELISA will show an invalid command.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="calendar"><a class="link" href="#calendar">5.2. Calendar</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Currently, it only shows <strong>2 events</strong> on each date due to limited space on the calendar. If there are more events on that date, to find them all, you can go to the event list and sort through it.</p>
+</li>
+<li>
+<p>Currently, it only shows the <strong>current</strong> month. We are still working to bring the next month to you.</p>
+</li>
+<li>
+<p>Please keep a full screen. If you resize, we are unable to guarantee the view of the calendar.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-01 07:06:48 UTC</div></div></div></body></html>
