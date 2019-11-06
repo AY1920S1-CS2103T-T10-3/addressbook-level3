@@ -772,7 +772,7 @@ The following activity diagram shows the how a task can be added, depending on t
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/AddTaskActivity.png" alt="AddTaskActivity">
+<img src="images/AddTaskActivity.png" alt="200" width="600">
 </div>
 <div class="title">Figure 11. Activity Diagram of adding a Task</div>
 </div>
@@ -801,7 +801,7 @@ Step 6. Upon the successful execution of AddCommand, a CommandResult is returned
 <div class="content">
 <img src="images/AddCommandPart_1.png" alt="AddCommandPart 1">
 </div>
-<div class="title">Figure 12. Calling execute in LogicManager</div>
+<div class="title">Figure 12. Call execute in LogicManager to create an AddTaskCommand</div>
 </div>
 <div class="paragraph">
 <p>This diagram shows how <code>execute</code> is carried out in the <code>Logic</code> component.
@@ -811,7 +811,7 @@ The following diagram shows how the same command is continued onto the <code>Mod
 <div class="content">
 <img src="images/AddCommandPart_2.png" alt="AddCommandPart 2">
 </div>
-<div class="title">Figure 13. LogicManager executing the command and returns CommandResult</div>
+<div class="title">Figure 13. LogicManager executes the AddTaskCommand and returns CommandResult</div>
 </div>
 <div class="paragraph">
 <p>This shows how <code>execute(model)</code> affects the <code>Model</code> component. It then returns a <code>CommandResult</code> r, which is the result of calling LogicManager#execute("task shower -d 1.hour.later").</p>
@@ -878,7 +878,7 @@ The accepted parameters for <code>-auto</code> is <code>day</code>, <code>week</
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/AutoRescheduleActivity.png" alt="AutoRescheduleActivity">
+<img src="images/AutoRescheduleActivity.png" alt="100" width="400">
 </div>
 <div class="title">Figure 14. Activity diagram of adding an Event with -auto flag</div>
 </div>
@@ -921,8 +921,13 @@ The classes involved in the above rescheduling are:<br></p>
 </ul>
 </div>
 <div class="paragraph">
-<p>To better understand its underlying structure, we can look at the class diagram below:
-<em>{insert class diagram here}</em></p>
+<p>To better understand its underlying structure, we can look at the class diagram below:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/AutoRescheduleClassDiagram.png" alt="100" width="500">
+</div>
+<div class="title">Figure 15. Class Diagram of classes involved in AutoReschedule function</div>
 </div>
 </div>
 <div class="sect3">
@@ -933,11 +938,30 @@ The classes involved in the above rescheduling are:<br></p>
 <div class="paragraph">
 <p>Step 1. The user enters the command <code>event CS2103T Quiz -d 23/09/2019 2359 -auto week</code>.<br>
 Step 2. The Event is created, following the sequence of steps in the section <em>Adding Task/Event</em>. However there are now some extra steps from Step 3 onwards that occur concurrently from the object creation of Event.<br>
-Step 3. &#8230;&#8203; <em>{work in progress}</em></p>
+Step 3. &#8230;&#8203; <em>{work in progress}</em><br></p>
 </div>
 <div class="paragraph">
-<p><em>{insert sequence diagram here}</em><br>
-<em>explain the above diagram</em><br></p>
+<p>The following diagrams show how the command <code>event Quiz -d 10.hour.later -auto week</code> is executed from the Logic component.
+The first diagram shows the adding of an Event, which may appear familiar as it has a sequence similar to the adding of task in <a href="#add-task-event-feature">Section 3.4, &#8220;Add Task/Event feature&#8221;</a>. However, there are some minor differences due to the presence of <code>-auto</code> which should be noted.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/AutoRescheduleSequence_1.png" alt="AutoRescheduleSequence 1">
+</div>
+<div class="title">Figure 16. Call execute in LogicManager and create an AddEventCommand</div>
+</div>
+<div class="paragraph">
+<p>As mentioned, the key points to take note of in the diagram above is <code>Event#setAutoReschedule(true)</code> and <code>Event#setReschedulePeriod(period)</code>.<br>
+The significance of these methods will be shown in the continuing diagram below:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/AutoRescheduleSequence_2.png" alt="AutoRescheduleSequence 2">
+</div>
+<div class="title">Figure 17. LogicManager executing AddEventCommand and create task for AutoRescheduleManager</div>
+</div>
+<div class="paragraph">
+<p>From the above diagram, we can see that the presence of <code>AutoReschedulePeriod</code> in Event results in the creation of <code>RescheduleTask</code> which would be queued into the Timer managed by <code>AutoRescheduleManager</code>.</p>
 </div>
 </div>
 <div class="sect3">
@@ -1731,4 +1755,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-06 14:36:21 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-06 14:48:22 UTC</div></div></div></body></html>

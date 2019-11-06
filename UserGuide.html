@@ -169,9 +169,14 @@ For your viewing pleasure, we&#8217;ve collated it nicely into a quick starter p
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>task shower -d 1.hour.later -r 30.min.later</code> <code>task shower -r 30.min.later -d 1.hour.later</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Flags must not be repeated in the same input</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>task shower -p high -p low</code> is <strong>incorrect</strong> as -p appears twice</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Flags must not be repeated in the same input, unless it is a tag flag</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>task shower -p high -p low</code> is <strong>incorrect</strong> as -p appears twice. However, <code>task bathe -t fresh -t hygiene</code> is accepted</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>task shower -p high</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">For the parser of mm.min.later, hh.hour.later, dd.day.later, the maximum allowed is 100</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>101.min.later</code> is not accepted, however <code>100.min.later</code> or <code>99.day.later</code> are both accepted.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>task study -d 99.day.later</code></p></td>
 </tr>
 </tbody>
 </table>
@@ -249,9 +254,9 @@ For your viewing pleasure, we&#8217;ve collated it nicely into a quick starter p
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">-desc</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">DESCRIPTION</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">alphanumeric only</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">alphanumeric and all symbols <strong>except</strong> "-"</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">drink 5 litres of water</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-desc</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-desc drink water!</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">-auto</p></td>
@@ -396,7 +401,7 @@ Format: <code>reminder DESCRIPTION -r REMINDER [-t TAG]</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>reminder John’s Birthday -r 19/09/2019 14:00</code></p>
+<p><code>reminder John’s Birthday -r 19/09/2019 1400</code></p>
 </li>
 <li>
 <p><code>reminder John’s Birthday -r 2019-09-19T14:00 -t friend</code></p>
@@ -438,7 +443,7 @@ It is not possible to snooze if no reminder has occurred yet.
 <h3 id="show-the-specified-category-code-show-code"><a class="link" href="#show-the-specified-category-code-show-code">4.5. Show the specified category : <code>show</code></a></h3>
 <div class="paragraph">
 <p>Shows the specified category by switching the view to the given list.<br>
-Format: `show [t] [e] [c] [r] (Exactly one flag must be used with this command)''</p>
+Format: `show [t] [e] [c] [r] (Exactly <strong>one</strong> flag must be used with this command)''</p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -449,7 +454,13 @@ Format: `show [t] [e] [c] [r] (Exactly one flag must be used with this command)'
 <p><code>show t</code></p>
 </li>
 <li>
+<p><code>show T</code> (Note: Case <em>insensitive</em>: Upper case is allowed)</p>
+</li>
+<li>
 <p><code>show e</code></p>
+</li>
+<li>
+<p><code>show E</code></p>
 </li>
 <li>
 <p><code>show r</code></p>
@@ -511,7 +522,7 @@ Format: `show [t] [e] [c] [r] (Exactly one flag must be used with this command)'
 <p>You are only able to edit the item currently shown in your view. For example, when you&#8217;re on the task list, you can only edit the tasks shown. You will not be able to edit events or reminders.</p>
 </li>
 <li>
-<p>The new item with the edited fields must not already exist.</p>
+<p>The new item with the edited fields must not already exist. Don&#8217;t worry if you can&#8217;t remember that, ELISA will remind you!</p>
 </li>
 </ul>
 </div>
@@ -732,10 +743,10 @@ Format: <code>redo</code></p>
 <p>Feeling less stress? You can type <code>priority</code> again to bring you out of the priority mode and back into the normal task view. Or even better, finish all your undone task and you will be automatically brought out of priority mode.</p>
 </div>
 <div class="paragraph">
-<p>Feeling lazy? You can also opt to turn off priority mode at a specific time by typing <code>priority dd/mm/yyyy hh:mm</code> and ELISA will turn it off at that specific time for you.</p>
+<p>Feeling lazy? You can also opt to turn off priority mode at a specific time by typing <code>priority dd/mm/yyyy hhmm</code> and ELISA will turn it off at that specific time for you.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>priority</code> or <code>priority dd/mm/yyyy hh:mm</code></p>
+<p>Format: <code>priority</code> or <code>priority dd/mm/yyyy hhmm</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -778,7 +789,8 @@ Format: <code>redo</code></p>
 But remember to close it before opening another item!</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>open INDEX</code></p>
+<p>Open format: <code>open INDEX</code><br>
+Close format: <code>close</code></p>
 </div>
 <div class="paragraph">
 <p>Example sequence:</p>
@@ -867,4 +879,4 @@ There is no need to save manually.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-06 14:36:21 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-06 14:48:22 UTC</div></div></div></body></html>
