@@ -86,7 +86,7 @@ Licence: <code>NUS</code></p>
 <p>Have you installed Java <code>11</code> ?</p>
 </li>
 <li>
-<p>Find me, <code>elisa.jar</code> <a href="https://github.com/ay1920s1-cs2103t-t10-3/main/releases">here</a>.</p>
+<p>Find me, <code>ELISA.jar</code> <a href="https://github.com/ay1920s1-cs2103t-t10-3/main/releases">here</a>.</p>
 </li>
 <li>
 <p>Double-click me to start the app. See you in a few seconds.</p>
@@ -411,6 +411,18 @@ Format: <code>reminder DESCRIPTION -r REMINDER [-t TAG]</code></p>
 </li>
 </ul>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+It is not possible to set a reminder in the past.
+</td>
+</tr>
+</table>
+</div>
 </div>
 <div class="sect2">
 <h3 id="snoozing-a-reminder-code-snooze-code"><a class="link" href="#snoozing-a-reminder-code-snooze-code">4.4. Snoozing a reminder: <code>snooze</code></a></h3>
@@ -426,17 +438,16 @@ Format: 'snooze [INDEX] [-s SNOOZE_DURATION]'<br></p>
 * <code>snooze 3 -s 10.min.later</code>
 * <code>snooze -s 10/10/2020</code></p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-It is not possible to snooze if no reminder has occurred yet.
-</td>
-</tr>
-</table>
+<div class="olist NOTE">
+<ol class="NOTE">
+<li>
+<p>It is possible to snooze the same reminder multiple times if you wish.<br></p>
+</li>
+<li>
+<p>It is not possible to snooze if no reminder has occurred yet.<br>
+However, if you use the snooze command incorrectly, ELISA will first attempt to correct your usage of the snooze command.</p>
+</li>
+</ol>
 </div>
 </div>
 <div class="sect2">
@@ -469,6 +480,18 @@ Format: `show [t] [e] [c] [r] (Exactly <strong>one</strong> flag must be used wi
 <p><code>show c</code></p>
 </li>
 </ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The flag can be in either lowercase or uppercase. Eg. <code>show E</code>.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
@@ -671,20 +694,10 @@ Format: <code>redo</code></p>
 <p>ELISA comes in-built with a sort feature that allows you to sort your items within the different panel. And the best part of it? YOU can decide how you want to sort it.</p>
 </div>
 <div class="paragraph">
-<p>The simple sort command on the different panel sorts the list differently (just another sign of how smart ELISA is) and they are as follows:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>task panel - tasks are sorted from those that are incomplete to those that are completed. Within the two groups, they are sorted based on their priority, from high to medium and to low.</p>
-</li>
-<li>
-<p>event panel - events are sorted based on their start date and time.</p>
-</li>
-<li>
-<p>reminder - reminders are sorted based on their firing off date and time.</p>
-</li>
-</ul>
+<p>The simple sort command on the different panel sorts the list differently (just another sign of how smart ELISA is) and they are as follows:
+* task panel - tasks are sorted from those that are incomplete to those that are completed. Within the two groups, they are sorted based on their priority, from high to medium and to low.
+* event panel - events are sorted based on their start date and time.
+* reminder - reminders are sorted based on their firing off date and time.</p>
 </div>
 <div class="paragraph">
 <p>But why stop there? You are also able to sort by priority and description within all the panels and even combine different sorting together! You are only limited by your imagination (and the items within your lists).</p>
@@ -879,4 +892,4 @@ There is no need to save manually.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-06 14:48:22 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-06 15:01:26 UTC</div></div></div></body></html>
