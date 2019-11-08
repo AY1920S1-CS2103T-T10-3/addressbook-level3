@@ -28,17 +28,19 @@ Licence: <code>NUS</code></p>
 <li><a href="#show-the-specified-category-code-show-code">4.5. Show the specified category : <code>show</code></a></li>
 <li><a href="#scrolling-the-list-code-up-code-code-down-code">4.6. Scrolling the list : <code>up</code> / <code>down</code></a></li>
 <li><a href="#changing-the-theme-code-theme-code">4.7. Changing the theme : <code>theme</code></a></li>
-<li><a href="#editing-an-item-code-edit-code">4.8. Editing an item : <code>edit</code></a></li>
-<li><a href="#deleting-a-reminder-task-event-code-delete-code">4.9. Deleting a reminder/task/event : <code>delete</code></a></li>
-<li><a href="#undoing-the-latest-modification-s-code-undo-code">4.10. Undoing the latest modification(s) : <code>undo</code></a></li>
-<li><a href="#redoing-the-latest-undone-command-s-code-redo-code">4.11. Redoing the latest undone command(s) : <code>redo</code></a></li>
-<li><a href="#sorting-elisa-out-code-sort-code">4.12. Sorting ELISA out: <code>sort</code></a></li>
-<li><a href="#finding-a-task-code-find-code">4.13. Finding a task: <code>find</code></a></li>
-<li><a href="#entering-priority-mode-code-priority-code">4.14. Entering priority mode: <code>priority</code></a></li>
-<li><a href="#expanding-an-item-in-the-view-code-open-code-code-close-code">4.15. Expanding an item in the view: <code>open</code> &amp; <code>close</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">4.16. Exiting the program : <code>exit</code></a></li>
-<li><a href="#saving-the-data">4.17. Saving the data</a></li>
-<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">4.18. Encrypting data files <code>[coming in v2.0]</code></a></li>
+<li><a href="#clearing-the-list-code-clear-code">4.8. Clearing the list : <code>clear</code></a></li>
+<li><a href="#clearing-the-chat-box-code-clearscreen-code">4.9. Clearing the chat box : <code>clearscreen</code></a></li>
+<li><a href="#editing-an-item-code-edit-code">4.10. Editing an item : <code>edit</code></a></li>
+<li><a href="#deleting-a-reminder-task-event-code-delete-code">4.11. Deleting a reminder/task/event : <code>delete</code></a></li>
+<li><a href="#undoing-the-latest-modification-s-code-undo-code">4.12. Undoing the latest modification(s) : <code>undo</code></a></li>
+<li><a href="#redoing-the-latest-undone-command-s-code-redo-code">4.13. Redoing the latest undone command(s) : <code>redo</code></a></li>
+<li><a href="#sorting-elisa-out-code-sort-code">4.14. Sorting ELISA out: <code>sort</code></a></li>
+<li><a href="#finding-a-task-code-find-code">4.15. Finding a task: <code>find</code></a></li>
+<li><a href="#entering-priority-mode-code-priority-code">4.16. Entering priority mode: <code>priority</code></a></li>
+<li><a href="#expanding-an-item-in-the-view-code-open-code-code-close-code">4.17. Expanding an item in the view: <code>open</code> &amp; <code>close</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">4.18. Exiting the program : <code>exit</code></a></li>
+<li><a href="#saving-the-data">4.19. Saving the data</a></li>
+<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">4.20. Encrypting data files <code>[coming in v2.0]</code></a></li>
 </ul>
 </li>
 <li><a href="#additional-notes">5. Additional Notes</a>
@@ -533,7 +535,39 @@ The flag can be in either lowercase or uppercase. Eg. <code>show E</code>.
 </div>
 </div>
 <div class="sect2">
-<h3 id="editing-an-item-code-edit-code"><a class="link" href="#editing-an-item-code-edit-code">4.8. Editing an item : <code>edit</code></a></h3>
+<h3 id="clearing-the-list-code-clear-code"><a class="link" href="#clearing-the-list-code-clear-code">4.8. Clearing the list : <code>clear</code></a></h3>
+<div class="paragraph">
+<p>Clears ALL the lists.</p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>clear</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="clearing-the-chat-box-code-clearscreen-code"><a class="link" href="#clearing-the-chat-box-code-clearscreen-code">4.9. Clearing the chat box : <code>clearscreen</code></a></h3>
+<div class="paragraph">
+<p>Clears the chat box.</p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>clearscreen</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="editing-an-item-code-edit-code"><a class="link" href="#editing-an-item-code-edit-code">4.10. Editing an item : <code>edit</code></a></h3>
 <div class="paragraph">
 <p>This command is used to edit any of the items that you might have.<br></p>
 </div>
@@ -587,7 +621,7 @@ Edits item 2 of the current list. Changes the description to <code>CS2103 team m
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-reminder-task-event-code-delete-code"><a class="link" href="#deleting-a-reminder-task-event-code-delete-code">4.9. Deleting a reminder/task/event : <code>delete</code></a></h3>
+<h3 id="deleting-a-reminder-task-event-code-delete-code"><a class="link" href="#deleting-a-reminder-task-event-code-delete-code">4.11. Deleting a reminder/task/event : <code>delete</code></a></h3>
 <div class="paragraph">
 <p>Deletes the reminder/task/event from ELISA.<br>
 Format: <code>delete INDEX</code></p>
@@ -626,7 +660,7 @@ Deletes the 2nd reminder in the shown reminder list.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="undoing-the-latest-modification-s-code-undo-code"><a class="link" href="#undoing-the-latest-modification-s-code-undo-code">4.10. Undoing the latest modification(s) : <code>undo</code></a></h3>
+<h3 id="undoing-the-latest-modification-s-code-undo-code"><a class="link" href="#undoing-the-latest-modification-s-code-undo-code">4.12. Undoing the latest modification(s) : <code>undo</code></a></h3>
 <div class="paragraph">
 <p>Reverts the latest commands given on the ELISA.<br>
 Format: <code>undo</code></p>
@@ -655,7 +689,7 @@ Undoes the last command</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="redoing-the-latest-undone-command-s-code-redo-code"><a class="link" href="#redoing-the-latest-undone-command-s-code-redo-code">4.11. Redoing the latest undone command(s) : <code>redo</code></a></h3>
+<h3 id="redoing-the-latest-undone-command-s-code-redo-code"><a class="link" href="#redoing-the-latest-undone-command-s-code-redo-code">4.13. Redoing the latest undone command(s) : <code>redo</code></a></h3>
 <div class="paragraph">
 <p>Re-executes the latest undone commands given on the ELISA.<br>
 Format: <code>redo</code></p>
@@ -686,7 +720,7 @@ Format: <code>redo</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="sorting-elisa-out-code-sort-code"><a class="link" href="#sorting-elisa-out-code-sort-code">4.12. Sorting ELISA out: <code>sort</code></a></h3>
+<h3 id="sorting-elisa-out-code-sort-code"><a class="link" href="#sorting-elisa-out-code-sort-code">4.14. Sorting ELISA out: <code>sort</code></a></h3>
 <div class="paragraph">
 <p>Is ELISA getting too cluttered and disorganized? Do you want to sort your task by their priority? Or the events by their start date?</p>
 </div>
@@ -723,7 +757,7 @@ Format: <code>redo</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="finding-a-task-code-find-code"><a class="link" href="#finding-a-task-code-find-code">4.13. Finding a task: <code>find</code></a></h3>
+<h3 id="finding-a-task-code-find-code"><a class="link" href="#finding-a-task-code-find-code">4.15. Finding a task: <code>find</code></a></h3>
 <div class="paragraph">
 <p>Is your task list getting too long and you are not able to find what you are looking for? Introducing the <code>find</code> function which will allow you to find what you want within the specific panel. Just type <code>find</code> and the keyword that you want to search for within the command box and ELISA will find the relevant items for you.</p>
 </div>
@@ -745,7 +779,7 @@ Format: <code>redo</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="entering-priority-mode-code-priority-code"><a class="link" href="#entering-priority-mode-code-priority-code">4.14. Entering priority mode: <code>priority</code></a></h3>
+<h3 id="entering-priority-mode-code-priority-code"><a class="link" href="#entering-priority-mode-code-priority-code">4.16. Entering priority mode: <code>priority</code></a></h3>
 <div class="paragraph">
 <p>Feeling stress? Too much task on your task list? Enter priority mode, a mode which will help you narrow down the most pressing task to be done.</p>
 </div>
@@ -793,7 +827,7 @@ Format: <code>redo</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="expanding-an-item-in-the-view-code-open-code-code-close-code"><a class="link" href="#expanding-an-item-in-the-view-code-open-code-code-close-code">4.15. Expanding an item in the view: <code>open</code> &amp; <code>close</code></a></h3>
+<h3 id="expanding-an-item-in-the-view-code-open-code-code-close-code"><a class="link" href="#expanding-an-item-in-the-view-code-open-code-code-close-code">4.17. Expanding an item in the view: <code>open</code> &amp; <code>close</code></a></h3>
 <div class="paragraph">
 <p>Want to see all the details of an item at one glance? Lazy to go to event list or reminder list to find them? We got you!</p>
 </div>
@@ -841,21 +875,21 @@ Although, the ESC key can close too, we do not advise doing so as ELISA may be c
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">4.16. Exiting the program : <code>exit</code></a></h3>
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">4.18. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Exits the program.<br>
 Format: <code>exit</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">4.17. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">4.19. Saving the data</a></h3>
 <div class="paragraph">
 <p>ELISA saves the data in the hard disk automatically after any command that changes the data.
 There is no need to save manually.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">4.18. Encrypting data files <code>[coming in v2.0]</code></a></h3>
+<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">4.20. Encrypting data files <code>[coming in v2.0]</code></a></h3>
 <div class="paragraph">
 <p><em>{explain how the user can enable/disable data encryption}</em></p>
 </div>
@@ -892,4 +926,4 @@ There is no need to save manually.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-06 18:31:46 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-08 03:18:21 UTC</div></div></div></body></html>
