@@ -136,8 +136,8 @@
 </tr>
 </tbody>
 </table>
-<div class="sect2">
-<h3 id="deleting-a-reminder-task-event-code-delete-code"><a class="link" href="#deleting-a-reminder-task-event-code-delete-code">Deleting a reminder/task/event : <code>delete</code></a></h3>
+<div class="sect3">
+<h4 id="deleting-a-reminder-task-event-code-delete-code"><a class="link" href="#deleting-a-reminder-task-event-code-delete-code">Deleting a reminder/task/event : <code>delete</code></a></h4>
 <div class="paragraph">
 <p>Deletes the reminder/task/event from ELISA.<br>
 Format: <code>delete INDEX</code></p>
@@ -176,7 +176,203 @@ Deletes the 2nd reminder in the shown reminder list.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="undoing-the-latest-modification-s-code-undo-code"><a class="link" href="#undoing-the-latest-modification-s-code-undo-code">Undoing the latest modification(s) : <code>undo</code></a></h3>
+<h3 id="reminder-feature"><a class="link" href="#reminder-feature">Reminder Feature</a></h3>
+<div class="sect3">
+<h4 id="snoozing-a-reminder-code-snooze-code"><a class="link" href="#snoozing-a-reminder-code-snooze-code">Snoozing a reminder: <code>snooze</code></a></h4>
+<div class="paragraph">
+<p>Snoozes a reminder that occurred since the application was open.<br>
+If an index is not provided, the most recently occurred reminder will be snoozed.<br>
+If a snooze duration is not specified, the reminder will be snoozed at the default duration of 5 min.<br>
+Format: 'snooze [INDEX] [-s SNOOZE_DURATION]'<br></p>
+</div>
+<div class="paragraph">
+<p>Examples:
+* <code>snooze 1</code>
+* <code>snooze 3 -s 10.min.later</code>
+* <code>snooze -s 10/10/2020 1400</code></p>
+</div>
+<div class="olist NOTE">
+<ol class="NOTE">
+<li>
+<p>It is possible to snooze the same reminder multiple times if you wish.<br></p>
+</li>
+<li>
+<p>It is not possible to snooze if no reminder has occurred yet.<br>
+However, if you use the snooze command incorrectly, ELISA will first attempt to correct your usage of the snooze command.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="navigation-features"><a class="link" href="#navigation-features">Navigation Features</a></h3>
+<div class="sect3">
+<h4 id="show-the-specified-category-code-show-code"><a class="link" href="#show-the-specified-category-code-show-code">Show the specified category : <code>show</code></a></h4>
+<div class="paragraph">
+<p>Shows the specified category by switching the view to the given list.<br>
+Format: `show [t] [e] [c] [r] (Exactly <strong>one</strong> flag must be used with this command)''</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The flag can be in either lowercase or uppercase. Eg. <code>show E</code>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="scrolling-the-list-code-up-code-code-down-code"><a class="link" href="#scrolling-the-list-code-up-code-code-down-code">Scrolling the list : <code>up</code> / <code>down</code></a></h4>
+<div class="paragraph">
+<p>Scrolls the list up/down</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="visual-features"><a class="link" href="#visual-features">Visual Features</a></h3>
+<div class="sect3">
+<h4 id="expanding-an-item-in-the-view-code-open-code-code-close-code"><a class="link" href="#expanding-an-item-in-the-view-code-open-code-code-close-code">Expanding an item in the view: <code>open</code> &amp; <code>close</code></a></h4>
+<div class="paragraph">
+<p>Want to see all the details of an item at one glance? Lazy to go to event list or reminder list to find them? We got you!</p>
+</div>
+<div class="paragraph">
+<p>You can now open up an item to see all its details, regardless of what list you are on.
+But remember to close it before opening another item!</p>
+</div>
+<div class="paragraph">
+<p>Open format: <code>open INDEX</code><br>
+Close format: <code>close</code></p>
+</div>
+<div class="paragraph">
+<p>Example sequence:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>show T</code> - to switch to the task view</p>
+</li>
+<li>
+<p><code>open 2</code> - opens the second item on the list</p>
+</li>
+<li>
+<p><code>close</code> - closes the item</p>
+</li>
+<li>
+<p><code>open 3</code> - opens the third item on the list (Note: If you forgot to close previously, no worries as ELISA will prompt you to!)</p>
+</li>
+<li>
+<p><code>close</code> - closes the item</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Although, the ESC key can close too, we do not advise doing so as ELISA may be confused later on :(
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="changing-the-theme-code-theme-code"><a class="link" href="#changing-the-theme-code-theme-code">Changing the theme : <code>theme</code></a></h4>
+<div class="paragraph">
+<p>Screen is too dark? Switch up the theme by typing <code>theme white</code>!</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/themewhite.PNG" alt="themewhite">
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>theme white</code></p>
+</li>
+<li>
+<p><code>theme black</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="clearing-the-screen-code-clearscreen-code-and-code-clear-code"><a class="link" href="#clearing-the-screen-code-clearscreen-code-and-code-clear-code">Clearing the screen : <code>clearscreen</code> and <code>clear</code></a></h4>
+<div class="paragraph">
+<p>Chat box getting too cluttered? Type <code>clearscreen</code> to clear it!</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>clear</code> - clears all lists</p>
+</li>
+<li>
+<p><code>clearscreen</code> - clears the chat box</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="calendar-feature"><a class="link" href="#calendar-feature">Calendar Feature</a></h3>
+<div class="paragraph">
+<p>Sick of looking through lists of events? Type <code>show c</code> in the command box and your events will be magically placed into a calendar!</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/calendar.PNG" alt="calendar">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="entertainment-features"><a class="link" href="#entertainment-features">Entertainment Features</a></h3>
+<div class="paragraph">
+<p>Too stressed from all the work? Check out these features to take a short break so that you can go further!</p>
+</div>
+<div class="sect3">
+<h4 id="play-a-game-code-game-code"><a class="link" href="#play-a-game-code-game-code">Play a game: <code>game</code></a></h4>
+<div class="paragraph">
+<p><code>game</code> switches your list of tasks into a game of Snakes!</p>
+</div>
+<div class="imageblock" style="float: right">
+<div class="content">
+<img src="../images/SnakeGame.PNG" alt="Snake" width="600" height="600">
+</div>
+</div>
+<div class="paragraph">
+<p><u>Rules:</u></p>
+</div>
+<div class="paragraph">
+<p>Control your snake by pressing the key commands <code>UP</code>, <code>DOWN</code>, <code>LEFT</code>, <code>RIGHT</code>. Careful not to let your snake bit it&#8217;s own tail or it will be GAME OVER!</p>
+</div>
+<div class="paragraph">
+<p>Hit <code>ENTER</code> to reset the game when your snake dies.</p>
+</div>
+<div class="paragraph">
+<p>Pressing <code>ESC</code> key will exit the game and return you to your list of tasks!</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="tell-a-joke-code-joke-code"><a class="link" href="#tell-a-joke-code-joke-code">Tell a joke: <code>joke</code></a></h4>
+<div class="paragraph">
+<p>Type <code>joke</code> in the command box and I will showcase my exceptional sense of humor and tell you a random joke!</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">Undo/Redo Feature</a></h3>
+<div class="sect3">
+<h4 id="undoing-the-latest-modification-s-code-undo-code"><a class="link" href="#undoing-the-latest-modification-s-code-undo-code">Undoing the latest modification(s) : <code>undo</code></a></h4>
 <div class="paragraph">
 <p>Reverts the latest commands given on the ELISA.<br>
 Format: <code>undo</code></p>
@@ -204,8 +400,8 @@ Undoes the last command</p>
 </ul>
 </div>
 </div>
-<div class="sect2">
-<h3 id="redoing-the-latest-undone-command-s-code-redo-code"><a class="link" href="#redoing-the-latest-undone-command-s-code-redo-code">Redoing the latest undone command(s) : <code>redo</code></a></h3>
+<div class="sect3">
+<h4 id="redoing-the-latest-undone-command-s-code-redo-code"><a class="link" href="#redoing-the-latest-undone-command-s-code-redo-code">Redoing the latest undone command(s) : <code>redo</code></a></h4>
 <div class="paragraph">
 <p>Re-executes the latest undone commands given on the ELISA.<br>
 Format: <code>redo</code></p>
@@ -235,8 +431,11 @@ Format: <code>redo</code></p>
 </ul>
 </div>
 </div>
+</div>
 <div class="sect2">
-<h3 id="sorting-elisa-out-code-sort-code"><a class="link" href="#sorting-elisa-out-code-sort-code">Sorting ELISA out: <code>sort</code></a></h3>
+<h3 id="sort-find-feature"><a class="link" href="#sort-find-feature">Sort/Find Feature</a></h3>
+<div class="sect3">
+<h4 id="sorting-elisa-out-code-sort-code"><a class="link" href="#sorting-elisa-out-code-sort-code">Sorting ELISA out: <code>sort</code></a></h4>
 <div class="paragraph">
 <p>Is ELISA getting too cluttered and disorganized? Do you want to sort your task by their priority? Or the events by their start date?</p>
 </div>
@@ -272,8 +471,8 @@ Format: <code>redo</code></p>
 </ul>
 </div>
 </div>
-<div class="sect2">
-<h3 id="finding-a-task-code-find-code"><a class="link" href="#finding-a-task-code-find-code">Finding a task: <code>find</code></a></h3>
+<div class="sect3">
+<h4 id="finding-a-task-code-find-code"><a class="link" href="#finding-a-task-code-find-code">Finding a task: <code>find</code></a></h4>
 <div class="paragraph">
 <p>Is your task list getting too long and you are not able to find what you are looking for? Introducing the <code>find</code> function which will allow you to find what you want within the specific panel. Just type <code>find</code> and the keyword that you want to search for within the command box and ELISA will find the relevant items for you.</p>
 </div>
@@ -292,6 +491,7 @@ Format: <code>redo</code></p>
 <p><code>find CS2101 CS2103</code> - find items that contains either CS2101 or CS2103 within their description.</p>
 </li>
 </ul>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -340,54 +540,6 @@ Format: <code>redo</code></p>
 </ul>
 </div>
 </div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="expanding-an-item-in-the-view-code-open-code-code-close-code"><a class="link" href="#expanding-an-item-in-the-view-code-open-code-code-close-code">Expanding an item in the view: <code>open</code> &amp; <code>close</code></a></h3>
-<div class="paragraph">
-<p>Want to see all the details of an item at one glance? Lazy to go to event list or reminder list to find them? We got you!</p>
-</div>
-<div class="paragraph">
-<p>You can now open up an item to see all its details, regardless of what list you are on.
-But remember to close it before opening another item!</p>
-</div>
-<div class="paragraph">
-<p>Open format: <code>open INDEX</code><br>
-Close format: <code>close</code></p>
-</div>
-<div class="paragraph">
-<p>Example sequence:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>show T</code> - to switch to the task view</p>
-</li>
-<li>
-<p><code>open 2</code> - opens the second item on the list</p>
-</li>
-<li>
-<p><code>close</code> - closes the item</p>
-</li>
-<li>
-<p><code>open 3</code> - opens the third item on the list (Note: If you forgot to close previously, no worries as ELISA will prompt you to!)</p>
-</li>
-<li>
-<p><code>close</code> - closes the item</p>
-</li>
-</ul>
-</div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-Although, the ESC key can close too, we do not advise doing so as ELISA may be confused later on :(
-</td>
-</tr>
-</table>
 </div>
 </div>
 <div class="sect2">
@@ -928,4 +1080,4 @@ The significance of these methods will be shown in the continuing diagram below:
 <p><em>{Optionally, you may include other projects in your portfolio.}</em></p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-08 03:18:21 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-09 04:38:45 UTC</div></div></div></body></html>
