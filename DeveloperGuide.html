@@ -623,7 +623,10 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </ul>
 </div>
 <div class="paragraph">
-<p>There are two variants to the priority mode, a normal priority mode that is controlled fully by the user and a scheduled priority mode that is triggered by the user but is scheduled to turn off after a specific amount of time. In addition to using the above three methods, the <code><code>ScheduledPriorityMode</code></code> also uses the following method:</p>
+<p>There are two variants to the priority mode, a normal priority mode and a focus mode. The focus mode is more restrictive than the normal priority mode. It prevents the user from doing any task that are not relevant to the task list, such as adding a new event or switching the pane. This is currently implemented by having a boolean to check if the application is in focus mode. (Refer to )</p>
+</div>
+<div class="paragraph">
+<p>There are two way to trigger the priority mode, a normal priority mode that is controlled fully by the user and a scheduled priority mode that is triggered by the user but is scheduled to turn off after a specific amount of time. In addition to using the above three methods, the <code><code>ScheduledPriorityMode</code></code> also uses the following method:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -636,24 +639,36 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <div class="sect3">
 <h4 id="example-run-of-code"><a class="link" href="#example-run-of-code">3.3.2. Example run of code</a></h4>
 <div class="paragraph">
-<p>In the following section, we will be showing a run of the priority mode and the behaviour of the mechanism at each step. In particular, we will be showing how the <code><code>ScheduledPriorityMode</code></code> works as it has a more complicated implementation than the normal <code><code>PriorityMode</code></code>.</p>
+<p>In the following section, we will be showing a run of the priority mode and a broad overview of the mechanism at each step. In particular, we will be showing how the <code><code>ScheduledPriorityMode</code></code> works as it has a more complicated implementation than the normal <code><code>PriorityMode</code></code>.</p>
 </div>
-<div class="paragraph">
-<p>Step 1. The user opens his ELISA software. The first screen that he observes will be the task screen which contains all the task of the user based on the time they were added into the list.</p>
-</div>
-<div class="paragraph">
-<p>Step 2. The user types <code><code>priority 30.min.later</code></code> into the command box of ELISA and hits enter. The list is instantly shrink to show only the most pressing task (i.e. the task with the highest priority). If two tasks have the same priority, either of the task will be shown as there is no other way for ELISA to compare between the two task.</p>
-</div>
-<div class="paragraph">
-<p>Step 3. The user can type <code><code>done 1</code></code> when he is done with the current task to retrieve the next task. This will carry on until there is no more undone task left to do. This is shown in the activity diagram below.</p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The user opens his ELISA software. The first screen that he observes will be the task screen which contains all the task of the user based on the time they were added into the list.</p>
+</li>
+<li>
+<p>The user types <code><code>priority 30.min.later</code></code> into the command box of ELISA and hits enter. The incomplete items are added to a <code><code>PriorityQueue&lt;Item&gt;</code></code> where they are ranked by their priority and if they have the same priority, the item that is added to ELISA first will have a higher ranking.</p>
+</li>
+<li>
+<p>Once all the items are added into the <code><code>PriorityQueue&lt;Item&gt;</code></code>, ELISA will peek the first task from the queue and present it to the user.</p>
+</li>
+<li>
+<p>The user can type <code><code>done 1</code></code> when he is done with the current task to retrieve the next task. This will carry on until there is no more undone task left to do in the priority queue. This is shown in the activity diagram below.</p>
+</li>
+</ol>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/PriorityModeActivityDiagram.png" alt="PriorityModeActivityDiagram">
 </div>
+<div class="title">Figure 9. Activity diagram for priority mode</div>
 </div>
-<div class="paragraph">
-<p>Step 4. ELISA will automatically disable the priority mode after 30 minutes and show <strong>all</strong> the task that the user have in his task list currently.</p>
+<div class="olist arabic">
+<ol class="arabic" start="5">
+<li>
+<p>ELISA will automatically disable the priority mode after 30 minutes and show <strong>all</strong> the task that the user have in his task list currently.</p>
+</li>
+</ol>
 </div>
 </div>
 <div class="sect3">
@@ -665,40 +680,61 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <div class="content">
 <img src="images/PriorityMode.png" alt="PriorityMode">
 </div>
-<div class="title">Figure 9. Sequence diagram for priority mode</div>
+<div class="title">Figure 10. Sequence diagram for priority mode</div>
 </div>
 <div class="paragraph">
 <p>Step 1. When the user types in the command, the <code><code>LogicManager</code></code> takes in the command as a string and pass it to the <code><code>AddressBookParser</code></code></p>
 </div>
 <div class="paragraph">
-<p>Step 2. The <code><code>AddressBookParser</code></code> parses the string and determine whether the command is that of a normal <code><code>PriorityCommand</code></code> or a <code><code>ScheduledPriorityCommand</code></code>. In this case, the command is that of a <code><code>ScheduledPriorityCommand</code></code> and so a new <code><code>ScheduledPriorityCommand</code></code> is created. This <code><code>ScheduledPriorityCommand</code></code> is passed back to the <code><code>LogicManager</code></code>.</p>
+<p>Step 2. The <code><code>AddressBookParser</code></code> parses the string and determine whether the command is that of a normal <code><code>PriorityCommand</code></code> or a <code><code>ScheduledPriorityCommand</code></code>.</p>
 </div>
 <div class="paragraph">
-<p>(Despite the fact that this is a <code><code>ScheduledPriorityCommand</code></code>, the following steps marked with a * are also applicable to a normal <code><code>PriorityCommand</code></code>).</p>
+<p>In this case, the command is that of a <code><code>ScheduledPriorityCommand</code></code> and so a new <code><code>ScheduledPriorityCommand</code></code> is created. This <code><code>ScheduledPriorityCommand</code></code> is passed back to the <code><code>LogicManager</code></code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The following steps (except those marked with a *) are also applicable to <code><code>PriorityCommand</code></code>.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
-<p>Step 3*. Within the <code><code>LogicManager</code></code>, the <code><code>ScheduledPriorityCommand#execute()</code></code> method is called and the command is executed.</p>
+<p>Step 3. Within the <code><code>LogicManager</code></code>, the <code><code>ScheduledPriorityCommand#execute()</code></code> method is called and the command is executed.</p>
 </div>
 <div class="paragraph">
-<p>Step 4. The <code><code>ScheduledPriorityCommand</code></code> calls the <code><code>ItemModel#scheduleOffPriorityMethod()</code></code> which creates a new <code><code>Timer</code></code> object and a new <code><code>TimerTask</code></code> object. The <code><code>TimerTask</code></code> object will be scheduled to fire off at a specific time, which in this case is 30 minutes later (as defined by the user).</p>
+<p>Step 4*. The <code><code>ScheduledPriorityCommand</code></code> calls the <code><code>ItemModel#scheduleOffPriorityMethod()</code></code> which creates a new <code><code>Timer</code></code> object and a new <code><code>TimerTask</code></code> object. The <code><code>TimerTask</code></code> object will be scheduled to fire off at a specific time, which in this case is 30 minutes later (as defined by the user).</p>
 </div>
 <div class="paragraph">
-<p>Step 5*. The <code><code>SchedulePriorityCommand</code></code> then calls <code><code>ItemModel#togglePriorityMode()</code></code> which calls the private method <code><code>ItemModel#toggleOnPriorityMode()</code></code> (since the current state of the priority mode is false).</p>
+<p>Step 5. The <code><code>SchedulePriorityCommand</code></code> then calls <code><code>ItemModel#togglePriorityMode()</code></code> which calls the private method <code><code>ItemModel#toggleOnPriorityMode()</code></code> (since the current state of the priority mode is false).</p>
 </div>
 <div class="paragraph">
-<p>Step 6*. This creates a new <code><code>TaskList</code></code> which will be the visualization list for the Task Panel throughout the entire priority mode period.</p>
+<p>Step 6. This creates a new <code><code>TaskList</code></code> which will be the visualization list for the Task Panel throughout the entire priority mode period.</p>
 </div>
 <div class="paragraph">
-<p>Step 7*. A <code><code>CommandResult</code></code> is passed to the <code><code>ScheduledPriorityCommand</code></code> and then back to the <code><code>LogicManager</code></code> to be passed into the <code><code>Ui</code></code>, informing the user that the priority mode is activate.</p>
+<p>Step 7. A <code><code>CommandResult</code></code> is passed to the <code><code>ScheduledPriorityCommand</code></code> and then back to the <code><code>LogicManager</code></code> to be passed into the <code><code>Ui</code></code>, informing the user that the priority mode is activate.</p>
 </div>
-<div class="paragraph">
-<p>(At this point, a normal <code><code>PriorityCommand</code></code> will end the sequence diagram here and will only be deactivated by the user&#8217;s input of <code><code>priority</code></code> again.)</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+A normal <code><code>PriorityCommand</code></code> will end at this point and will only be deactivated by the user&#8217;s input of <code><code>priority</code></code> again.
+</td>
+</tr>
+</table>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/PriorityMode2.png" alt="PriorityMode2">
 </div>
-<div class="title">Figure 10. Sequence diagram for the scheduled turning off of priority mode</div>
+<div class="title">Figure 11. Sequence diagram for the scheduled turning off of priority mode</div>
 </div>
 <div class="paragraph">
 <p>Step 8. As the <code><code>Timer</code></code> within the <code><code>ItemModelManager</code></code> is still running on a separate thread, it will trigger the <code><code>TimerTask#run()</code></code> when the user defined time is reached.</p>
@@ -713,49 +749,122 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <div class="sect3">
 <h4 id="design-consideration"><a class="link" href="#design-consideration">3.3.4. Design Consideration</a></h4>
 <div class="paragraph">
-<p>Aspect: How to turn off the priority mode after a fixed time</p>
+<p><strong>Aspect: How to restrict commands for focus mode</strong></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1:</strong> Having two different classes for activating the priority mode, a normal <code><code>PriorityCommand</code></code> and a <code><code>ScheduledPriorityCommand</code></code> that extends from the <code><code>PriorityCommand</code></code>. The timer will be activated in the <code><code>ScheduledPriorityCommand</code></code>.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Adhere to the SLAP principle with each class having it&#8217;s own implementation of the <code><code>Command#execute(ItemModel)</code></code>. This makes it easier to maintain the code and prevents from overloading the ItemModel by keeping the timer there.</p>
-</li>
-<li>
-<p>Cons: There is no way to end the <code><code>ScheduledPriorityCommand</code></code> as the timer is kept within the command and so cannot be cancelled prematurely as there is no way to access the command after that.</p>
+<p>Alternative 1: Storing a boolean within the <code>ItemModelManager</code> to check if the application is in focus mode or normal mode. Commands that are not allowed to be called in focus mode will check against this boolean to determine if the command is allowed.</p>
 </li>
 </ul>
 </div>
-</li>
-<li>
-<p><strong>Alternative 2 (Current choice)</strong>: Having a timer within the <code><code>ItemModelManager</code></code> and having a specific method within the <code><code>ItemModelManager</code></code> to handle this creation of the timer.</p>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Pros</th>
+<th class="tableblock halign-left valign-top">Cons</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This implementation will contain the changes within the class of the <code><code>Command</code></code> itself and will ensure that they do not interfere with each other. This will make it easier to maintain the code.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This implementation is not scalable as each new <code><code>Command</code></code> that is added will need to be checked to see if they are allowed in focus mode. There is also the additional overhead of checking the state of the <code><code>ItemModelManager</code></code> at every call of <code><code>Command#execute()</code></code>.</p></td>
+</tr>
+</tbody>
+</table>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: The scheduled priority mode can be controlled within the <code><code>ItemModelManager</code></code> and can then be controlled within the class such that it can be cancelled when it is done.</p>
-</li>
-<li>
-<p>Cons: This implementation will clutter the <code><code>ItemModelManager</code></code> further and make it harder for maintaining the code.</p>
+<p>Alternative 2 (Current implementation): Create a new <code><code>FocusElisaParser</code></code> that extends from the current <code><code>ElisaParser</code></code> but prevent the parsing of commands that are not allowed in focus mode.</p>
 </li>
 </ul>
 </div>
-</li>
-</ul>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Pros</th>
+<th class="tableblock halign-left valign-top">Cons</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This implementation stops the creation of the <code><code>Command</code></code> at the <code><code>Parser</code></code> level which will reduce the computational cost to the application.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This implementation requires the manipulation of the <code><code>LogicManager</code></code> to change the parser and require it to observe the <code><code>ItemModelManager</code></code> for changes. There might also be more difficulty when maintaining the code as there is a need to maintain the <code><code>Parser#parse()</code></code> method of the two <code><code>Parser</code></code>.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Both methods are not scalable in the long run, but at this moment, alternative 2 is favoured as it prevents the command from even being parsed or created, which saves the computing time. At the same time, it is easier to maintain as one only needs to edit the <code><code>Parser#parse()</code></code> method instead of having an if-else loop in all the command that are banned.</p>
 </div>
 <div class="paragraph">
-<p>Alternative 2 was chosen as we believe that the functionality of the <code><code>ScheduledPriorityMode</code></code> takes priority over the maintainability of the code and should be used first until a better method can be created.</p>
+<p><strong>Aspect: How to turn off the priority mode after a fixed time</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Alternative 1: Having two different classes for activating the priority mode, a normal <code><code>PriorityCommand</code></code> and a <code><code>ScheduledPriorityCommand</code></code> that extends from the <code><code>PriorityCommand</code></code>. The timer will be activated in the <code><code>ScheduledPriorityCommand</code></code>.</p>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Pros</th>
+<th class="tableblock halign-left valign-top">Cons</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adheres to the SLAP principle with each class having it&#8217;s own implementation of the <code><code>Command#execute(ItemModel)</code></code>. This makes it easier to maintain the code and prevents from overloading the <code><code>ItemModelManager</code></code> by keeping the timer there.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">There is no way to end the schedule priority mode prematurely as the timer is kept within the command and so cannot be referenced after the execution of the command.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="ulist">
+<ul>
+<li>
+<p>Alternative 2 (Current implementation): Having a timer within the <code><code>ItemModelManager</code></code> and having a specific method within the <code><code>ItemModelManager</code></code> to handle this creation of the timer.</p>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Pros</th>
+<th class="tableblock halign-left valign-top">Cons</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The timer can be referenced from the <code><code>ItemModelManager</code></code> and so it can be cancelled prematurely if the user chooses to do so.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This implementation will clutter the <code><code>ItemModelManager</code></code> further and make it harder for maintaining the code.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Alternative 2 was chosen as we believe that the ability to cancel a scheduled priority mode prematurely takes priority over the maintainability of the code and should be used until a better method can be created.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="possible-extension"><a class="link" href="#possible-extension">3.3.5. Possible extension</a></h4>
 <div class="paragraph">
-<p>As of this moment, there is no way to display the status of the priority mode within the <code><code>Ui</code></code> other than through the visualization list. One possible extension is changing the colour of Elisa to signify that the user is in the priority mode.</p>
-</div>
-<div class="paragraph">
-<p>At the moment, there is also no way to inform the user that the priority mode is disabled when it is scheduled to be off. However, this can be solved if the above extension is implemented as it will trigger the message when the mode switches.</p>
+<p>At the moment, the user is not able to keep track of the amount of time that he have before the schedule priority mode is over. This could be overcome by including a countdown timer in the Ui when the user toggles on the scheduled priority mode.</p>
 </div>
 </div>
 </div>
@@ -774,7 +883,7 @@ The following activity diagram shows the how a task can be added, depending on t
 <div class="content">
 <img src="images/AddTaskActivity.png" alt="200" width="600">
 </div>
-<div class="title">Figure 11. Activity Diagram of adding a Task</div>
+<div class="title">Figure 12. Activity Diagram of adding a Task</div>
 </div>
 <div class="paragraph">
 <p>This shows how we can easily add Task, Event and Reminder with a <em>single</em> command.
@@ -801,7 +910,7 @@ Step 6. Upon the successful execution of AddCommand, a CommandResult is returned
 <div class="content">
 <img src="images/AddCommandPart_1.png" alt="AddCommandPart 1">
 </div>
-<div class="title">Figure 12. Call execute in LogicManager to create an AddTaskCommand</div>
+<div class="title">Figure 13. Call execute in LogicManager to create an AddTaskCommand</div>
 </div>
 <div class="paragraph">
 <p>This diagram shows how <code>execute</code> is carried out in the <code>Logic</code> component.
@@ -811,7 +920,7 @@ The following diagram shows how the same command is continued onto the <code>Mod
 <div class="content">
 <img src="images/AddCommandPart_2.png" alt="AddCommandPart 2">
 </div>
-<div class="title">Figure 13. LogicManager executes the AddTaskCommand and returns CommandResult</div>
+<div class="title">Figure 14. LogicManager executes the AddTaskCommand and returns CommandResult</div>
 </div>
 <div class="paragraph">
 <p>This shows how <code>execute(model)</code> affects the <code>Model</code> component. It then returns a <code>CommandResult</code> r, which is the result of calling LogicManager#execute("task shower -d 1.hour.later").</p>
@@ -880,7 +989,7 @@ The accepted parameters for <code>-auto</code> is <code>day</code>, <code>week</
 <div class="content">
 <img src="images/AutoRescheduleActivity.png" alt="100" width="400">
 </div>
-<div class="title">Figure 14. Activity diagram of adding an Event with -auto flag</div>
+<div class="title">Figure 15. Activity diagram of adding an Event with -auto flag</div>
 </div>
 <div class="paragraph">
 <p>In the diagram, when we add the Event initially, we would check the start time of the Event and update it accordingly.
@@ -927,7 +1036,7 @@ The classes involved in the above rescheduling are:<br></p>
 <div class="content">
 <img src="images/AutoRescheduleClassDiagram.png" alt="100" width="500">
 </div>
-<div class="title">Figure 15. Class Diagram of classes involved in AutoReschedule function</div>
+<div class="title">Figure 16. Class Diagram of classes involved in AutoReschedule function</div>
 </div>
 </div>
 <div class="sect3">
@@ -948,7 +1057,7 @@ The first diagram shows the adding of an Event, which may appear familiar as it 
 <div class="content">
 <img src="images/AutoRescheduleSequence_1.png" alt="AutoRescheduleSequence 1">
 </div>
-<div class="title">Figure 16. Call execute in LogicManager and create an AddEventCommand</div>
+<div class="title">Figure 17. Call execute in LogicManager and create an AddEventCommand</div>
 </div>
 <div class="paragraph">
 <p>As mentioned, the key points to take note of in the diagram above is <code>Event#setAutoReschedule(true)</code> and <code>Event#setReschedulePeriod(period)</code>.<br>
@@ -958,7 +1067,7 @@ The significance of these methods will be shown in the continuing diagram below:
 <div class="content">
 <img src="images/AutoRescheduleSequence_2.png" alt="AutoRescheduleSequence 2">
 </div>
-<div class="title">Figure 17. LogicManager executing AddEventCommand and create task for AutoRescheduleManager</div>
+<div class="title">Figure 18. LogicManager executing AddEventCommand and create task for AutoRescheduleManager</div>
 </div>
 <div class="paragraph">
 <p>From the above diagram, we can see that the presence of <code>AutoReschedulePeriod</code> in Event results in the creation of <code>RescheduleTask</code> which would be queued into the Timer managed by <code>AutoRescheduleManager</code>.</p>
@@ -1755,4 +1864,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-09 04:38:45 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-09 07:09:19 UTC</div></div></div></body></html>
