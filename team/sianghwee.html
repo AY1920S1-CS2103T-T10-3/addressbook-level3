@@ -201,22 +201,53 @@
 </tr>
 </tbody>
 </table>
-<div class="sect2">
-<h3 id="entering-priority-mode-code-priority-code"><a class="link" href="#entering-priority-mode-code-priority-code">Entering priority mode: <code>priority</code></a></h3>
 <div class="paragraph">
-<p>Feeling stressed? Too much task on your task list? Enter priority mode, a mode which will help you narrow down the most pressing task to be done.</p>
+<p>Feeling stress? Too much task on your task list? Enter priority mode, a mode which will help you narrow down the most pressing task to be done.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/BeforePriority.PNG" alt="800" width="800">
+</div>
+<div class="title">Figure 2. ELISA before priority mode with a long list of task</div>
 </div>
 <div class="paragraph">
 <p>By simply typing <code>priority</code> into the command box, you will be given one single task of the highest priority among your task list. This task is chosen by ELISA base on priority and the order in which the task was added to the list.</p>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/AfterPriority.PNG" alt="800" width="800">
+</div>
+<div class="title">Figure 3. ELISA in priority mode</div>
+</div>
 <div class="paragraph">
-<p>Feeling less stressed? You can type <code>priority</code> again to bring you out of the priority mode and back into the normal task view. Or even better, finish all your undone tasks and you will be automatically brought out of priority mode.</p>
+<p>Notice that the ELISA icon turns red to signify that you are in priority mode and your task list has shrink from 5 tasks to the 1 most important task.</p>
+</div>
+<div class="paragraph">
+<p>When you are done with your current task, just tell ELISA you are done by simply typing <code>done 1</code> and ELISA will generate the next task for you.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/AfterDone.PNG" alt="800" width="800">
+</div>
+<div class="title">Figure 4. ELISA after completing the first task</div>
+</div>
+<div class="paragraph">
+<p>Feeling less stress? You can type <code>priority</code> again to bring you out of the priority mode and back into the normal task view. Or even better, finish all your undone task and you will be automatically brought out of priority mode.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/AllDone.PNG" alt="800" width="800">
+</div>
+<div class="title">Figure 5. ELISA after all tasks are completed</div>
 </div>
 <div class="paragraph">
 <p>Feeling lazy? You can also opt to turn off priority mode at a specific time by typing <code>priority dd/mm/yyyy hhmm</code> and ELISA will turn it off at that specific time for you.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>priority</code> or <code>priority dd/mm/yyyy hhmm</code></p>
+<p>There is also an extreme focus mode for the easily distracted. Simply tell ELISA that you want to enter the extreme focus mode by attaching a <code>-f</code> flag to the back of the command. In the extreme focus mode, commands such as <code>show</code>, <code>sort</code>, <code>find</code>, <code>game</code>, <code>event</code> and <code>reminder</code> are banned.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>priority [DATETIME] [-f]</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -230,7 +261,7 @@
 <p><code>priority 30/10/2019 1200</code> - activates the priority mode and ask ELISA to turn it off on 30/10/2019 at noon</p>
 </li>
 <li>
-<p><code>priority 2.hours.later</code> - activates the priority mode and ask ELISA to turn it off 2 hours later</p>
+<p><code>priority 2.hour.later -f</code> - activates the focus mode and ask ELISA to turn it off 2 hours later</p>
 </li>
 </ul>
 </div>
@@ -239,13 +270,12 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Note that this command can only be called in the task panel.</p>
+<p>Note that this command can only be called in the task panel and when you have incomplete tasks to be completed.</p>
 </li>
 <li>
-<p>Note that all commands such as <code>edit</code>, <code>undo</code> and <code>redo</code> still works in priority mode.</p>
+<p>Note that all command such as <code>edit</code>, <code>undo</code> and <code>redo</code> still works in priority mode. However, if a <code>done</code> or <code>delete</code> command takes you out of priority mode and then you <code>undo</code> it, it will only <code>undo</code> the command but will not take you back into priority mode.</p>
 </li>
 </ul>
-</div>
 </div>
 </div>
 </div>
@@ -326,7 +356,7 @@
 <div class="content">
 <img src="../images/PriorityModeActivityDiagram.png" alt="PriorityModeActivityDiagram">
 </div>
-<div class="title">Figure 2. Activity diagram for priority mode</div>
+<div class="title">Figure 6. Activity diagram for priority mode</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic" start="5">
@@ -345,7 +375,7 @@
 <div class="content">
 <img src="../images/PriorityMode.png" alt="PriorityMode">
 </div>
-<div class="title">Figure 3. Sequence diagram for priority mode</div>
+<div class="title">Figure 7. Sequence diagram for priority mode</div>
 </div>
 <div class="paragraph">
 <p>Step 1. When the user types in the command, the <code><code>LogicManager</code></code> takes in the command as a string and pass it to the <code><code>AddressBookParser</code></code></p>
@@ -399,7 +429,7 @@ A normal <code><code>PriorityCommand</code></code> will end at this point and wi
 <div class="content">
 <img src="../images/PriorityMode2.png" alt="PriorityMode2">
 </div>
-<div class="title">Figure 4. Sequence diagram for the scheduled turning off of priority mode</div>
+<div class="title">Figure 8. Sequence diagram for the scheduled turning off of priority mode</div>
 </div>
 <div class="paragraph">
 <p>Step 8. As the <code><code>Timer</code></code> within the <code><code>ItemModelManager</code></code> is still running on a separate thread, it will trigger the <code><code>TimerTask#run()</code></code> when the user defined time is reached.</p>
@@ -534,4 +564,4 @@ A normal <code><code>PriorityCommand</code></code> will end at this point and wi
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-09 13:03:40 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-09 13:08:20 UTC</div></div></div></body></html>

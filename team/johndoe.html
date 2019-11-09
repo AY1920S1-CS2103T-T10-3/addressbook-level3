@@ -291,6 +291,7 @@ Although, the ESC key can close too, we do not advise doing so as ELISA may be c
 <div class="content">
 <img src="../images/themewhite.PNG" alt="themewhite">
 </div>
+<div class="title">Figure 1. White theme of ELISA</div>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -332,6 +333,7 @@ Although, the ESC key can close too, we do not advise doing so as ELISA may be c
 <div class="content">
 <img src="../images/calendar.PNG" alt="calendar">
 </div>
+<div class="title">Figure 2. Calendar feature of ELISA</div>
 </div>
 </div>
 <div class="sect2">
@@ -348,6 +350,7 @@ Although, the ESC key can close too, we do not advise doing so as ELISA may be c
 <div class="content">
 <img src="../images/SnakeGame.PNG" alt="Snake" width="600" height="600">
 </div>
+<div class="title">Figure 3. Snake game of ELISA</div>
 </div>
 <div class="paragraph">
 <p><u>Rules:</u></p>
@@ -452,6 +455,9 @@ Format: <code>redo</code></p>
 </ul>
 </div>
 </div>
+</div>
+<div class="sect2">
+<h3 id="sort-find-priority-feature"><a class="link" href="#sort-find-priority-feature">Sort/Find/Priority Feature</a></h3>
 <div class="sect3">
 <h4 id="sorting-elisa-out-code-sort-code"><a class="link" href="#sorting-elisa-out-code-sort-code">Sorting ELISA out: <code>sort</code></a></h4>
 <div class="paragraph">
@@ -494,7 +500,7 @@ Format: <code>redo</code></p>
 <p><code>sort priority</code> - sorts the item within the panel by their priority (from high to low).</p>
 </li>
 <li>
-<p><code>sort desc</code> - sorts the item within the panel by their description (lexicographic order)</p>
+<p><code>sort description</code> - sorts the item within the panel by their description (lexicographic order)</p>
 </li>
 </ul>
 </div>
@@ -503,6 +509,18 @@ Format: <code>redo</code></p>
 <h4 id="finding-a-task-code-find-code"><a class="link" href="#finding-a-task-code-find-code">Finding a task: <code>find</code></a></h4>
 <div class="paragraph">
 <p>Is your task list getting too long and you are not able to find what you are looking for? Introducing the <code>find</code> function which will allow you to find what you want within the specific panel. Just type <code>find</code> and the keyword that you want to search for within the command box and ELISA will find the relevant items for you.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/BeforeFind.PNG" alt="BeforeFind">
+</div>
+<div class="title">Figure 4. ELISA before find command</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/AfterFind.PNG" alt="AfterFind">
+</div>
+<div class="title">Figure 5. ELISA after find command</div>
 </div>
 <div class="paragraph">
 <p>Format: <code>find &lt;keyword&gt;</code></p>
@@ -520,24 +538,53 @@ Format: <code>redo</code></p>
 </li>
 </ul>
 </div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="entering-priority-mode-code-priority-code"><a class="link" href="#entering-priority-mode-code-priority-code">Entering priority mode: <code>priority</code></a></h3>
 <div class="paragraph">
-<p>Feeling stressed? Too much task on your task list? Enter priority mode, a mode which will help you narrow down the most pressing task to be done.</p>
+<p>Feeling stress? Too much task on your task list? Enter priority mode, a mode which will help you narrow down the most pressing task to be done.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/BeforePriority.PNG" alt="800" width="800">
+</div>
+<div class="title">Figure 6. ELISA before priority mode with a long list of task</div>
 </div>
 <div class="paragraph">
 <p>By simply typing <code>priority</code> into the command box, you will be given one single task of the highest priority among your task list. This task is chosen by ELISA base on priority and the order in which the task was added to the list.</p>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/AfterPriority.PNG" alt="800" width="800">
+</div>
+<div class="title">Figure 7. ELISA in priority mode</div>
+</div>
 <div class="paragraph">
-<p>Feeling less stressed? You can type <code>priority</code> again to bring you out of the priority mode and back into the normal task view. Or even better, finish all your undone tasks and you will be automatically brought out of priority mode.</p>
+<p>Notice that the ELISA icon turns red to signify that you are in priority mode and your task list has shrink from 5 tasks to the 1 most important task.</p>
+</div>
+<div class="paragraph">
+<p>When you are done with your current task, just tell ELISA you are done by simply typing <code>done 1</code> and ELISA will generate the next task for you.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/AfterDone.PNG" alt="800" width="800">
+</div>
+<div class="title">Figure 8. ELISA after completing the first task</div>
+</div>
+<div class="paragraph">
+<p>Feeling less stress? You can type <code>priority</code> again to bring you out of the priority mode and back into the normal task view. Or even better, finish all your undone task and you will be automatically brought out of priority mode.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/AllDone.PNG" alt="800" width="800">
+</div>
+<div class="title">Figure 9. ELISA after all tasks are completed</div>
 </div>
 <div class="paragraph">
 <p>Feeling lazy? You can also opt to turn off priority mode at a specific time by typing <code>priority dd/mm/yyyy hhmm</code> and ELISA will turn it off at that specific time for you.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>priority</code> or <code>priority dd/mm/yyyy hhmm</code></p>
+<p>There is also an extreme focus mode for the easily distracted. Simply tell ELISA that you want to enter the extreme focus mode by attaching a <code>-f</code> flag to the back of the command. In the extreme focus mode, commands such as <code>show</code>, <code>sort</code>, <code>find</code>, <code>game</code>, <code>event</code> and <code>reminder</code> are banned.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>priority [DATETIME] [-f]</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -551,7 +598,7 @@ Format: <code>redo</code></p>
 <p><code>priority 30/10/2019 1200</code> - activates the priority mode and ask ELISA to turn it off on 30/10/2019 at noon</p>
 </li>
 <li>
-<p><code>priority 2.hours.later</code> - activates the priority mode and ask ELISA to turn it off 2 hours later</p>
+<p><code>priority 2.hour.later -f</code> - activates the focus mode and ask ELISA to turn it off 2 hours later</p>
 </li>
 </ul>
 </div>
@@ -560,12 +607,13 @@ Format: <code>redo</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p>Note that this command can only be called in the task panel.</p>
+<p>Note that this command can only be called in the task panel and when you have incomplete tasks to be completed.</p>
 </li>
 <li>
-<p>Note that all commands such as <code>edit</code>, <code>undo</code> and <code>redo</code> still works in priority mode.</p>
+<p>Note that all command such as <code>edit</code>, <code>undo</code> and <code>redo</code> still works in priority mode. However, if a <code>done</code> or <code>delete</code> command takes you out of priority mode and then you <code>undo</code> it, it will only <code>undo</code> the command but will not take you back into priority mode.</p>
 </li>
 </ul>
+</div>
 </div>
 </div>
 </div>
@@ -582,12 +630,6 @@ Format: <code>exit</code></p>
 <div class="paragraph">
 <p>ELISA saves the data in the hard disk automatically after any command that changes the data.
 There is no need to save manually.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">Encrypting data files <code>[coming in v2.0]</code></a></h3>
-<div class="paragraph">
-<p><em>{explain how the user can enable/disable data encryption}</em></p>
 </div>
 </div>
 </div>
@@ -610,7 +652,7 @@ There is no need to save manually.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Currently, it only shows <strong>2 events</strong> on each date due to limited space on the calendar. If there are more events on that date, to find them all, you can go to the event list and sort through it.</p>
+<p>Currently, it only shows <strong>1 event</strong> on each date due to limited space on the calendar. If there are more events on that date, to find them all, you can go to the event list and sort through it.</p>
 </li>
 <li>
 <p>Currently, it only shows the <strong>current</strong> month. We are still working to bring the next month to you.</p>
@@ -619,12 +661,6 @@ There is no need to save manually.</p>
 <p>Please keep a full screen. If you resize, we are unable to guarantee the view of the calendar.</p>
 </li>
 </ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="encrypting-data-files-code-coming-in-v2-0-code-2"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code-2">Encrypting data files <code>[coming in v2.0]</code></a></h3>
-<div class="paragraph">
-<p><em>{explain how the user can enable/disable data encryption}</em></p>
 </div>
 </div>
 </div>
@@ -871,7 +907,7 @@ The following activity diagram shows the how a task can be added, depending on t
 <div class="content">
 <img src="../images/AddTaskActivity.png" alt="200" width="600">
 </div>
-<div class="title">Figure 1. Activity Diagram of adding a Task</div>
+<div class="title">Figure 10. Activity Diagram of adding a Task</div>
 </div>
 <div class="paragraph">
 <p>This shows how we can easily add Task, Event and Reminder with a <em>single</em> command.
@@ -898,7 +934,7 @@ Step 6. Upon the successful execution of AddCommand, a CommandResult is returned
 <div class="content">
 <img src="../images/AddCommandPart_1.png" alt="AddCommandPart 1">
 </div>
-<div class="title">Figure 2. Call execute in LogicManager to create an AddTaskCommand</div>
+<div class="title">Figure 11. Call execute in LogicManager to create an AddTaskCommand</div>
 </div>
 <div class="paragraph">
 <p>This diagram shows how <code>execute</code> is carried out in the <code>Logic</code> component.
@@ -908,7 +944,7 @@ The following diagram shows how the same command is continued onto the <code>Mod
 <div class="content">
 <img src="../images/AddCommandPart_2.png" alt="AddCommandPart 2">
 </div>
-<div class="title">Figure 3. LogicManager executes the AddTaskCommand and returns CommandResult</div>
+<div class="title">Figure 12. LogicManager executes the AddTaskCommand and returns CommandResult</div>
 </div>
 <div class="paragraph">
 <p>This shows how <code>execute(model)</code> affects the <code>Model</code> component. It then returns a <code>CommandResult</code> r, which is the result of calling LogicManager#execute("task shower -d 1.hour.later").</p>
@@ -977,7 +1013,7 @@ The accepted parameters for <code>-auto</code> is <code>day</code>, <code>week</
 <div class="content">
 <img src="../images/AutoRescheduleActivity.png" alt="100" width="400">
 </div>
-<div class="title">Figure 4. Activity diagram of adding an Event with -auto flag</div>
+<div class="title">Figure 13. Activity diagram of adding an Event with -auto flag</div>
 </div>
 <div class="paragraph">
 <p>In the diagram, when we add the Event initially, we would check the start time of the Event and update it accordingly.
@@ -1024,7 +1060,7 @@ The classes involved in the above rescheduling are:<br></p>
 <div class="content">
 <img src="../images/AutoRescheduleClassDiagram.png" alt="100" width="500">
 </div>
-<div class="title">Figure 5. Class Diagram of classes involved in AutoReschedule function</div>
+<div class="title">Figure 14. Class Diagram of classes involved in AutoReschedule function</div>
 </div>
 </div>
 <div class="sect3">
@@ -1045,7 +1081,7 @@ The first diagram shows the adding of an Event, which may appear familiar as it 
 <div class="content">
 <img src="../images/AutoRescheduleSequence_1.png" alt="AutoRescheduleSequence 1">
 </div>
-<div class="title">Figure 6. Call execute in LogicManager and create an AddEventCommand</div>
+<div class="title">Figure 15. Call execute in LogicManager and create an AddEventCommand</div>
 </div>
 <div class="paragraph">
 <p>As mentioned, the key points to take note of in the diagram above is <code>Event#setAutoReschedule(true)</code> and <code>Event#setReschedulePeriod(period)</code>.<br>
@@ -1055,7 +1091,7 @@ The significance of these methods will be shown in the continuing diagram below:
 <div class="content">
 <img src="../images/AutoRescheduleSequence_2.png" alt="AutoRescheduleSequence 2">
 </div>
-<div class="title">Figure 7. LogicManager executing AddEventCommand and create task for AutoRescheduleManager</div>
+<div class="title">Figure 16. LogicManager executing AddEventCommand and create task for AutoRescheduleManager</div>
 </div>
 <div class="paragraph">
 <p>From the above diagram, we can see that the presence of <code>AutoReschedulePeriod</code> in Event results in the creation of <code>RescheduleTask</code> which would be queued into the Timer managed by <code>AutoRescheduleManager</code>.</p>
@@ -1108,4 +1144,4 @@ The significance of these methods will be shown in the continuing diagram below:
 <p><em>{Optionally, you may include other projects in your portfolio.}</em></p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-09 13:03:40 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-09 13:08:20 UTC</div></div></div></body></html>

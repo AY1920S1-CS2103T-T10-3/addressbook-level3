@@ -29,10 +29,9 @@ Licence: <code>NUS</code></p>
 <li><a href="#entertainment-features">4.6. Entertainment Features</a></li>
 <li><a href="#asking-elisa-for-a-joke-code-joke-code">4.7. Asking ELISA for a joke : <code>joke</code></a></li>
 <li><a href="#undo-redo-feature">4.8. Undo/Redo Feature</a></li>
-<li><a href="#entering-priority-mode-code-priority-code">4.9. Entering priority mode: <code>priority</code></a></li>
+<li><a href="#sort-find-priority-feature">4.9. Sort/Find/Priority Feature</a></li>
 <li><a href="#exiting-the-program-code-exit-code">4.10. Exiting the program : <code>exit</code></a></li>
 <li><a href="#saving-the-data">4.11. Saving the data</a></li>
-<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">4.12. Encrypting data files <code>[coming in v2.0]</code></a></li>
 </ul>
 </li>
 <li><a href="#additional-notes">5. Additional Notes</a>
@@ -88,6 +87,7 @@ Licence: <code>NUS</code></p>
 <div class="content">
 <img src="images/MainWindow.png" alt="MainWindow" width="790">
 </div>
+<div class="title">Figure 1. Main window of ELISA</div>
 </div>
 </li>
 <li>
@@ -124,8 +124,6 @@ For your viewing pleasure, we&#8217;ve collated it nicely into a quick starter p
 <img src="images/ug_features.png" alt="ug features">
 </div>
 </div>
-<div class="exampleblock">
-<div class="content">
 <div class="paragraph">
 <p>This table shows the basic rules for the formatting the input:</p>
 </div>
@@ -155,12 +153,18 @@ For your viewing pleasure, we&#8217;ve collated it nicely into a quick starter p
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Flags in square brackets are optional</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">If given <code>task DESCRIPTION [-t TAG]</code> tag is optional</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>task shower</code> <code>task shower -t clean</code></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>task shower</code><br>
+ <code>task shower -t clean</code></p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Flags can be in any order, given that they are accepted by the command</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">If given <code>task DESCRIPTION [-d DATETIME] [-r REMINDER]</code> -r can come before -d</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>task shower -d 1.hour.later -r 30.min.later</code> <code>task shower -r 30.min.later -d 1.hour.later</code></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>task shower -d 1.hour.later -r 30.min.later</code><br>
+ <code>task shower -r 30.min.later -d 1.hour.later</code></p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Flags must not be repeated in the same input, unless it is a tag flag</p></td>
@@ -203,9 +207,9 @@ For your viewing pleasure, we&#8217;ve collated it nicely into a quick starter p
 <table class="tableblock frame-all grid-all spread">
 <caption class="title">Table 2. Flags Overview</caption>
 <colgroup>
+<col style="width: 10%;">
 <col style="width: 20%;">
-<col style="width: 20%;">
-<col style="width: 20%;">
+<col style="width: 30%;">
 <col style="width: 20%;">
 <col style="width: 20%;">
 </colgroup>
@@ -282,6 +286,34 @@ For your viewing pleasure, we&#8217;ve collated it nicely into a quick starter p
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p>There are three other flags that do not take in any parameters and are only used for the edit command. They are listed below:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 3. Additional flags</caption>
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 90%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Flag:</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning:</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">--tk</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Used to delete a task attached to an item</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">--e</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Used to delete an event attached to an item</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">--r</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Used to delete a reminder attached to an item</p></td>
+</tr>
+</tbody>
+</table>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -316,8 +348,6 @@ All time dependent elements such as deadline, reminder and calendar time are dep
 </div>
 <div class="paragraph">
 <p>If you face any issues, please check the <a href="#additional-notes">Section 5, &#8220;Additional Notes&#8221;</a>. If it is not mentioned there, then feel free to bring it up to us!</p>
-</div>
-</div>
 </div>
 <div class="paragraph">
 <p>Now we are ready to jump into the features itself!</p>
@@ -425,8 +455,8 @@ It is not possible to set a reminder in the past.
 <div class="paragraph">
 <p>This command is used to edit any of the items that you might have.<br></p>
 </div>
-<div class="sect5">
-<h6 id="strong-limitations-strong-br"><a class="link" href="#strong-limitations-strong-br"><strong>Limitations</strong><br></a></h6>
+<div class="sect4">
+<h5 id="strong-limitations-strong-br"><a class="link" href="#strong-limitations-strong-br"><strong>Limitations</strong><br></a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -630,6 +660,7 @@ Although, the ESC key can close too, we do not advise doing so as ELISA may be c
 <div class="content">
 <img src="images/themewhite.PNG" alt="themewhite">
 </div>
+<div class="title">Figure 2. White theme of ELISA</div>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -671,6 +702,7 @@ Although, the ESC key can close too, we do not advise doing so as ELISA may be c
 <div class="content">
 <img src="images/calendar.PNG" alt="calendar">
 </div>
+<div class="title">Figure 3. Calendar feature of ELISA</div>
 </div>
 </div>
 <div class="sect2">
@@ -687,6 +719,7 @@ Although, the ESC key can close too, we do not advise doing so as ELISA may be c
 <div class="content">
 <img src="images/SnakeGame.PNG" alt="Snake" width="600" height="600">
 </div>
+<div class="title">Figure 4. Snake game of ELISA</div>
 </div>
 <div class="paragraph">
 <p><u>Rules:</u></p>
@@ -791,8 +824,11 @@ Format: <code>redo</code></p>
 </ul>
 </div>
 </div>
+</div>
+<div class="sect2">
+<h3 id="sort-find-priority-feature"><a class="link" href="#sort-find-priority-feature">4.9. Sort/Find/Priority Feature</a></h3>
 <div class="sect3">
-<h4 id="sorting-elisa-out-code-sort-code"><a class="link" href="#sorting-elisa-out-code-sort-code">4.8.3. Sorting ELISA out: <code>sort</code></a></h4>
+<h4 id="sorting-elisa-out-code-sort-code"><a class="link" href="#sorting-elisa-out-code-sort-code">4.9.1. Sorting ELISA out: <code>sort</code></a></h4>
 <div class="paragraph">
 <p>Is ELISA getting too cluttered and disorganized? Do you want to sort your task by their priority? Or the events by their start date?</p>
 </div>
@@ -833,15 +869,27 @@ Format: <code>redo</code></p>
 <p><code>sort priority</code> - sorts the item within the panel by their priority (from high to low).</p>
 </li>
 <li>
-<p><code>sort desc</code> - sorts the item within the panel by their description (lexicographic order)</p>
+<p><code>sort description</code> - sorts the item within the panel by their description (lexicographic order)</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect3">
-<h4 id="finding-a-task-code-find-code"><a class="link" href="#finding-a-task-code-find-code">4.8.4. Finding a task: <code>find</code></a></h4>
+<h4 id="finding-a-task-code-find-code"><a class="link" href="#finding-a-task-code-find-code">4.9.2. Finding a task: <code>find</code></a></h4>
 <div class="paragraph">
 <p>Is your task list getting too long and you are not able to find what you are looking for? Introducing the <code>find</code> function which will allow you to find what you want within the specific panel. Just type <code>find</code> and the keyword that you want to search for within the command box and ELISA will find the relevant items for you.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/BeforeFind.PNG" alt="BeforeFind">
+</div>
+<div class="title">Figure 5. ELISA before find command</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/AfterFind.PNG" alt="AfterFind">
+</div>
+<div class="title">Figure 6. ELISA after find command</div>
 </div>
 <div class="paragraph">
 <p>Format: <code>find &lt;keyword&gt;</code></p>
@@ -859,24 +907,53 @@ Format: <code>redo</code></p>
 </li>
 </ul>
 </div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="entering-priority-mode-code-priority-code"><a class="link" href="#entering-priority-mode-code-priority-code">4.9. Entering priority mode: <code>priority</code></a></h3>
 <div class="paragraph">
-<p>Feeling stressed? Too much task on your task list? Enter priority mode, a mode which will help you narrow down the most pressing task to be done.</p>
+<p>Feeling stress? Too much task on your task list? Enter priority mode, a mode which will help you narrow down the most pressing task to be done.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/BeforePriority.PNG" alt="800" width="800">
+</div>
+<div class="title">Figure 7. ELISA before priority mode with a long list of task</div>
 </div>
 <div class="paragraph">
 <p>By simply typing <code>priority</code> into the command box, you will be given one single task of the highest priority among your task list. This task is chosen by ELISA base on priority and the order in which the task was added to the list.</p>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="images/AfterPriority.PNG" alt="800" width="800">
+</div>
+<div class="title">Figure 8. ELISA in priority mode</div>
+</div>
 <div class="paragraph">
-<p>Feeling less stressed? You can type <code>priority</code> again to bring you out of the priority mode and back into the normal task view. Or even better, finish all your undone tasks and you will be automatically brought out of priority mode.</p>
+<p>Notice that the ELISA icon turns red to signify that you are in priority mode and your task list has shrink from 5 tasks to the 1 most important task.</p>
+</div>
+<div class="paragraph">
+<p>When you are done with your current task, just tell ELISA you are done by simply typing <code>done 1</code> and ELISA will generate the next task for you.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/AfterDone.PNG" alt="800" width="800">
+</div>
+<div class="title">Figure 9. ELISA after completing the first task</div>
+</div>
+<div class="paragraph">
+<p>Feeling less stress? You can type <code>priority</code> again to bring you out of the priority mode and back into the normal task view. Or even better, finish all your undone task and you will be automatically brought out of priority mode.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/AllDone.PNG" alt="800" width="800">
+</div>
+<div class="title">Figure 10. ELISA after all tasks are completed</div>
 </div>
 <div class="paragraph">
 <p>Feeling lazy? You can also opt to turn off priority mode at a specific time by typing <code>priority dd/mm/yyyy hhmm</code> and ELISA will turn it off at that specific time for you.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>priority</code> or <code>priority dd/mm/yyyy hhmm</code></p>
+<p>There is also an extreme focus mode for the easily distracted. Simply tell ELISA that you want to enter the extreme focus mode by attaching a <code>-f</code> flag to the back of the command. In the extreme focus mode, commands such as <code>show</code>, <code>sort</code>, <code>find</code>, <code>game</code>, <code>event</code> and <code>reminder</code> are banned.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>priority [DATETIME] [-f]</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -890,7 +967,7 @@ Format: <code>redo</code></p>
 <p><code>priority 30/10/2019 1200</code> - activates the priority mode and ask ELISA to turn it off on 30/10/2019 at noon</p>
 </li>
 <li>
-<p><code>priority 2.hours.later</code> - activates the priority mode and ask ELISA to turn it off 2 hours later</p>
+<p><code>priority 2.hour.later -f</code> - activates the focus mode and ask ELISA to turn it off 2 hours later</p>
 </li>
 </ul>
 </div>
@@ -899,12 +976,13 @@ Format: <code>redo</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p>Note that this command can only be called in the task panel.</p>
+<p>Note that this command can only be called in the task panel and when you have incomplete tasks to be completed.</p>
 </li>
 <li>
-<p>Note that all commands such as <code>edit</code>, <code>undo</code> and <code>redo</code> still works in priority mode.</p>
+<p>Note that all command such as <code>edit</code>, <code>undo</code> and <code>redo</code> still works in priority mode. However, if a <code>done</code> or <code>delete</code> command takes you out of priority mode and then you <code>undo</code> it, it will only <code>undo</code> the command but will not take you back into priority mode.</p>
 </li>
 </ul>
+</div>
 </div>
 </div>
 </div>
@@ -921,12 +999,6 @@ Format: <code>exit</code></p>
 <div class="paragraph">
 <p>ELISA saves the data in the hard disk automatically after any command that changes the data.
 There is no need to save manually.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">4.12. Encrypting data files <code>[coming in v2.0]</code></a></h3>
-<div class="paragraph">
-<p><em>{explain how the user can enable/disable data encryption}</em></p>
 </div>
 </div>
 </div>
@@ -949,7 +1021,7 @@ There is no need to save manually.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Currently, it only shows <strong>2 events</strong> on each date due to limited space on the calendar. If there are more events on that date, to find them all, you can go to the event list and sort through it.</p>
+<p>Currently, it only shows <strong>1 event</strong> on each date due to limited space on the calendar. If there are more events on that date, to find them all, you can go to the event list and sort through it.</p>
 </li>
 <li>
 <p>Currently, it only shows the <strong>current</strong> month. We are still working to bring the next month to you.</p>
@@ -961,4 +1033,4 @@ There is no need to save manually.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-09 13:03:40 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-09 13:08:20 UTC</div></div></div></body></html>
