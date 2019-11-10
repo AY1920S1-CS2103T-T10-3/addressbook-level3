@@ -298,6 +298,14 @@ of the <code>execute(ItemModel model)</code> in that Command.</p>
 <p>The command execution history is stored in a stack, which is maintained in <code>ElisaCommandHistory</code>.</p>
 </div>
 <div class="paragraph">
+<p>The activity diagram below shows the flow of the undo command.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/UndoActivity.png" alt="UndoActivity">
+</div>
+</div>
+<div class="paragraph">
 <p>Below is a possible usage scenario and the app behaviour.</p>
 </div>
 <div class="paragraph">
@@ -321,7 +329,17 @@ will pop the <code>AddTaskCommand</code> from the stack and reverse the effects 
 <p>Step 3. After successful execution of the <code>UndoCommand</code> a confirmation message is displayed in the chat box.</p>
 </div>
 <div class="paragraph">
-<p>Of course, the undo feature has its counterpart, the redo command. The commands to be redone are stored in an additional stack within <code>ElisaCommandHistory</code>, and when the redo is done, it executes the command again, which reapplies the most recent change.</p>
+<p>Of course, the undo feature has its counterpart, the redo command. The commands to be redone are stored in an additional stack within <code>ElisaCommandHistory</code>,
+and when the redo is done, it executes the command again, which reapplies the most recent change. Every time a new <code>UndoableCommand</code> is executed, the redo stack is cleared.
+That is, the redo stack is only non empty when the latest executed <code>Command</code>(s) is/are <code>UndoCommand</code>(s).</p>
+</div>
+<div class="paragraph">
+<p>The activity diagram below shows the flow of the redo command.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/RedoActivity.png" alt="RedoActivity">
+</div>
 </div>
 </div>
 </div>
@@ -577,4 +595,4 @@ will pop the <code>AddTaskCommand</code> from the stack and reverse the effects 
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 14:53:26 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 16:10:50 UTC</div></div></div></body></html>
