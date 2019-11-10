@@ -866,10 +866,10 @@ Format: <code>redo</code></p>
 <p><code>sort</code> - a simple sort that follows the criteria mentioned above for the different panel.</p>
 </li>
 <li>
-<p><code>sort priority</code> - sorts the item within the panel by their priority (from high to low).</p>
+<p><code>sort pri</code> - sorts the item within the panel by their priority (from high to low).</p>
 </li>
 <li>
-<p><code>sort description</code> - sorts the item within the panel by their description (lexicographic order)</p>
+<p><code>sort desc</code> - sorts the item within the panel by their description (lexicographic order)</p>
 </li>
 </ul>
 </div>
@@ -877,7 +877,7 @@ Format: <code>redo</code></p>
 <div class="sect3">
 <h4 id="finding-a-task-code-find-code"><a class="link" href="#finding-a-task-code-find-code">4.9.2. Finding a task: <code>find</code></a></h4>
 <div class="paragraph">
-<p>Is your task list getting too long and you are not able to find what you are looking for? Introducing the <code>find</code> function which will allow you to find what you want within the specific panel. Just type <code>find</code> and the keyword that you want to search for within the command box and ELISA will find the relevant items for you.</p>
+<p>Is your task list getting too long and you are not able to find what you are looking for? Introducing the <code>find</code> function which will allow you to find what you want within the specific panel. Just type <code>find</code> and the keywords that you want to search for within the command box and ELISA will find the relevant items for you.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -907,42 +907,45 @@ Format: <code>redo</code></p>
 </li>
 </ul>
 </div>
+</div>
+<div class="sect3">
+<h4 id="entering-priority-mode-code-priority-code"><a class="link" href="#entering-priority-mode-code-priority-code">4.9.3. Entering priority mode: <code>priority</code></a></h4>
 <div class="paragraph">
-<p>Feeling stress? Too much task on your task list? Enter priority mode, a mode which will help you narrow down the most pressing task to be done.</p>
+<p>Feeling overwhelmed by the sheer amount of tasks to do? Enter priority mode, a mode which will help you narrow down the most pressing task to be done.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/BeforePriority.PNG" alt="800" width="800">
+<img src="images/BeforePriority.PNG" alt="600" width="600">
 </div>
-<div class="title">Figure 7. ELISA before priority mode with a long list of task</div>
+<div class="title">Figure 7. ELISA before priority mode with a long list of tasks</div>
 </div>
 <div class="paragraph">
 <p>By simply typing <code>priority</code> into the command box, you will be given one single task of the highest priority among your task list. This task is chosen by ELISA base on priority and the order in which the task was added to the list.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/AfterPriority.PNG" alt="800" width="800">
+<img src="images/AfterPriority.PNG" alt="600" width="600">
 </div>
 <div class="title">Figure 8. ELISA in priority mode</div>
 </div>
 <div class="paragraph">
-<p>Notice that the ELISA icon turns red to signify that you are in priority mode and your task list has shrink from 5 tasks to the 1 most important task.</p>
+<p>Notice that the ELISA icon turns red to signify that you are in priority mode and your task list has shrunk from 5 tasks down to the 1 most important task.</p>
 </div>
 <div class="paragraph">
 <p>When you are done with your current task, just tell ELISA you are done by simply typing <code>done 1</code> and ELISA will generate the next task for you.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/AfterDone.PNG" alt="800" width="800">
+<img src="images/AfterDone.PNG" alt="600" width="600">
 </div>
 <div class="title">Figure 9. ELISA after completing the first task</div>
 </div>
 <div class="paragraph">
-<p>Feeling less stress? You can type <code>priority</code> again to bring you out of the priority mode and back into the normal task view. Or even better, finish all your undone task and you will be automatically brought out of priority mode.</p>
+<p>Feeling less stressed? You can type <code>priority</code> again to bring you out of the priority mode and back into the normal task view. Or even better, finish all your undone tasks and you will be automatically brought out of priority mode.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/AllDone.PNG" alt="800" width="800">
+<img src="images/AllDone.PNG" alt="600" width="600">
 </div>
 <div class="title">Figure 10. ELISA after all tasks are completed</div>
 </div>
@@ -977,6 +980,9 @@ Format: <code>redo</code></p>
 <ul>
 <li>
 <p>Note that this command can only be called in the task panel and when you have incomplete tasks to be completed.</p>
+</li>
+<li>
+<p>Note that if priority mode is currently on, any variation of <code>priority</code> will turn it off.</p>
 </li>
 <li>
 <p>Note that all command such as <code>edit</code>, <code>undo</code> and <code>redo</code> still works in priority mode. However, if a <code>done</code> or <code>delete</code> command takes you out of priority mode and then you <code>undo</code> it, it will only <code>undo</code> the command but will not take you back into priority mode.</p>
@@ -1033,4 +1039,4 @@ There is no need to save manually.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-09 13:08:20 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 05:25:03 UTC</div></div></div></body></html>
