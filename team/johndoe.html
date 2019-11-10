@@ -346,23 +346,41 @@ Although, the ESC key can close too, we do not advise doing so as ELISA may be c
 <div class="paragraph">
 <p><code>game</code> switches your list of tasks into a game of Snakes!</p>
 </div>
-<div class="imageblock" style="float: right">
+<div class="paragraph">
+<p>There are 2 modes to the game: <code>easy</code> and <code>hard</code>. Type <code>game hard</code> to enter the hard mode of the game!</p>
+</div>
+<div class="paragraph">
+<p>Controls: <code>UP</code>, <code>DOWN</code>, <code>LEFT</code>, <code>RIGHT</code></p>
+</div>
+<div class="imageblock">
 <div class="content">
 <img src="../images/SnakeGame.PNG" alt="Snake" width="600" height="600">
 </div>
-<div class="title">Figure 3. Snake game of ELISA</div>
+<div class="title">Figure 3. Snake game <code>EASY</code><br></div>
 </div>
 <div class="paragraph">
-<p><u>Rules:</u></p>
+<p><code>EASY</code></p>
 </div>
 <div class="paragraph">
-<p>Control your snake by pressing the key commands <code>UP</code>, <code>DOWN</code>, <code>LEFT</code>, <code>RIGHT</code>. Careful not to let your snake bite it&#8217;s own tail or it will be GAME OVER!</p>
+<p>New to the game? Try out the <code>easy</code> mode, where all you have to do is collect the food, which is indicated by the pink box. Biting your own tail will result in GAME OVER! Be careful!</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/snakegamehard.PNG" alt="SnakeHard" width="600" height="600">
+</div>
+<div class="title">Figure 4. Snake game <code>HARD</code><br></div>
 </div>
 <div class="paragraph">
-<p>Hit <code>ENTER</code> to reset the game when your snake dies.</p>
+<p><code>HARD</code></p>
 </div>
 <div class="paragraph">
-<p>Pressing <code>ESC</code> key will exit the game and return you to your list of tasks!</p>
+<p>Find the game too easy? Enter the <code>hard</code> mode and there will be 20 random walls (indicated by blue box) placed all around the game. Colliding with any of these walls will result in a GAME OVER! You will need to navigate through these walls to collect your food!</p>
+</div>
+<div class="paragraph">
+<p><code>EXIT</code></p>
+</div>
+<div class="paragraph">
+<p>Realised that you have played for too long and want to get back to work? Hitting the <code>ESC</code> key will exit the game and return you to your list of tasks!</p>
 </div>
 </div>
 </div>
@@ -514,13 +532,13 @@ Format: <code>redo</code></p>
 <div class="content">
 <img src="../images/BeforeFind.PNG" alt="BeforeFind">
 </div>
-<div class="title">Figure 4. ELISA before find command</div>
+<div class="title">Figure 5. ELISA before find command</div>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="../images/AfterFind.PNG" alt="AfterFind">
 </div>
-<div class="title">Figure 5. ELISA after find command</div>
+<div class="title">Figure 6. ELISA after find command</div>
 </div>
 <div class="paragraph">
 <p>Format: <code>find &lt;keyword&gt;</code></p>
@@ -548,7 +566,7 @@ Format: <code>redo</code></p>
 <div class="content">
 <img src="../images/BeforePriority.PNG" alt="500" width="500">
 </div>
-<div class="title">Figure 6. ELISA before priority mode with a long list of tasks</div>
+<div class="title">Figure 7. ELISA before priority mode with a long list of tasks</div>
 </div>
 <div class="paragraph">
 <p>By simply typing <code>priority</code> into the command box, you will be given one single task of the highest priority among your task list. This task is chosen by ELISA base on priority and the order in which the task was added to the list.</p>
@@ -557,7 +575,7 @@ Format: <code>redo</code></p>
 <div class="content">
 <img src="../images/AfterPriority.PNG" alt="500" width="500">
 </div>
-<div class="title">Figure 7. ELISA in priority mode</div>
+<div class="title">Figure 8. ELISA in priority mode</div>
 </div>
 <div class="paragraph">
 <p>Notice that the ELISA icon turns red to signify that you are in priority mode and your task list has shrunk from 5 tasks down to the 1 most important task.</p>
@@ -569,7 +587,7 @@ Format: <code>redo</code></p>
 <div class="content">
 <img src="../images/AfterDone.PNG" alt="500" width="500">
 </div>
-<div class="title">Figure 8. ELISA after completing the first task</div>
+<div class="title">Figure 9. ELISA after completing the first task</div>
 </div>
 <div class="paragraph">
 <p>Feeling less stressed? You can type <code>priority</code> again to bring you out of the priority mode and back into the normal task view. Or even better, finish all your undone tasks and you will be automatically brought out of priority mode.</p>
@@ -578,7 +596,7 @@ Format: <code>redo</code></p>
 <div class="content">
 <img src="../images/AllDone.PNG" alt="500" width="500">
 </div>
-<div class="title">Figure 9. ELISA after all tasks are completed</div>
+<div class="title">Figure 10. ELISA after all tasks are completed</div>
 </div>
 <div class="paragraph">
 <p>Feeling lazy? You can also opt to turn off priority mode at a specific time by typing <code>priority dd/mm/yyyy hhmm</code> and ELISA will turn it off at that specific time for you.</p>
@@ -913,7 +931,7 @@ The following activity diagram shows the how a task can be added, depending on t
 <div class="content">
 <img src="../images/AddTaskActivity.png" alt="200" width="600">
 </div>
-<div class="title">Figure 10. Activity Diagram of adding a Task</div>
+<div class="title">Figure 11. Activity Diagram of adding a Task</div>
 </div>
 <div class="paragraph">
 <p>This shows how we can easily add Task, Event and Reminder with a <em>single</em> command.
@@ -940,7 +958,7 @@ Step 6. Upon the successful execution of AddCommand, a CommandResult is returned
 <div class="content">
 <img src="../images/AddCommandPart_1.png" alt="AddCommandPart 1">
 </div>
-<div class="title">Figure 11. Call execute in LogicManager to create an AddTaskCommand</div>
+<div class="title">Figure 12. Call execute in LogicManager to create an AddTaskCommand</div>
 </div>
 <div class="paragraph">
 <p>This diagram shows how <code>execute</code> is carried out in the <code>Logic</code> component.
@@ -950,7 +968,7 @@ The following diagram shows how the same command is continued onto the <code>Mod
 <div class="content">
 <img src="../images/AddCommandPart_2.png" alt="AddCommandPart 2">
 </div>
-<div class="title">Figure 12. LogicManager executes the AddTaskCommand and returns CommandResult</div>
+<div class="title">Figure 13. LogicManager executes the AddTaskCommand and returns CommandResult</div>
 </div>
 <div class="paragraph">
 <p>This shows how <code>execute(model)</code> affects the <code>Model</code> component. It then returns a <code>CommandResult</code> r, which is the result of calling LogicManager#execute("task shower -d 1.hour.later").</p>
@@ -1019,7 +1037,7 @@ The accepted parameters for <code>-auto</code> is <code>day</code>, <code>week</
 <div class="content">
 <img src="../images/AutoRescheduleActivity.png" alt="100" width="400">
 </div>
-<div class="title">Figure 13. Activity diagram of adding an Event with -auto flag</div>
+<div class="title">Figure 14. Activity diagram of adding an Event with -auto flag</div>
 </div>
 <div class="paragraph">
 <p>In the diagram, when we add the Event initially, we would check the start time of the Event and update it accordingly.
@@ -1066,7 +1084,7 @@ The classes involved in the above rescheduling are:<br></p>
 <div class="content">
 <img src="../images/AutoRescheduleClassDiagram.png" alt="100" width="500">
 </div>
-<div class="title">Figure 14. Class Diagram of classes involved in AutoReschedule function</div>
+<div class="title">Figure 15. Class Diagram of classes involved in AutoReschedule function</div>
 </div>
 </div>
 <div class="sect3">
@@ -1087,7 +1105,7 @@ The first diagram shows the adding of an Event, which may appear familiar as it 
 <div class="content">
 <img src="../images/AutoRescheduleSequence_1.png" alt="AutoRescheduleSequence 1">
 </div>
-<div class="title">Figure 15. Call execute in LogicManager and create an AddEventCommand</div>
+<div class="title">Figure 16. Call execute in LogicManager and create an AddEventCommand</div>
 </div>
 <div class="paragraph">
 <p>As mentioned, the key points to take note of in the diagram above is <code>Event#setAutoReschedule(true)</code> and <code>Event#setReschedulePeriod(period)</code>.<br>
@@ -1097,7 +1115,7 @@ The significance of these methods will be shown in the continuing diagram below:
 <div class="content">
 <img src="../images/AutoRescheduleSequence_2.png" alt="AutoRescheduleSequence 2">
 </div>
-<div class="title">Figure 16. LogicManager executing AddEventCommand and create task for AutoRescheduleManager</div>
+<div class="title">Figure 17. LogicManager executing AddEventCommand and create task for AutoRescheduleManager</div>
 </div>
 <div class="paragraph">
 <p>From the above diagram, we can see that the presence of <code>AutoReschedulePeriod</code> in Event results in the creation of <code>RescheduleTask</code> which would be queued into the Timer managed by <code>AutoRescheduleManager</code>.</p>
@@ -1150,4 +1168,4 @@ The significance of these methods will be shown in the continuing diagram below:
 <p><em>{Optionally, you may include other projects in your portfolio.}</em></p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 10:59:45 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 11:35:06 UTC</div></div></div></body></html>

@@ -22,14 +22,15 @@
 </li>
 <li><a href="#implementation">3. Implementation</a>
 <ul class="sectlevel2">
-<li><a href="#implemented-undo-redo-feature">3.1. [Implemented] Undo/Redo Feature</a></li>
-<li><a href="#proposed-undo-redo-feature">3.2. [Proposed] Undo/Redo feature</a></li>
-<li><a href="#priority-mode">3.3. Priority Mode</a></li>
-<li><a href="#add-task-event-feature">3.4. Add Task/Event feature</a></li>
-<li><a href="#rescheduling-of-recurring-events-automatically">3.5. Rescheduling of recurring Events automatically</a></li>
-<li><a href="#proposed-data-encryption">3.6. [Proposed] Data Encryption</a></li>
-<li><a href="#logging">3.7. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.8. Configuration</a></li>
+<li><a href="#game-feature">3.1. Game feature</a></li>
+<li><a href="#implemented-undo-redo-feature">3.2. [Implemented] Undo/Redo Feature</a></li>
+<li><a href="#proposed-undo-redo-feature">3.3. [Proposed] Undo/Redo feature</a></li>
+<li><a href="#priority-mode">3.4. Priority Mode</a></li>
+<li><a href="#add-task-event-feature">3.5. Add Task/Event feature</a></li>
+<li><a href="#rescheduling-of-recurring-events-automatically">3.6. Rescheduling of recurring Events automatically</a></li>
+<li><a href="#proposed-data-encryption">3.7. [Proposed] Data Encryption</a></li>
+<li><a href="#logging">3.8. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.9. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a></li>
@@ -343,9 +344,122 @@ The lifeline for <code>DeleteCommandParser</code> should end at the destroy mark
 <p>This section describes some noteworthy details on how certain features are implemented.</p>
 </div>
 <div class="sect2">
-<h3 id="implemented-undo-redo-feature"><a class="link" href="#implemented-undo-redo-feature">3.1. [Implemented] Undo/Redo Feature</a></h3>
+<h3 id="game-feature"><a class="link" href="#game-feature">3.1. Game feature</a></h3>
+<div class="paragraph">
+<p>This section talks about how the <code>game</code> function is implemented. This feature aims to encourage users to take a break by playing the traditional Nokia (phone) game: Snake.</p>
+</div>
 <div class="sect3">
-<h4 id="current-implementation-logic"><a class="link" href="#current-implementation-logic">3.1.1. Current Implementation Logic</a></h4>
+<h4 id="implementation-2"><a class="link" href="#implementation-2">3.1.1. Implementation</a></h4>
+<div class="paragraph">
+<p>The game screen appears after the user enters the command <code>game</code> into the command box. A separate scene handled by a separate thread is created to run the game so that Elisa&#8217;s scenes and threads are not overloaded. The following activity diagram shows how the game screen is launched.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/GameActivityDiagram.png" alt="500" width="600">
+</div>
+<div class="title">Figure 9. Activity diagram for game mode</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="internal-workings-of-the-game"><a class="link" href="#internal-workings-of-the-game">3.1.2. Internal workings of the Game</a></h4>
+<div class="paragraph">
+<p>Given below is an example usage scenario of how add behaves at each step:</p>
+</div>
+<div class="paragraph">
+<p>&lt;LOGIC&gt;<br>
+Step 1. The user enters the command "game".<br>
+Step 2. The LogicManager creates an ElisaParser to parse the user input.<br>
+Step 3. ElisaParser creates a GameCommandParser to parse the user input.<br>
+Step 4. LogicManager will execute the GameCommand. GameCommand will create a GameCommandResult.<br>
+Step 5. MainWindow will call its own method startgame().</p>
+</div>
+<div class="paragraph">
+<p>&lt;GAME&gt;<br>
+Step 6. startgame() calls the method resetgame(), which creates a Grid and GameLoop.<br>
+Step 7. startgame() calls the method gameCheck on the canvas to check the keys that are pressed during the game.<br>
+Step 8. startgame() creates a new scene and sets primaryStage&#8217;s scene to this new scene.<br>
+Step 9. startgame() creates a new thread to run the game.<br></p>
+</div>
+<div class="paragraph">
+<p>The figure below shows the sequence diagram on what happens after the startgame() method is called.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/CreatingGameSequenceDiagram.png" alt="500" width="600">
+</div>
+<div class="title">Figure 10. Sequence Diagram for game creation</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="game-considerations"><a class="link" href="#game-considerations">3.1.3. Game considerations</a></h4>
+<div class="paragraph">
+<p>The considerations for the choice of game is shown below:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Alternatives:</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pros:</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cons:</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1. Minesweeper</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">It is a well-known popular desktop game.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">It is difficult to understand the implied rules to this game and this game requires a long time to complete.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2. Sudoku</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">It is a well-known popular pen-and-paper game.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">It is difficult to understand the implied rules to this game and this game requires a long time to complete.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3. <strong>(Current)</strong> Snake</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">It is a well-known popular Nokia (phone) game. The rules are simple to understand. The duration for each game is short.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">It is addictive when users try to break their high score.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">3.1.4. Design considerations</a></h4>
+<div class="paragraph">
+<p>The design considerations for the placement of the game is shown below:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Alternatives:</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pros:</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cons:</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1. Placing the game in one of the tabs (beside the Calendar) such that <code>show g</code> will switch tab to the game tab.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Users are able to see the chatbox while in the game.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Requires users to use the mouse (away from CLI) to switch between typing in the command box and hitting the keys on the keyboard.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2. <strong>(Current)</strong> Creating a separate scene such that the original scene (with ELISA) is hidden when game mode is entered.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows users to hit the keys on the keyboard without typing into the command box.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Users are unable to see the chatbox from Elisa.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="implemented-undo-redo-feature"><a class="link" href="#implemented-undo-redo-feature">3.2. [Implemented] Undo/Redo Feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-logic"><a class="link" href="#current-implementation-logic">3.2.1. Current Implementation Logic</a></h4>
 <div class="paragraph">
 <p>The undo function uses the revert command method without using states and history, unlike the proposed method.
 This is because an issue was encountered with referencing lists and firing reminders multiple times when the state history method was used.</p>
@@ -388,9 +502,9 @@ will pop the <code>AddTaskCommand</code> from the stack and reverse the effects 
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-undo-redo-feature"><a class="link" href="#proposed-undo-redo-feature">3.2. [Proposed] Undo/Redo feature</a></h3>
+<h3 id="proposed-undo-redo-feature"><a class="link" href="#proposed-undo-redo-feature">3.3. [Proposed] Undo/Redo feature</a></h3>
 <div class="sect3">
-<h4 id="proposed-implementation"><a class="link" href="#proposed-implementation">3.2.1. Proposed Implementation</a></h4>
+<h4 id="proposed-implementation"><a class="link" href="#proposed-implementation">3.3.1. Proposed Implementation</a></h4>
 <div class="paragraph">
 <p>The undo/redo mechanism is facilitated by <code>VersionedAddressBook</code>.
 It extends <code>AddressBook</code> with an undo/redo history, stored internally as an <code>addressBookStateList</code> and <code>currentStatePointer</code>.
@@ -532,7 +646,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">3.2.2. Design Considerations</a></h4>
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.3.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-undo-redo-executes"><a class="link" href="#aspect-how-undo-redo-executes">Aspect: How undo &amp; redo executes</a></h5>
 <div class="ulist">
@@ -602,9 +716,9 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </div>
 <div class="sect2">
-<h3 id="priority-mode"><a class="link" href="#priority-mode">3.3. Priority Mode</a></h3>
+<h3 id="priority-mode"><a class="link" href="#priority-mode">3.4. Priority Mode</a></h3>
 <div class="sect3">
-<h4 id="implementation-2"><a class="link" href="#implementation-2">3.3.1. Implementation</a></h4>
+<h4 id="implementation-3"><a class="link" href="#implementation-3">3.4.1. Implementation</a></h4>
 <div class="paragraph">
 <p>The priority mode is used to aid the user in focusing on the most pressing task that they have especially when they have many tasks in their list. As priority mode is only for clearing of tasks, the priority mode can only be activated at the task pane of the application.</p>
 </div>
@@ -625,7 +739,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </ul>
 </div>
 <div class="paragraph">
-<p>There are two variants to the priority mode, a normal priority mode and a focus mode. The focus mode is more restrictive than the normal priority mode, preventing the user from doing any operations that are not relevant to the task list, such as adding a new event. This is currently implemented by having a separate <code>Parser</code> when ELISA is in focus mode. (Refer to <a href="#Priority-Design-Consideration">Section 3.3.4, &#8220;Design Consideration&#8221;</a> for more details)</p>
+<p>There are two variants to the priority mode, a normal priority mode and a focus mode. The focus mode is more restrictive than the normal priority mode, preventing the user from doing any operations that are not relevant to the task list, such as adding a new event. This is currently implemented by having a separate <code>Parser</code> when ELISA is in focus mode. (Refer to <a href="#Priority-Design-Consideration">Section 3.4.4, &#8220;Design Consideration&#8221;</a> for more details)</p>
 </div>
 <div class="paragraph">
 <p>There are two ways to trigger priority mode, a normal priority mode that is controlled fully by the user and a scheduled priority mode that is triggered by the user but is scheduled to turn off after a specific amount of time. In addition to the above three methods, the scheduled priority mode also uses the following method:</p>
@@ -639,7 +753,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </div>
 <div class="sect3">
-<h4 id="example-run-of-priority-mode"><a class="link" href="#example-run-of-priority-mode">3.3.2. Example run of priority mode</a></h4>
+<h4 id="example-run-of-priority-mode"><a class="link" href="#example-run-of-priority-mode">3.4.2. Example run of priority mode</a></h4>
 <div class="paragraph">
 <p>In this section, we will show a run of the priority mode and a overview of the mechanism at each step. In particular, we will be showing how the <code><code>ScheduledPriorityCommand</code></code> works as it has a more complicated implementation than the normal <code><code>PriorityCommand</code></code>.</p>
 </div>
@@ -663,7 +777,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <div class="content">
 <img src="images/PriorityModeActivityDiagram.png" alt="300" width="300">
 </div>
-<div class="title">Figure 9. Activity diagram for priority mode</div>
+<div class="title">Figure 11. Activity diagram for priority mode</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic" start="5">
@@ -674,7 +788,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </div>
 <div class="sect3">
-<h4 id="internal-working-of-the-command"><a class="link" href="#internal-working-of-the-command">3.3.3. Internal working of the command</a></h4>
+<h4 id="internal-working-of-the-command"><a class="link" href="#internal-working-of-the-command">3.4.3. Internal working of the command</a></h4>
 <div class="paragraph">
 <p>The figure below shows the sequence diagram on what happens from a simple execution of the <code><code>priority 30.min.later</code></code> command. We will go through the internal mechanism of the execution of the <code><code>ScheduledPriorityCommand</code></code>.</p>
 </div>
@@ -682,7 +796,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <div class="content">
 <img src="images/PriorityMode.png" alt="PriorityMode">
 </div>
-<div class="title">Figure 10. Sequence diagram for priority mode</div>
+<div class="title">Figure 12. Sequence diagram for priority mode</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -741,7 +855,7 @@ A normal <code><code>PriorityCommand</code></code> will end at this point and wi
 <div class="content">
 <img src="images/PriorityMode2.png" alt="300" width="300">
 </div>
-<div class="title">Figure 11. Sequence diagram for the scheduled turning off of priority mode</div>
+<div class="title">Figure 13. Sequence diagram for the scheduled turning off of priority mode</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic" start="8">
@@ -758,7 +872,7 @@ A normal <code><code>PriorityCommand</code></code> will end at this point and wi
 </div>
 </div>
 <div class="sect3">
-<h4 id="Priority-Design-Consideration"><a class="link" href="#Priority-Design-Consideration">3.3.4. Design Consideration</a></h4>
+<h4 id="Priority-Design-Consideration"><a class="link" href="#Priority-Design-Consideration">3.4.4. Design Consideration</a></h4>
 <div class="paragraph">
 <p><strong>Aspect: How to restrict commands for focus mode</strong></p>
 </div>
@@ -873,19 +987,19 @@ A normal <code><code>PriorityCommand</code></code> will end at this point and wi
 </div>
 </div>
 <div class="sect3">
-<h4 id="possible-extension"><a class="link" href="#possible-extension">3.3.5. Possible extension</a></h4>
+<h4 id="possible-extension"><a class="link" href="#possible-extension">3.4.5. Possible extension</a></h4>
 <div class="paragraph">
 <p>At the moment, the user is not able to keep track of the amount of time that he has before the schedule priority mode is over. This can be improved by including a countdown timer in the Ui when the user toggles on the scheduled priority mode.</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="add-task-event-feature"><a class="link" href="#add-task-event-feature">3.4. Add Task/Event feature</a></h3>
+<h3 id="add-task-event-feature"><a class="link" href="#add-task-event-feature">3.5. Add Task/Event feature</a></h3>
 <div class="paragraph">
 <p>Task, Events and Reminders are all Items and can be added using the <strong>same</strong> command. Adding of Items is facilitated by ItemModel#add(Item).<br></p>
 </div>
 <div class="sect3">
-<h4 id="implementation-3"><a class="link" href="#implementation-3">3.4.1. Implementation</a></h4>
+<h4 id="implementation-4"><a class="link" href="#implementation-4">3.5.1. Implementation</a></h4>
 <div class="paragraph">
 <p>A Task with a deadline flag <code>-d</code> will be considered an Event. A Task with a reminder flag <code>-r</code> will be considered a Reminder.<br>
 The following activity diagram shows the how a task can be added, depending on the flags present:</p>
@@ -894,7 +1008,7 @@ The following activity diagram shows the how a task can be added, depending on t
 <div class="content">
 <img src="images/AddTaskActivity.png" alt="200" width="600">
 </div>
-<div class="title">Figure 12. Activity Diagram of adding a Task</div>
+<div class="title">Figure 14. Activity Diagram of adding a Task</div>
 </div>
 <div class="paragraph">
 <p>This shows how we can easily add Task, Event and Reminder with a <em>single</em> command.
@@ -902,7 +1016,7 @@ However, in this section, we will only show how Task and Event is added. Adding 
 </div>
 </div>
 <div class="sect3">
-<h4 id="internal-workings-of-the-command"><a class="link" href="#internal-workings-of-the-command">3.4.2. Internal workings of the command</a></h4>
+<h4 id="internal-workings-of-the-command"><a class="link" href="#internal-workings-of-the-command">3.5.2. Internal workings of the command</a></h4>
 <div class="paragraph">
 <p>Given below is an example usage scenario of how add behaves at each step:<br></p>
 </div>
@@ -921,7 +1035,7 @@ Step 6. Upon the successful execution of AddCommand, a CommandResult is returned
 <div class="content">
 <img src="images/AddCommandPart_1.png" alt="AddCommandPart 1">
 </div>
-<div class="title">Figure 13. Call execute in LogicManager to create an AddTaskCommand</div>
+<div class="title">Figure 15. Call execute in LogicManager to create an AddTaskCommand</div>
 </div>
 <div class="paragraph">
 <p>This diagram shows how <code>execute</code> is carried out in the <code>Logic</code> component.
@@ -931,14 +1045,14 @@ The following diagram shows how the same command is continued onto the <code>Mod
 <div class="content">
 <img src="images/AddCommandPart_2.png" alt="AddCommandPart 2">
 </div>
-<div class="title">Figure 14. LogicManager executes the AddTaskCommand and returns CommandResult</div>
+<div class="title">Figure 16. LogicManager executes the AddTaskCommand and returns CommandResult</div>
 </div>
 <div class="paragraph">
 <p>This shows how <code>execute(model)</code> affects the <code>Model</code> component. It then returns a <code>CommandResult</code> r, which is the result of calling LogicManager#execute("task shower -d 1.hour.later").</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.4.3. Design considerations</a></h4>
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.5.3. Design considerations</a></h4>
 <div class="paragraph">
 <p>The design considerations for the classes are shown below:</p>
 </div>
@@ -980,12 +1094,12 @@ The following diagram shows how the same command is continued onto the <code>Mod
 </div>
 </div>
 <div class="sect2">
-<h3 id="rescheduling-of-recurring-events-automatically"><a class="link" href="#rescheduling-of-recurring-events-automatically">3.5. Rescheduling of recurring Events automatically</a></h3>
+<h3 id="rescheduling-of-recurring-events-automatically"><a class="link" href="#rescheduling-of-recurring-events-automatically">3.6. Rescheduling of recurring Events automatically</a></h3>
 <div class="paragraph">
 <p>This section talks about how the <code>autoReschedule</code> function is implemented. This feature aims to provide users with greater convenience when scheduling events that occur periodically (eg. weekly deadlines, monthly appointments).</p>
 </div>
 <div class="sect3">
-<h4 id="implementation-4"><a class="link" href="#implementation-4">3.5.1. Implementation</a></h4>
+<h4 id="implementation-5"><a class="link" href="#implementation-5">3.6.1. Implementation</a></h4>
 <div class="paragraph">
 <p>To reschedule a task, we need a deadline as we need to be able to calculate the next date. Recall that any Task with a deadline is considered an Event. As such, <strong>only Events can be rescheduled.</strong></p>
 </div>
@@ -1000,7 +1114,7 @@ The accepted parameters for <code>-auto</code> is <code>day</code>, <code>week</
 <div class="content">
 <img src="images/AutoRescheduleActivity.png" alt="100" width="400">
 </div>
-<div class="title">Figure 15. Activity diagram of adding an Event with -auto flag</div>
+<div class="title">Figure 17. Activity diagram of adding an Event with -auto flag</div>
 </div>
 <div class="paragraph">
 <p>In the diagram, when we add the Event initially, we would check the start time of the Event and update it accordingly.
@@ -1047,11 +1161,11 @@ The classes involved in the above rescheduling are:<br></p>
 <div class="content">
 <img src="images/AutoRescheduleClassDiagram.png" alt="100" width="500">
 </div>
-<div class="title">Figure 16. Class Diagram of classes involved in AutoReschedule function</div>
+<div class="title">Figure 18. Class Diagram of classes involved in AutoReschedule function</div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="internal-workings-of-the-command-2"><a class="link" href="#internal-workings-of-the-command-2">3.5.2. Internal workings of the command</a></h4>
+<h4 id="internal-workings-of-the-command-2"><a class="link" href="#internal-workings-of-the-command-2">3.6.2. Internal workings of the command</a></h4>
 <div class="paragraph">
 <p>Now we are ready to look at the sequence of actions. Given below is an example usage scenario of how add behaves at each step:<br></p>
 </div>
@@ -1062,13 +1176,13 @@ Step 3. &#8230;&#8203; <em>{work in progress}</em><br></p>
 </div>
 <div class="paragraph">
 <p>The following diagrams show how the command <code>event Quiz -d 10.hour.later -auto week</code> is executed from the Logic component.
-The first diagram shows the adding of an Event, which may appear familiar as it has a sequence similar to the adding of task in <a href="#add-task-event-feature">Section 3.4, &#8220;Add Task/Event feature&#8221;</a>. However, there are some minor differences due to the presence of <code>-auto</code> which should be noted.</p>
+The first diagram shows the adding of an Event, which may appear familiar as it has a sequence similar to the adding of task in <a href="#add-task-event-feature">Section 3.5, &#8220;Add Task/Event feature&#8221;</a>. However, there are some minor differences due to the presence of <code>-auto</code> which should be noted.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/AutoRescheduleSequence_1.png" alt="AutoRescheduleSequence 1">
 </div>
-<div class="title">Figure 17. Call execute in LogicManager and create an AddEventCommand</div>
+<div class="title">Figure 19. Call execute in LogicManager and create an AddEventCommand</div>
 </div>
 <div class="paragraph">
 <p>As mentioned, the key points to take note of in the diagram above is <code>Event#setAutoReschedule(true)</code> and <code>Event#setReschedulePeriod(period)</code>.<br>
@@ -1078,14 +1192,14 @@ The significance of these methods will be shown in the continuing diagram below:
 <div class="content">
 <img src="images/AutoRescheduleSequence_2.png" alt="AutoRescheduleSequence 2">
 </div>
-<div class="title">Figure 18. LogicManager executing AddEventCommand and create task for AutoRescheduleManager</div>
+<div class="title">Figure 20. LogicManager executing AddEventCommand and create task for AutoRescheduleManager</div>
 </div>
 <div class="paragraph">
 <p>From the above diagram, we can see that the presence of <code>AutoReschedulePeriod</code> in Event results in the creation of <code>RescheduleTask</code> which would be queued into the Timer managed by <code>AutoRescheduleManager</code>.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.5.3. Design considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.6.3. Design considerations</a></h4>
 <div class="paragraph">
 <p>The design considerations for the classes are shown below:</p>
 </div>
@@ -1116,20 +1230,20 @@ The significance of these methods will be shown in the continuing diagram below:
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.6. [Proposed] Data Encryption</a></h3>
+<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.7. [Proposed] Data Encryption</a></h3>
 <div class="paragraph">
 <p><em>{Explain here how the data encryption feature will be implemented}</em></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.7. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.8. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.8, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.9, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -1160,7 +1274,7 @@ The significance of these methods will be shown in the continuing diagram below:
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.8. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.9. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -2010,4 +2124,4 @@ Expected: ELISA will reverse the undo command and a new task is generated.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 10:59:45 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 11:35:06 UTC</div></div></div></body></html>
