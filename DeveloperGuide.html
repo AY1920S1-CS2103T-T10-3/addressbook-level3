@@ -44,8 +44,10 @@
 <li><a href="#instructions-for-manual-testing">Appendix G: Instructions for Manual Testing</a>
 <ul class="sectlevel2">
 <li><a href="#launch-and-shutdown">G.1. Launch and Shutdown</a></li>
-<li><a href="#deleting-a-person">G.2. Deleting a person</a></li>
-<li><a href="#saving-data">G.3. Saving data</a></li>
+<li><a href="#adding-a-task">G.2. Adding a task</a></li>
+<li><a href="#deleting-a-task">G.3. Deleting a task</a></li>
+<li><a href="#priority-mode-testing">G.4. Priority mode testing</a></li>
+<li><a href="#saving-data">G.5. Saving data</a></li>
 </ul>
 </li>
 </ul>
@@ -268,7 +270,7 @@ The lifeline for <code>DeleteCommandParser</code> should end at the destroy mark
 <h3 id="Design-Model"><a class="link" href="#Design-Model">2.4. Model component</a></h3>
 <div class="imageblock">
 <div class="content">
-<img src="images/ModelClassDiagram.png" alt="ModelClassDiagram">
+<img src="images/ModelClassDiagram.png" alt="500" width="500">
 </div>
 <div class="title">Figure 7. Structure of the Model Component</div>
 </div>
@@ -291,17 +293,14 @@ The lifeline for <code>DeleteCommandParser</code> should end at the destroy mark
 </li>
 </ul>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The reason for using four observable list as opposed to having one observable list that is filtered every time we update the list is because we believe that this will lead to faster loading time every time we switch view as it is just a change in the Visualization List pointer. This is better than the O(n) method of filtering a single VisualizeList as it will require going through all the items in the list to find those that are relevant.
-</td>
-</tr>
-</table>
+<div class="sect3">
+<h4 id="design-consideration"><a class="link" href="#design-consideration">2.4.1. Design Consideration</a></h4>
+<div class="paragraph">
+<p>The original implementation was to have one single observable list and modifying it whenever the view changes. We decided against it as we believe that this will result in O(n) time complexity for switching the different views as we need to iterate through all the items to find the relevant items.</p>
+</div>
+<div class="paragraph">
+<p>Using the four visualization list, we only need to change the pointer when we want to change the view of the viewing panel making it an O(1) time complexity solution. However, this makes it more complicated to maintain the different lists.</p>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -642,7 +641,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <div class="sect3">
 <h4 id="example-run-of-priority-mode"><a class="link" href="#example-run-of-priority-mode">3.3.2. Example run of priority mode</a></h4>
 <div class="paragraph">
-<p>In this section, we will show a run of the priority mode and a overview of the mechanism at each step. In particular, we will be showing how the <code><code>ScheduledPriorityMode</code></code> works as it has a more complicated implementation than the normal <code><code>PriorityMode</code></code>.</p>
+<p>In this section, we will show a run of the priority mode and a overview of the mechanism at each step. In particular, we will be showing how the <code><code>ScheduledPriorityCommand</code></code> works as it has a more complicated implementation than the normal <code><code>PriorityCommand</code></code>.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -662,7 +661,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/PriorityModeActivityDiagram.png" alt="400" width="400">
+<img src="images/PriorityModeActivityDiagram.png" alt="300" width="300">
 </div>
 <div class="title">Figure 9. Activity diagram for priority mode</div>
 </div>
@@ -740,7 +739,7 @@ A normal <code><code>PriorityCommand</code></code> will end at this point and wi
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/PriorityMode2.png" alt="400" width="400">
+<img src="images/PriorityMode2.png" alt="300" width="300">
 </div>
 <div class="title">Figure 11. Sequence diagram for the scheduled turning off of priority mode</div>
 </div>
@@ -870,13 +869,13 @@ A normal <code><code>PriorityCommand</code></code> will end at this point and wi
 </tbody>
 </table>
 <div class="paragraph">
-<p>Alternative 2 was chosen as we believe that the ability to cancel a scheduled priority mode prematurely takes priority over the maintainability of the code and should be used until a better method can be created.</p>
+<p>Alternative 2 was chosen as we believe that the ability to cancel a scheduled priority mode prematurely is more important than the maintainability of the code at the moment.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="possible-extension"><a class="link" href="#possible-extension">3.3.5. Possible extension</a></h4>
 <div class="paragraph">
-<p>At the moment, the user is not able to keep track of the amount of time that he has before the schedule priority mode is over. This can be overcome by including a countdown timer in the Ui when the user toggles on the scheduled priority mode.</p>
+<p>At the moment, the user is not able to keep track of the amount of time that he has before the schedule priority mode is over. This can be improved by including a countdown timer in the Ui when the user toggles on the scheduled priority mode.</p>
 </div>
 </div>
 </div>
@@ -1234,12 +1233,12 @@ The significance of these methods will be shown in the continuing diagram below:
 <div class="paragraph">
 <p>Priorities: High (must have) - <code>* * *</code>, Medium (nice to have) - <code>* *</code>, Low (unlikely to have) - <code>*</code></p>
 </div>
-<table class="tableblock frame-all grid-all" style="width: 59%;">
+<table class="tableblock frame-all grid-all spread">
 <colgroup>
-<col style="width: 22%;">
-<col style="width: 23%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
 <col style="width: 25%;">
-<col style="width: 30%;">
+<col style="width: 35%;">
 </colgroup>
 <thead>
 <tr>
@@ -1822,26 +1821,82 @@ Expected: The most recent window size and location is retained.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-person"><a class="link" href="#deleting-a-person">G.2. Deleting a person</a></h3>
+<h3 id="adding-a-task"><a class="link" href="#adding-a-task">G.2. Adding a task</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Deleting a person while all persons are listed</p>
+<p>Adding a task while on the task list panel</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Prerequisites: List all persons using the <code>list</code> command. Multiple persons in the list.</p>
+<p>Prerequisites: Switch to the task list panel using the <code>show T</code> command.</p>
+</li>
+<li>
+<p>Test case: <code>task testcase</code><br>
+Expected: A task with the description "testcase" is added to the task list panel. The priority of the task is medium (the default value).</p>
+</li>
+<li>
+<p>Test case: <code>task testcase 2 -p high</code><br>
+Expected: A task with the description "testcase 2" and of high priority is added to the task list panel.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Adding a task while not on the task list panel</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Switch to the event list panel using the <code>show E</code> command.</p>
+</li>
+<li>
+<p>Test case: <code>task testcase 3 -p low -d 1.min.later</code><br>
+Expected: ELISA will automatically switch to the task list panel and a new task with the description "testcase 3" and priority low should be added to the task list panel.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Adding a task that already exists</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: The task list panel must already be populated and a task on the list is already know.</p>
+</li>
+<li>
+<p>Test case: <code>task testcase</code> (in this case, we are using one of the earlier test case)<br>
+Expected: Elisa will prompt you that the task already exist in the list and cannot be added.</p>
+</li>
+<li>
+<p>As an additional test case, you can mark a current task as done and then try adding that task into ELISA again. ELISA will still flag it as a repeated object despite the different state of completeness.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deleting-a-task"><a class="link" href="#deleting-a-task">G.3. Deleting a task</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Deleting a task while all tasks are listed</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Switch to the task list panel using the <code>show T</code> command. There should be multiple tasks in the list</p>
 </li>
 <li>
 <p>Test case: <code>delete 1</code><br>
-Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.</p>
+Expected: First task is deleted from the list. Details of the deleted task will show in the result display.</p>
 </li>
 <li>
 <p>Test case: <code>delete 0</code><br>
-Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.</p>
+Expected: No person is deleted. Error details shown in the result display.</p>
 </li>
 <li>
-<p>Other incorrect delete commands to try: <code>delete</code>, <code>delete x</code> (where x is larger than the list size) <em>{give more}</em><br>
+<p>Other incorrect delete commands to try: <code>delete</code>, <code>delete x</code> (where x is greater than the size of the list), <code>delete y</code> (where y is a negative index)<br>
 Expected: Similar to previous.</p>
 </li>
 </ol>
@@ -1849,12 +1904,93 @@ Expected: Similar to previous.</p>
 </li>
 </ol>
 </div>
-<div class="paragraph">
-<p><em>{ more test cases &#8230;&#8203; }</em></p>
+</div>
+<div class="sect2">
+<h3 id="priority-mode-testing"><a class="link" href="#priority-mode-testing">G.4. Priority mode testing</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Toggling on priority mode</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Switch to the task list panel using the <code>show T</code> command. There should be at least 1 incomplete task in the list and priority mode should be disabled at the moment.</p>
+</li>
+<li>
+<p>Test case: <code>priority</code><br>
+Expected: The ELISA icon will turn red and only one task will be shown on the task list panel. You can try switching a panel (<code>show E</code>) or adding an event to make sure it works.</p>
+</li>
+<li>
+<p>Test case: <code>priority -f</code><br>
+Expected: Same as above, except this time switching of panel or adding an event is not allowed.</p>
+</li>
+<li>
+<p>Test case: <code>priority 1.min.later -f</code><br>
+Expected: Same as above, except this time priority mode will deactivate after 1 minute.</p>
+</li>
+<li>
+<p>Test case: <code>priority -d</code>
+Expected: Flag not recognized and ELISA will reject the command.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Toggling off priority mode</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Switch to the task list panel using the <code>show T</code> command. Priority mode is already activated.</p>
+</li>
+<li>
+<p>Test case: <code>priority</code><br>
+Expected: Deactivate priority mode and show you all your tasks.</p>
+</li>
+<li>
+<p>Test case: <code>priority 1.min.later</code>, <code>priority -f</code><br>
+Expected: Same as above.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Manipulate list while in priority mode</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Switch to the task list panel using the <code>show T</code> command. Priority mode is already activated.</p>
+</li>
+<li>
+<p>Test case: <code>done 1</code><br>
+Expected: ELISA will mark the task as done and generate the next task. If there is no next task, ELISA will automatically take you out of priority mode.</p>
+</li>
+<li>
+<p>Test case: <code>delete 1</code><br>
+Expected: ELISA will delete the task and generate the next task. If there is no next task, ELISA will automatically take you out of priority mode.</p>
+</li>
+<li>
+<p>Test case: <code>edit 1 -p low</code> (most effective for a task list with more than 1 task and the current task priority is high)<br>
+Expected: ELISA will edit the priority of the current task to low (any other priority can be used). A new task with a higher priority will be generated.</p>
+</li>
+<li>
+<p>Test case: <code>undo</code> (used after one of the above has taken place)<br>
+Expected: ELISA will reverse the previous process and the old task will be generated again.</p>
+</li>
+<li>
+<p>Test case: <code>redo</code> (used after an undo command)<br>
+Expected: ELISA will reverse the undo command and a new task is generated.</p>
+</li>
+<li>
+<p>Other test cases: You can try doing all of these commands in focus mode to ensure that they work.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-data"><a class="link" href="#saving-data">G.3. Saving data</a></h3>
+<h3 id="saving-data"><a class="link" href="#saving-data">G.5. Saving data</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -1874,4 +2010,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 05:25:03 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 10:54:09 UTC</div></div></div></body></html>
