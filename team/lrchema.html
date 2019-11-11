@@ -10,10 +10,17 @@
 <h2 id="about-the-project"><a class="link" href="#about-the-project">About the Project</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>My team of 4 software engineering students and I were tasked with enhancing a basic command line interface desktop address book application for our Software Engineering project.</p>
+<p>My team of 4 software engineering students and I were tasked with either enhancing or morphing a basic command line
+interface desktop address book application for our Software Engineering project. We decided to morph the application,
+keeping a similar underlying architecture but changing the purpose entirely.</p>
 </div>
 <div class="paragraph">
-<p>We’re living in a fast paced, stressful world where things are constantly changing; and so are our tasks. We thought it would be helpful to have an application to aid us in managing these tasks, so we chose to morph the address book into a student assistant with a personality to liven up our dreary days, and we called her ELISA. This application enables users to add and track various tasks and events, as well as receive reminders for them. The assistant is in the form of a chat bot, and she has been given a sassy and humorous personality in order to enhance the user experience.</p>
+<p>We are living in a fast paced, stressful world where things are constantly changing; and so are our tasks. We thought it
+would be helpful to have an application to aid us in managing these tasks, so we chose to morph the address book into a
+student assistant with a personality to liven up our dreary days, and we called her ELISA (Exceptionally Loud and
+Intelligent Student Assistant). This application enables users to add and track various tasks and events, as well as
+receive reminders for them. The assistant is in the form of a chat bot, and she has been given a sassy and humorous
+personality in order to enhance the user experience.</p>
 </div>
 <div class="paragraph">
 <p>This is how our user interface looks like:</p>
@@ -145,7 +152,7 @@ The logo before, which looks cute and innocent</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/lrchema/elisaBefore.PNG" alt="elisaBefore">
+<img src="../images/lrchema/elisaBefore.PNG" alt="][" width="200">
 </div>
 </div>
 <div class="paragraph">
@@ -153,7 +160,7 @@ The logo before, which looks cute and innocent</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/lrchema/elisaAfter.PNG" alt="elisaAfter">
+<img src="../images/lrchema/elisaAfter.PNG" alt="][" width="200">
 </div>
 </div>
 <div class="ulist">
@@ -302,7 +309,7 @@ of the <code>execute(ItemModel model)</code> in that Command.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/UndoActivity.png" alt="UndoActivity">
+<img src="../images/UndoActivity.png" alt="][" width="250">
 </div>
 </div>
 <div class="paragraph">
@@ -313,7 +320,7 @@ of the <code>execute(ItemModel model)</code> in that Command.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/UndoStackStep1.png" alt="UndoStackStep1">
+<img src="../images/UndoStackStep1.png" alt="][" width="250">
 </div>
 </div>
 <div class="paragraph">
@@ -322,7 +329,7 @@ will pop the <code>AddTaskCommand</code> from the stack and reverse the effects 
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/UndoStackStep2.png" alt="UndoStackStep2">
+<img src="../images/UndoStackStep2.png" alt="][" width="450">
 </div>
 </div>
 <div class="paragraph">
@@ -338,7 +345,137 @@ That is, the redo stack is only non empty when the latest executed <code>Command
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/RedoActivity.png" alt="RedoActivity">
+<img src="../images/RedoActivity.png" alt="][" width="250">
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="previous-undo-redo-feature"><a class="link" href="#previous-undo-redo-feature">[Previous] Undo/Redo feature</a></h3>
+<div class="sect3">
+<h4 id="previous-implementation-has-since-been-refactored"><a class="link" href="#previous-implementation-has-since-been-refactored">Previous Implementation [Has since been refactored]</a></h4>
+<div class="paragraph">
+<p>The undo/redo mechanism is facilitated by <code>ElisaStateHistory</code>.
+It stores a stack of type <code>ElisaState</code>, which keeps track of the app data with a deep copy of the <code>ItemStorage</code> and the current displayed list with a deep copy of <code>VisualizeList</code>.
+Additionally, it implements the following operations:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>ElisaStateHistory#push()</code>&#8201;&#8212;&#8201;Saves the current ELISA state in its history.</p>
+</li>
+<li>
+<p><code>ElisaStateHistory#pop()</code>&#8201;&#8212;&#8201;Removes and returns the latest state as long as there is more than 1 item in the stack. This 1 item is the original application state that is saved on startup.</p>
+</li>
+<li>
+<p><code>ElisaStateHistory#size()</code>&#8201;&#8212;&#8201;Returns the number of states in the stack.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Given below is an example usage scenario and how the undo mechanism behaves at each step.</p>
+</div>
+<div class="paragraph">
+<p>Step 1. The user launches the application for the first time. The <code>ElisaStateHistory</code> will be initialized with the initial ELISA state</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/UndoState0.png" alt="][" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p>Step 2. The user executes <code>task eat</code> command to add a task with a description "eat". Upon execution of any command except <code>undo</code> and <code>show</code>, the <code>Logic</code> calls <code>ItemModel#updateState()</code> to save the latest state to <code>ElisaStateHistory</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/UndoState1.png" alt="][" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p>Step 3. The user executes <code>task jogging</code> to add another task with description "jogging". This command also calls <code>ItemModel#updateState()</code>, causing another modified ELISA state to be saved into the <code>ElisaStateHistory</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/UndoState2.png" alt="][" width="500">
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If a command fails its execution, it will not call <code>ItemModel#updateState()</code>, so the ELISA state will not be saved.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Step 4. The user now decides that adding the task "jogging" was a mistake, and decides to undo that action by executing the <code>undo</code> command. The <code>undo</code> command will call <code>ElisaStateHistory#popCommand()</code>, which will delete the last added state, and <code>Logic</code> will update the application state to the one at the top of the stack after command execution.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/UndoState3.png" alt="][" width="500">
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If the size of <code>ElisaStateHistory</code> is 1, that is, only containing the initial state, then there are no previous Elisa states to restore. The <code>undo</code> command checks for this case within its <code>execute()</code> method. If so, it will return an error to the user rather than attempting to perform the undo.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how the undo operation works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/UndoStateSequence.png" alt="UndoStateSequence">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-how-undo-redo-executes"><a class="link" href="#aspect-how-undo-redo-executes">Aspect: How undo &amp; redo executes</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (initial choice):</strong> Saves the entire Elisa state.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement.</p>
+</li>
+<li>
+<p>Cons: May have performance issues in terms of memory usage, especially when a large number of items are added.</p>
+</li>
+<li>
+<p>Another Con found after implementation: Reminders fire multiple times due to storing multiple references to items</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2 (current choice):</strong> Individual command knows how to undo/redo by itself.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Will use less memory (e.g. for <code>delete</code>, just save the item being deleted).</p>
+</li>
+<li>
+<p>Cons: We must ensure that the implementation of each individual command are correct.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -595,4 +732,4 @@ That is, the redo stack is only non empty when the latest executed <code>Command
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 13:01:00 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 13:19:10 UTC</div></div></div></body></html>

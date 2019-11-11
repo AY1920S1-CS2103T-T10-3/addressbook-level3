@@ -24,7 +24,7 @@
 <ul class="sectlevel2">
 <li><a href="#game-feature">3.1. Game feature</a></li>
 <li><a href="#implemented-undo-redo-feature">3.2. [Implemented] Undo/Redo Feature</a></li>
-<li><a href="#proposed-undo-redo-feature">3.3. [Proposed] Undo/Redo feature</a></li>
+<li><a href="#previous-undo-redo-feature">3.3. [Previous] Undo/Redo feature</a></li>
 <li><a href="#priority-mode">3.4. Priority Mode</a></li>
 <li><a href="#add-task-event-feature">3.5. Add Task/Event feature</a></li>
 <li><a href="#rescheduling-of-recurring-events-automatically">3.6. Rescheduling of recurring Events automatically</a></li>
@@ -48,7 +48,7 @@
 <li><a href="#adding-a-task">G.2. Adding a task</a></li>
 <li><a href="#deleting-a-task">G.3. Deleting a task</a></li>
 <li><a href="#editing-a-task">G.4. Editing a task</a></li>
-<li><a href="#game-mode-testing">G.5. Game mode testing</a></li>
+<li><a href="#undoing-redoing-previous-commands">G.5. Undoing/Redoing previous commands</a></li>
 <li><a href="#change-theme-testing">G.6. Change theme testing</a></li>
 <li><a href="#priority-mode-testing">G.7. Priority mode testing</a></li>
 <li><a href="#saving-data">G.8. Saving data</a></li>
@@ -481,7 +481,7 @@ of the <code>execute(ItemModel model)</code> in that Command.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/UndoActivity.png" alt="UndoActivity">
+<img src="images/UndoActivity.png" alt="][" width="250">
 </div>
 </div>
 <div class="paragraph">
@@ -492,7 +492,7 @@ of the <code>execute(ItemModel model)</code> in that Command.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/UndoStackStep1.png" alt="UndoStackStep1">
+<img src="images/UndoStackStep1.png" alt="][" width="250">
 </div>
 </div>
 <div class="paragraph">
@@ -501,7 +501,7 @@ will pop the <code>AddTaskCommand</code> from the stack and reverse the effects 
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/UndoStackStep2.png" alt="UndoStackStep2">
+<img src="images/UndoStackStep2.png" alt="][" width="450">
 </div>
 </div>
 <div class="paragraph">
@@ -517,61 +517,58 @@ That is, the redo stack is only non empty when the latest executed <code>Command
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/RedoActivity.png" alt="RedoActivity">
+<img src="images/RedoActivity.png" alt="][" width="250">
 </div>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-undo-redo-feature"><a class="link" href="#proposed-undo-redo-feature">3.3. [Proposed] Undo/Redo feature</a></h3>
+<h3 id="previous-undo-redo-feature"><a class="link" href="#previous-undo-redo-feature">3.3. [Previous] Undo/Redo feature</a></h3>
 <div class="sect3">
-<h4 id="proposed-implementation"><a class="link" href="#proposed-implementation">3.3.1. Proposed Implementation</a></h4>
+<h4 id="previous-implementation-has-since-been-refactored"><a class="link" href="#previous-implementation-has-since-been-refactored">3.3.1. Previous Implementation [Has since been refactored]</a></h4>
 <div class="paragraph">
-<p>The undo/redo mechanism is facilitated by <code>VersionedAddressBook</code>.
-It extends <code>AddressBook</code> with an undo/redo history, stored internally as an <code>addressBookStateList</code> and <code>currentStatePointer</code>.
+<p>The undo/redo mechanism is facilitated by <code>ElisaStateHistory</code>.
+It stores a stack of type <code>ElisaState</code>, which keeps track of the app data with a deep copy of the <code>ItemStorage</code> and the current displayed list with a deep copy of <code>VisualizeList</code>.
 Additionally, it implements the following operations:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>VersionedAddressBook#commit()</code>&#8201;&#8212;&#8201;Saves the current address book state in its history.</p>
+<p><code>ElisaStateHistory#push()</code>&#8201;&#8212;&#8201;Saves the current ELISA state in its history.</p>
 </li>
 <li>
-<p><code>VersionedAddressBook#undo()</code>&#8201;&#8212;&#8201;Restores the previous address book state from its history.</p>
+<p><code>ElisaStateHistory#pop()</code>&#8201;&#8212;&#8201;Removes and returns the latest state as long as there is more than 1 item in the stack. This 1 item is the original application state that is saved on startup.</p>
 </li>
 <li>
-<p><code>VersionedAddressBook#redo()</code>&#8201;&#8212;&#8201;Restores a previously undone address book state from its history.</p>
+<p><code>ElisaStateHistory#size()</code>&#8201;&#8212;&#8201;Returns the number of states in the stack.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>These operations are exposed in the <code>Model</code> interface as <code>Model#commitAddressBook()</code>, <code>Model#undoAddressBook()</code> and <code>Model#redoAddressBook()</code> respectively.</p>
+<p>Given below is an example usage scenario and how the undo mechanism behaves at each step.</p>
 </div>
 <div class="paragraph">
-<p>Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.</p>
-</div>
-<div class="paragraph">
-<p>Step 1. The user launches the application for the first time. The <code>VersionedAddressBook</code> will be initialized with the initial address book state, and the <code>currentStatePointer</code> pointing to that single address book state.</p>
+<p>Step 1. The user launches the application for the first time. The <code>ElisaStateHistory</code> will be initialized with the initial ELISA state</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/UndoRedoState0.png" alt="UndoRedoState0">
+<img src="images/UndoState0.png" alt="][" width="500">
 </div>
 </div>
 <div class="paragraph">
-<p>Step 2. The user executes <code>delete 5</code> command to delete the 5th person in the address book. The <code>delete</code> command calls <code>Model#commitAddressBook()</code>, causing the modified state of the address book after the <code>delete 5</code> command executes to be saved in the <code>addressBookStateList</code>, and the <code>currentStatePointer</code> is shifted to the newly inserted address book state.</p>
+<p>Step 2. The user executes <code>task eat</code> command to add a task with a description "eat". Upon execution of any command except <code>undo</code> and <code>show</code>, the <code>Logic</code> calls <code>ItemModel#updateState()</code> to save the latest state to <code>ElisaStateHistory</code>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/UndoRedoState1.png" alt="UndoRedoState1">
+<img src="images/UndoState1.png" alt="][" width="500">
 </div>
 </div>
 <div class="paragraph">
-<p>Step 3. The user executes <code>add n/David &#8230;&#8203;</code> to add a new person. The <code>add</code> command also calls <code>Model#commitAddressBook()</code>, causing another modified address book state to be saved into the <code>addressBookStateList</code>.</p>
+<p>Step 3. The user executes <code>task jogging</code> to add another task with description "jogging". This command also calls <code>ItemModel#updateState()</code>, causing another modified ELISA state to be saved into the <code>ElisaStateHistory</code>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/UndoRedoState2.png" alt="UndoRedoState2">
+<img src="images/UndoState2.png" alt="][" width="500">
 </div>
 </div>
 <div class="admonitionblock note">
@@ -581,17 +578,17 @@ Additionally, it implements the following operations:</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If a command fails its execution, it will not call <code>Model#commitAddressBook()</code>, so the address book state will not be saved into the <code>addressBookStateList</code>.
+If a command fails its execution, it will not call <code>ItemModel#updateState()</code>, so the ELISA state will not be saved.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the <code>undo</code> command. The <code>undo</code> command will call <code>Model#undoAddressBook()</code>, which will shift the <code>currentStatePointer</code> once to the left, pointing it to the previous address book state, and restores the address book to that state.</p>
+<p>Step 4. The user now decides that adding the task "jogging" was a mistake, and decides to undo that action by executing the <code>undo</code> command. The <code>undo</code> command will call <code>ElisaStateHistory#popCommand()</code>, which will delete the last added state, and <code>Logic</code> will update the application state to the one at the top of the stack after command execution.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/UndoRedoState3.png" alt="UndoRedoState3">
+<img src="images/UndoState3.png" alt="][" width="500">
 </div>
 </div>
 <div class="admonitionblock note">
@@ -601,7 +598,7 @@ If a command fails its execution, it will not call <code>Model#commitAddressBook
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If the <code>currentStatePointer</code> is at index 0, pointing to the initial address book state, then there are no previous address book states to restore. The <code>undo</code> command uses <code>Model#canUndoAddressBook()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
+If the size of <code>ElisaStateHistory</code> is 1, that is, only containing the initial state, then there are no previous Elisa states to restore. The <code>undo</code> command checks for this case within its <code>execute()</code> method. If so, it will return an error to the user rather than attempting to perform the undo.
 </td>
 </tr>
 </table>
@@ -611,58 +608,7 @@ If the <code>currentStatePointer</code> is at index 0, pointing to the initial a
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/UndoSequenceDiagram.png" alt="UndoSequenceDiagram">
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The lifeline for <code>UndoCommand</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>The <code>redo</code> command does the opposite&#8201;&#8212;&#8201;it calls <code>Model#redoAddressBook()</code>, which shifts the <code>currentStatePointer</code> once to the right, pointing to the previously undone state, and restores the address book to that state.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If the <code>currentStatePointer</code> is at index <code>addressBookStateList.size() - 1</code>, pointing to the latest address book state, then there are no undone address book states to restore. The <code>redo</code> command uses <code>Model#canRedoAddressBook()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Step 5. The user then decides to execute the command <code>list</code>. Commands that do not modify the address book, such as <code>list</code>, will usually not call <code>Model#commitAddressBook()</code>, <code>Model#undoAddressBook()</code> or <code>Model#redoAddressBook()</code>. Thus, the <code>addressBookStateList</code> remains unchanged.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/UndoRedoState4.png" alt="UndoRedoState4">
-</div>
-</div>
-<div class="paragraph">
-<p>Step 6. The user executes <code>clear</code>, which calls <code>Model#commitAddressBook()</code>. Since the <code>currentStatePointer</code> is not pointing at the end of the <code>addressBookStateList</code>, all address book states after the <code>currentStatePointer</code> will be purged. We designed it this way because it no longer makes sense to redo the <code>add n/David &#8230;&#8203;</code> command. This is the behavior that most modern desktop applications follow.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/UndoRedoState5.png" alt="UndoRedoState5">
-</div>
-</div>
-<div class="paragraph">
-<p>The following activity diagram summarizes what happens when a user executes a new command:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/CommitActivityDiagram.png" alt="CommitActivityDiagram">
+<img src="images/UndoStateSequence.png" alt="UndoStateSequence">
 </div>
 </div>
 </div>
@@ -673,60 +619,30 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Saves the entire address book.</p>
+<p><strong>Alternative 1 (initial choice):</strong> Saves the entire Elisa state.</p>
 <div class="ulist">
 <ul>
 <li>
 <p>Pros: Easy to implement.</p>
 </li>
 <li>
-<p>Cons: May have performance issues in terms of memory usage.</p>
+<p>Cons: May have performance issues in terms of memory usage, especially when a large number of items are added.</p>
+</li>
+<li>
+<p>Another Con found after implementation: Reminders fire multiple times due to storing multiple references to items</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> Individual command knows how to undo/redo by itself.</p>
+<p><strong>Alternative 2 (current choice):</strong> Individual command knows how to undo/redo by itself.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Will use less memory (e.g. for <code>delete</code>, just save the person being deleted).</p>
+<p>Pros: Will use less memory (e.g. for <code>delete</code>, just save the item being deleted).</p>
 </li>
 <li>
 <p>Cons: We must ensure that the implementation of each individual command are correct.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect4">
-<h5 id="aspect-data-structure-to-support-the-undo-redo-commands"><a class="link" href="#aspect-data-structure-to-support-the-undo-redo-commands">Aspect: Data structure to support the undo/redo commands</a></h5>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1 (current choice):</strong> Use a list to store the history of address book states.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.</p>
-</li>
-<li>
-<p>Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both <code>HistoryManager</code> and <code>VersionedAddressBook</code>.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2:</strong> Use <code>HistoryManager</code> for undo/redo</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.</p>
-</li>
-<li>
-<p>Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as <code>HistoryManager</code> now needs to do two different things.</p>
 </li>
 </ul>
 </div>
@@ -2149,7 +2065,65 @@ Even though this is for task, the same tests can be used for testing events and 
 </div>
 </div>
 <div class="sect2">
-<h3 id="game-mode-testing"><a class="link" href="#game-mode-testing">G.5. Game mode testing</a></h3>
+<h3 id="undoing-redoing-previous-commands"><a class="link" href="#undoing-redoing-previous-commands">G.5. Undoing/Redoing previous commands</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Undoing when no <code>UndoableCommand</code>(s) have been executed</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Open the application and do not execute any add, edit, delete, priority or show commands</p>
+</li>
+<li>
+<p>Test case: <code>undo</code><br>
+Expected: No changes to be undone. Error message shown in chat box.</p>
+</li>
+<li>
+<p>Test case: <code>redo</code><br>
+Expected: No undo commands to be redone. Error message shown in chat box.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Undoing when <code>UndoableCommand</code>(s) <em>have</em> been executed</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Open the application and execute some commands like adding/removing items, changing done/not done of tasks, modifying dates/descriptions</p>
+</li>
+<li>
+<p>Test case: <code>undo</code><br>
+Expected: Last executed change should be reverted.</p>
+</li>
+<li>
+<p>Test case: <code>redo</code><br>
+Expected: Last undone change should be re-applied</p>
+</li>
+<li>
+<p>Other test cases: You can <code>undo</code> and <code>redo</code> multiple times in either direction to remove and apply changes.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Redoing when previous <code>UndoCommand</code>(s) exist but are not the last executed</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Execute at least one <code>UndoableCommand</code>, followed by one or more <code>UndoCommand</code>(s), and then another <code>UndoableCommand</code></p>
+</li>
+<li>
+<p>Test case: <code>redo</code><br>
+    Expected: Should not be able to redo as the undo/redo command history has changed. Error message shown in chat box.
+=== Game mode testing</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="images/SnakeGame.PNG" alt="500" width="600">
@@ -2330,4 +2304,4 @@ Expected: ELISA will reverse the undo command and a new task is generated.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 13:01:00 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 13:19:10 UTC</div></div></div></body></html>
