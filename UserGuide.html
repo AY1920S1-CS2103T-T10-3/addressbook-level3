@@ -473,42 +473,7 @@ It is currently not possible to set a reminder for events with an autoreschedule
 </div>
 </div>
 <div class="sect3">
-<h4 id="adding-a-reminder-code-reminder-code"><a class="link" href="#adding-a-reminder-code-reminder-code">4.1.3. Adding a reminder: <code>reminder</code></a></h4>
-<div class="paragraph">
-<p>Adds a reminder to the reminder list<br>
-Format: <code>reminder DESCRIPTION -r REMINDER [-t TAG]</code></p>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>reminder John’s Birthday -r 19/09/2019 1400</code></p>
-</li>
-<li>
-<p><code>reminder John’s Birthday -r 2019-09-19T14:00 -t friend</code></p>
-</li>
-<li>
-<p><code>reminder John&#8217;s Birthday -r 3.day.later</code></p>
-</li>
-</ul>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-It is not possible to set a reminder in the past.
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="sect3">
-<h4 id="editing-an-item-code-edit-code"><a class="link" href="#editing-an-item-code-edit-code">4.1.4. Editing an item : <code>edit</code></a></h4>
+<h4 id="editing-an-item-code-edit-code"><a class="link" href="#editing-an-item-code-edit-code">4.1.3. Editing an item : <code>edit</code></a></h4>
 <div class="paragraph">
 <p>This command is used to edit any of the items that you might have.<br></p>
 </div>
@@ -608,7 +573,7 @@ Edits item 2 of the current list. Changes the description to <code>CS2103 team m
 </div>
 </div>
 <div class="sect3">
-<h4 id="deleting-a-reminder-task-event-code-delete-code"><a class="link" href="#deleting-a-reminder-task-event-code-delete-code">4.1.5. Deleting a reminder/task/event : <code>delete</code></a></h4>
+<h4 id="deleting-a-reminder-task-event-code-delete-code"><a class="link" href="#deleting-a-reminder-task-event-code-delete-code">4.1.4. Deleting a reminder/task/event : <code>delete</code></a></h4>
 <div class="paragraph">
 <p>Deletes the reminder/task/event from ELISA.<br>
 Format: <code>delete INDEX</code></p>
@@ -647,7 +612,7 @@ Deletes the 2nd reminder in the shown reminder list.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="completing-a-task-code-done-code"><a class="link" href="#completing-a-task-code-done-code">4.1.6. Completing a task: <code>done</code></a></h4>
+<h4 id="completing-a-task-code-done-code"><a class="link" href="#completing-a-task-code-done-code">4.1.5. Completing a task: <code>done</code></a></h4>
 <div class="paragraph">
 <p>Mark a task at the specific index as done.</p>
 </div>
@@ -686,7 +651,7 @@ Deletes the 2nd reminder in the shown reminder list.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="continuing-with-a-task-code-continue-code"><a class="link" href="#continuing-with-a-task-code-continue-code">4.1.7. Continuing with a task: <code>continue</code></a></h4>
+<h4 id="continuing-with-a-task-code-continue-code"><a class="link" href="#continuing-with-a-task-code-continue-code">4.1.6. Continuing with a task: <code>continue</code></a></h4>
 <div class="paragraph">
 <p>Mark a task at the specific index as undone.</p>
 </div>
@@ -790,16 +755,108 @@ This also means that reminders cannot be created with the <code>-auto</code> fla
 </div>
 <div class="sect2">
 <h3 id="reminder-feature"><a class="link" href="#reminder-feature">4.3. Reminder Feature</a></h3>
-<div class="sect3">
-<h4 id="snoozing-a-reminder-code-snooze-code"><a class="link" href="#snoozing-a-reminder-code-snooze-code">4.3.1. Snoozing a reminder: <code>snooze</code></a></h4>
 <div class="paragraph">
-<p>Snoozes a reminder that occurred since the application was open.<br>
-If an index is not provided, the most recently occurred reminder will be snoozed.<br>
-If a snooze duration is not specified, the reminder will be snoozed at the default duration of 5 min.<br>
-Format: 'snooze [INDEX] [-s SNOOZE_DURATION]'<br></p>
+<p>So focused on your work that you forget the other tasks in your life?
+Don&#8217;t worry! You can ask ELISA to remind you to do what you need to do, when you need to do it!</p>
+</div>
+<div class="sect3">
+<h4 id="adding-a-reminder-code-reminder-code"><a class="link" href="#adding-a-reminder-code-reminder-code">4.3.1. Adding a reminder: <code>reminder</code></a></h4>
+<div class="paragraph">
+<p>Simply add your reminder with this command:
+<code>reminder John’s Birthday -r 11/11/2019 1440</code><br>
+ and ELISA will carry it out!</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/BeforeReminderCommand.PNG" alt="BeforeReminderCommand">
+</div>
 </div>
 <div class="paragraph">
-<p>Examples:
+<p>Once it&#8217;s time for you to be reminded, ELISA will remind you!
+Best of all, ELISA will play a chime so you won&#8217;t need to have ELISA open in order to be reminded!</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/AfterReminderCommand.PNG" alt="AfterReminderCommand">
+</div>
+</div>
+<div class="paragraph">
+<p>More specifically, the reminder command format is: <code>reminder DESCRIPTION -r REMINDER [-t TAG]</code></p>
+</div>
+<div class="paragraph">
+<p>Here are some other ways you could use this command!:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>reminder Finish UG -r 11/10/2019 1400</code></p>
+</li>
+<li>
+<p><code>reminder Get John’s Birthday gift -r 2019-09-19T14:00 -t friend</code></p>
+</li>
+<li>
+<p><code>reminder Study for 2103T Exam -r 3.day.later</code></p>
+<div class="olist NOTE">
+<ol class="NOTE">
+<li>
+<p>It is currently not possible to set a reminder for events with an autoreschedule flag. We intend to include this in v2.0 .</p>
+</li>
+<li>
+<p>It is not possible to set a reminder in the past.</p>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/FailReminderCommand.PNG" alt="FailReminderCommand">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="snoozing-a-reminder-code-snooze-code"><a class="link" href="#snoozing-a-reminder-code-snooze-code">4.3.2. Snoozing a reminder: <code>snooze</code></a></h4>
+<div class="paragraph">
+<p>If you&#8217;re in the groove of working but still want to be reminded again of a reminder that just occurred, you can use the snooze command!</p>
+</div>
+<div class="paragraph">
+<p><code>snooze</code> will snooze the most recent reminder for a duration of time (5 minutes by default)</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/BeforeSnoozeCommand.PNG" alt="BeforeSnoozeCommand">
+</div>
+</div>
+<div class="paragraph">
+<p>And ELISA will remind you again once it&#8217;s time!</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/AfterSnoozeCommand.PNG" alt="AfterSnoozeCommand">
+</div>
+</div>
+<div class="paragraph">
+<p>More specifically the format of this command is: 'snooze [INDEX] [-s SNOOZE_DURATION]'<br></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>This snoozes a reminder.<br></p>
+</li>
+<li>
+<p>The index refers to the it&#8217;s index in the reminder list.<br></p>
+</li>
+<li>
+<p>If an index is not provided, the most recently occurred reminder will be snoozed.<br></p>
+</li>
+<li>
+<p>If a snooze duration is not specified, the reminder will be snoozed at the default duration of 5 min.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Here are some examples you can try out!
 * <code>snooze 1</code>
 * <code>snooze 3 -s 10.min.later</code>
 * <code>snooze -s 10/10/2020 1400</code></p>
@@ -810,7 +867,7 @@ Format: 'snooze [INDEX] [-s SNOOZE_DURATION]'<br></p>
 <p>It is possible to snooze the same reminder multiple times if you wish.<br></p>
 </li>
 <li>
-<p>It is not possible to snooze if no reminder has occurred yet.<br>
+<p>It is not possible to snooze (without specifying index) if no reminder has occurred yet.<br>
 However, if you use the snooze command incorrectly, ELISA will first attempt to correct your usage of the snooze command.</p>
 </li>
 </ol>
@@ -1313,4 +1370,4 @@ There is no need to save manually.</p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 14:45:20 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 15:13:47 UTC</div></div></div></body></html>

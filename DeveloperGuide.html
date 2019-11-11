@@ -47,11 +47,13 @@
 <li><a href="#launch-and-shutdown">G.1. Launch and Shutdown</a></li>
 <li><a href="#adding-a-task">G.2. Adding a task</a></li>
 <li><a href="#deleting-a-task">G.3. Deleting a task</a></li>
-<li><a href="#editing-a-task">G.4. Editing a task</a></li>
-<li><a href="#undoing-redoing-previous-commands">G.5. Undoing/Redoing previous commands</a></li>
-<li><a href="#change-theme-testing">G.6. Change theme testing</a></li>
-<li><a href="#priority-mode-testing">G.7. Priority mode testing</a></li>
-<li><a href="#saving-data">G.8. Saving data</a></li>
+<li><a href="#adding-a-reminder">G.4. Adding a reminder</a></li>
+<li><a href="#snoozing-a-reminder">G.5. Snoozing a reminder</a></li>
+<li><a href="#editing-a-task">G.6. Editing a task</a></li>
+<li><a href="#undoing-redoing-previous-commands">G.7. Undoing/Redoing previous commands</a></li>
+<li><a href="#change-theme-testing">G.8. Change theme testing</a></li>
+<li><a href="#priority-mode-testing">G.9. Priority mode testing</a></li>
+<li><a href="#saving-data">G.10. Saving data</a></li>
 </ul>
 </li>
 </ul>
@@ -1559,7 +1561,74 @@ A normal <code><code>PriorityCommand</code></code> will end at this point and wi
 </li>
 </ul>
 </div>
-<h3 id="use-case-004-find-upcoming-reminders" class="discrete">Use Case 004: Find upcoming reminders.</h3>
+<h3 id="use-case-004-snooze-a-reminder" class="discrete">Use Case 004: Snooze a reminder</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User enters the snooze command.</p>
+</li>
+<li>
+<p>ELISA snoozes the reminder.</p>
+</li>
+<li>
+<p>ELISA reminds the user of that reminder after the specified duration.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>1a. There are no recent reminders to be snooze</p>
+<div class="ulist">
+<ul>
+<li>
+<p>1a1. ELISA displays an error message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>1b. The user does not which reminder to snooze.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>1b1. ELISA snoozes the most recent reminder.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Use case resumes at step 2.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>1c. The user does not specify how long to snooze.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>1c1. ELISA snoozes the reminder for a default duration.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Use case resumes at step 2.</p>
+</div>
+<h3 id="use-case-005-find-upcoming-reminders" class="discrete">Use Case 005: Find upcoming reminders.</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -1576,10 +1645,10 @@ A normal <code><code>PriorityCommand</code></code> will end at this point and wi
 </li>
 <li>
 <p>ELISA shows the updated list of reminders sorted by date and time.</p>
-<h3 id="use-case-005-search-for-a-task-by-its-description" class="discrete">Use Case 005: Search for a task by its description</h3>
 </li>
 </ol>
 </div>
+<h3 id="use-case-006-search-for-a-task-by-its-description" class="discrete">Use Case 006: Search for a task by its description</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -1619,7 +1688,7 @@ A normal <code><code>PriorityCommand</code></code> will end at this point and wi
 </li>
 </ul>
 </div>
-<h3 id="use-case-006-undo-the-last-command" class="discrete">Use Case 006: Undo the last command</h3>
+<h3 id="use-case-007-undo-the-last-command" class="discrete">Use Case 007: Undo the last command</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -1656,7 +1725,7 @@ A normal <code><code>PriorityCommand</code></code> will end at this point and wi
 </li>
 </ul>
 </div>
-<h3 id="use-case-007-using-priority-mode" class="discrete">Use Case 007: Using Priority Mode</h3>
+<h3 id="use-case-008-using-priority-mode" class="discrete">Use Case 008: Using Priority Mode</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -1708,7 +1777,7 @@ A normal <code><code>PriorityCommand</code></code> will end at this point and wi
 <p>Should work on any <a href="#mainstream-os">mainstream OS</a> as long as it has Java <code>11</code> or above installed.</p>
 </li>
 <li>
-<p>Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.</p>
+<p>Should be able to hold up to 1000 tasks / events / reminders (combined) without a noticeable sluggishness in performance for typical usage.</p>
 </li>
 <li>
 <p>A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.</p>
@@ -1805,7 +1874,7 @@ These instructions only provide a starting point for testers to work on; testers
 </li>
 <li>
 <p>Double-click the jar file<br>
-Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.</p>
+Expected: Shows the GUI with an empty set of tasks. The window size may not be optimum.</p>
 </li>
 </ol>
 </div>
@@ -1825,9 +1894,6 @@ Expected: The most recent window size and location is retained.</p>
 </div>
 </li>
 </ol>
-</div>
-<div class="paragraph">
-<p><em>{ more test cases &#8230;&#8203; }</em></p>
 </div>
 </div>
 <div class="sect2">
@@ -1915,17 +1981,11 @@ Expected: First task is deleted from the list. Details of the deleted task will 
 </li>
 <li>
 <p>Test case: <code>delete 0</code><br>
-Expected: No person is deleted. Error details shown in the result display.</p>
+Expected: No task is deleted. Error details shown in the result display.</p>
 </li>
 <li>
 <p>Other incorrect delete commands to try: <code>delete</code>, <code>delete x</code> (where x is greater than the size of the list), <code>delete y</code> (where y is a negative index)<br>
 Expected: Similar to previous.</p>
-</li>
-</ol>
-</div>
-</li>
-</ol>
-</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -1938,9 +1998,101 @@ Even though this is for task, the same tests can be used for testing events and 
 </tr>
 </table>
 </div>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
 </div>
 <div class="sect2">
-<h3 id="editing-a-task"><a class="link" href="#editing-a-task">G.4. Editing a task</a></h3>
+<h3 id="adding-a-reminder"><a class="link" href="#adding-a-reminder">G.4. Adding a reminder</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Adding a reminder</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Know the current date and time. Volume of computer is audible to tester.<br></p>
+</li>
+<li>
+<p>Test case: <code>reminder John&#8217;s Birthday -r 1.min.later</code><br>
+Expected: View is switched to reminder list panel (if not already there). A reminder is added to the reminder list. Details of the reminder will be shown in the result display. After 1 minute, a chime is played and a red dialog box with the details of the reminder will appear in the result display.</p>
+</li>
+<li>
+<p>Test case: <code>reminder John&#8217;s Birthday -r x</code> (where x is the date and time 1 minute later from now in the format <code>dd/MM/yyyy HHmm</code>. E.g. <code>reminder John&#8217;s Birthday</code> -r 15/11/2019 1800)
+Expected: Similar to previous test case. (Since x is 1 minute from now.)<br></p>
+</li>
+<li>
+<p>Test case: <code>reminder John&#8217;s Birthday -r y</code> (where y is the date and time 1 minute later from now in the format <code>yyyy-MM-ddTHHmm</code>. E.g. <code>reminder John&#8217;s Birthday</code> -r 2019-11-15T18:00)
+Expected: Similar to previous test case. (Since y is 1 minute from now.)<br></p>
+</li>
+<li>
+<p>Test case: <code>undo</code> (used after one of the above has taken place)
+Expected: ELISA will reverse the addition of the reminder and no reminder will occur later on.<br></p>
+</li>
+<li>
+<p>Test case: <code>redo</code> (used after a valid undo command has taken place)
+Expected: ELISA will reverse the undo of the addition of the reminder and a reminder will occur at the appropriate time. Note that if the time for the reminder to occur has already passed, the reminder will not occur.<br></p>
+</li>
+<li>
+<p>Test case: <code>reminder John&#8217;s Birthday -r z</code> (where z is the date and time 1 minute before now in the format <code>dd/MM/yyyy HHmm</code>. E.g. <code>reminder John&#8217;s Birthday</code> -r 15/11/2019 1358)
+Expected: No reminder is added. Error details shown in result display. (Since z is 1 minute before now.)</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="snoozing-a-reminder"><a class="link" href="#snoozing-a-reminder">G.5. Snoozing a reminder</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Snoozing a reminder</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Reminder has been added. Know the current date and time. Volume of computer is audible to tester.<br></p>
+</li>
+<li>
+<p>Test case: <code>snooze 1</code><br>
+Expected: First reminder of the reminder list will occur again five minutes from now.</p>
+</li>
+<li>
+<p>Test case: <code>snooze 1 -s 1.min.later</code><br>
+Expected: First reminder of the reminder list will occur again one minute from now.</p>
+</li>
+<li>
+<p>Test case: <code>snooze 1 -s x</code> (where x is the date and time 1 minute later from now in the format <code>dd/MM/yyyy HHmm</code>. E.g. <code>reminder John&#8217;s Birthday</code> -r 15/11/2019 1800)
+Expected: Similar to previous test case. (Since x is 1 minute from now.)<br></p>
+</li>
+<li>
+<p>Test case: <code>snooze John&#8217;s Birthday -s y</code> (where y is the date and time 1 minute later from now in the format <code>yyyy-MM-ddTHHmm</code>. E.g. <code>reminder John&#8217;s Birthday</code> -s 2019-11-15T18:00)
+Expected: Similar to previous test case. (Since y is 1 minute from now.)<br></p>
+</li>
+<li>
+<p>Test case: <code>undo</code> (used after one of the above has taken place)
+Expected: ELISA will reverse the snoozing of the reminder and reminder&#8217;s occurrence date time will revert to it its state before the snooze.<br></p>
+</li>
+<li>
+<p>Test case: <code>redo</code> (used after a valid undo command has taken place)
+Expected: ELISA will reverse the undo of the snoozing of the reminder and a reminder will occur at the appropriate time. Note that if the time for the reminder to occur has already passed, the reminder will not occur.<br></p>
+</li>
+<li>
+<p>Test case: <code>snooze John&#8217;s Birthday -s z</code> (where z is the date and time 1 minute before now in the format <code>dd/MM/yyyy HHmm</code>. E.g. <code>reminder John&#8217;s Birthday</code> -s 15/11/2019 1358)
+Expected: No reminder is snoozed. Error details shown in result display. (Since z is 1 minute before now.)</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="editing-a-task"><a class="link" href="#editing-a-task">G.6. Editing a task</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2020,7 +2172,7 @@ Even though this is for task, the same tests can be used for testing events and 
 </div>
 </div>
 <div class="sect2">
-<h3 id="undoing-redoing-previous-commands"><a class="link" href="#undoing-redoing-previous-commands">G.5. Undoing/Redoing previous commands</a></h3>
+<h3 id="undoing-redoing-previous-commands"><a class="link" href="#undoing-redoing-previous-commands">G.7. Undoing/Redoing previous commands</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2121,7 +2273,7 @@ Expected: Same as above.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="change-theme-testing"><a class="link" href="#change-theme-testing">G.6. Change theme testing</a></h3>
+<h3 id="change-theme-testing"><a class="link" href="#change-theme-testing">G.8. Change theme testing</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2142,7 +2294,7 @@ Expected: Change ELISA&#8217;s theme to white.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="priority-mode-testing"><a class="link" href="#priority-mode-testing">G.7. Priority mode testing</a></h3>
+<h3 id="priority-mode-testing"><a class="link" href="#priority-mode-testing">G.9. Priority mode testing</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2226,7 +2378,7 @@ Expected: ELISA will reverse the undo command and a new task is generated.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-data"><a class="link" href="#saving-data">G.8. Saving data</a></h3>
+<h3 id="saving-data"><a class="link" href="#saving-data">G.10. Saving data</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2259,4 +2411,4 @@ Expected: ELISA will reverse the undo command and a new task is generated.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 14:45:20 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 15:13:47 UTC</div></div></div></body></html>
