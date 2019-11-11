@@ -73,6 +73,16 @@
 <div class="paragraph">
 <p>In this section, I will be briefly going through my contributions to this team project. For the full extent of my contributions to the project, please visit <a href="https://nus-cs2103-ay1920s1.github.io/tp-dashboard/#=undefined&amp;search=icesiolz">here</a>.</p>
 </div>
+<div class="paragraph">
+<p>Major enhancements:<br>
+- Added Game Command<br>
+- Refactored and designed ELISA&#8217;s UI</p>
+</div>
+<div class="paragraph">
+<p>Minor enhancements:<br>
+- Added Navigation Features (<code>show</code>, <code>up/down</code>)<br>
+- Added Visual Features (<code>theme</code>)</p>
+</div>
 <div class="sect2">
 <h3 id="functional-contributions"><a class="link" href="#functional-contributions">Functional contributions</a></h3>
 <div class="ulist">
@@ -82,17 +92,85 @@
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p><em>What does it do?</em></p>
+<div class="imageblock">
+<div class="content">
+<img src="../images/snakegamehard.PNG" alt="500" width="600">
+</div>
+<div class="title">Figure 2. Snake Game <strong>HARD</strong> mode</div>
 </div>
 <div class="paragraph">
-<p><em>Why make it?</em></p>
+<p><em>What does it do?</em><br>
+This feature allows users to enter the Game mode to take a break from all the work. After entering the game mode, users will be able to play the traditional Nokia (phone) game: Snake. Snake has a very simple rule: Eat the food and do not bite your own tail! The game does not take up a lot of time and therefore is the best game for a short break.</p>
 </div>
 <div class="paragraph">
-<p><em>Why is it special?</em></p>
+<p><em>Why make it?</em><br>
+Users may get stressed or burnt out when they are constantly doing work non-stop. The game mode is developed as an avenue to take a break from all the work and provide a form of entertainment. Taking a temporary break to recharge will definitely help the user be more productive later on.</p>
 </div>
 <div class="paragraph">
-<p><em>Difficulties?</em></p>
+<p><em>Why is it special?</em><br>
+There are 2 difficulty levels in this game feature: Easy and Hard. In the easy mode, there are no walls (indicated by the blue box) whereas in the hard mode, 20 walls will be randomly spawned in the game space. Colliding into these walls will result in GAME OVER. The option for a hard mode is provided to keep the game interesting as the walls are in different positions every round. Users that have gotten used to the easy mode will be able to stay engaged in the hard mode.</p>
+</div>
+<div class="paragraph">
+<p>This feature is very special because there is no task tracking app in the current market with a built-in game feature with the sole purpose of providing entertainment. Many people are neglecting the importance of taking breaks and the effects it has on boosting productivity. I hope that this feature will be able to encourage these people to take breaks.</p>
+</div>
+<div class="paragraph">
+<p><em>Difficulties?</em><br>
+The difficulty of this feature is mainly the need to integrate this feature into ELISA. Originally, I wanted to run the game in a separate tab (Refer to the annotated figure above) from the list and calendar tabs but to do so would mean that the user has to click into the tab when they want to play the game and click the commandbox when they want to type a command. This is very problematic as ELISA is designed for CLI users which meant that they do not want to use the mouse.</p>
+</div>
+<div class="paragraph">
+<p>I worked around that problem by implementing the game feature using a separate scene from the ELISA&#8217;s scene. This means that when the user enter the game mode, he will not be able to see ELISA and his list of tasks. This solves the problem I mentioned earlier as well as met the goal of encouraging the user to take a break from work.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Navigation Features (Minor Feature)</strong>:</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The following features are features that allow the application to be completely CLI based. Since ELISA is designed for CLI users, I have to provide a way for the users to navigate through ELISA without the use of the mouse.</p>
+</div>
+<div class="paragraph">
+<p><code>show T/E/R/C</code> switches the tabs between the lists and calendar views.
+<code>up/down</code> scrolls the list up/down.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Theme Feature (Minor Feature)</strong>:</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The theme feature is to allow users to change the colour scheme of ELISA. This feature is very useful especially when the screen it too bright/dark depending on the location that the user is in and switching the colour scheme will make ELISA more visible.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/icesiolz/UG1.png" alt="UG1">
+</div>
+<div class="title">Figure 3. Theme Feature</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>UI integration (Major Contribution)</strong>:</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For this section, please refer to the annotated diagram above.</p>
+</div>
+<div class="paragraph">
+<p>I designed the entire UI of ELISA to display the features that ELISA has. While UI may not be considered a feature, it is a huge part of whether an app is user-friendly and therefore I have devoted a significant amount of time into its design.</p>
+</div>
+<div class="paragraph">
+<p>Firstly the mascot, ELISA. ELISA is a female student assistant, therefore the overall structure of ELISA is that of a female robot. The colour blue is chosen because blue is the most popular colour in the world. (according to a study by Philip Cohen from the University of Maryland) It is a colour often found in nature and people always describe blue as calm and serene, which is what we want users to feel.</p>
+</div>
+<div class="paragraph">
+<p>Secondly, the chat style <code>Result Display</code>. I designed it to be a chat style display so that it would seem like ELISA is an intelligent companion. The chat bubbles allow users to experience texting with a friend (like other instant messaging apps) which has been proven to be helpful in alleviating stress.</p>
+</div>
+<div class="paragraph">
+<p>Thirdly, the intuitive icons of ELISA that displays information in each list. Green ELISA with a cheerful appearance indicates that a task has been completed while Red ELISA with a crossed eye indicates that a task is incomplete. These icons make ELISA more interesting and friendly to the user as it further personifies ELISA by giving her emotions. Additionally, there were actually more ELISA icons that were designed but not used in the final product because of time constraints and the difficulty of aligning all the elements of the app.</p>
 </div>
 </div>
 <div class="sect2">
@@ -108,7 +186,7 @@
 </ul>
 </div>
 <div class="paragraph">
-<p>Refactored the ui class so that it will work with the project.</p>
+<p>Refactored the UI classes as well as the DarkTheme.css file so that it is able to integrate with the project.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -133,88 +211,29 @@
 </tr>
 </tbody>
 </table>
-<div class="sect3">
-<h4 id="entering-priority-mode-code-priority-code"><a class="link" href="#entering-priority-mode-code-priority-code">Entering priority mode: <code>priority</code></a></h4>
 <div class="paragraph">
-<p>Feeling overwhelmed by the sheer amount of tasks to do? Enter priority mode, a mode which will help you narrow down the most pressing task to be done.</p>
+<p>Firstly, I designed the heading banners to make the UG more friendly as compared to plain text headings.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/BeforePriority.PNG" alt="500" width="500">
+<img src="../images/icesiolz/UG5.png" alt="UG5">
 </div>
-<div class="title">Figure 2. ELISA before priority mode with a long list of tasks</div>
+<div class="title">Figure 4. UG banner</div>
 </div>
 <div class="paragraph">
-<p>By simply typing <code>priority</code> into the command box, you will be given one single task of the highest priority among your task list. This task is chosen by ELISA base on priority and the order in which the task was added to the list.</p>
+<p>Secondly, I rearranged the features of the UG into better headings such as Visual Features, Navigation Features, CLI Features etc. This improves readability of the UG.</p>
+</div>
+<div class="paragraph">
+<p>Thirdly, I wrote the Theme Feature, Calendar Feature, Navigation Feature and Game Feature portion of the UG. I will show the Game Feature portion of the UG here below.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/AfterPriority.PNG" alt="500" width="500">
+<img src="../images/icesiolz/UG3.png" alt="UG3">
 </div>
-<div class="title">Figure 3. ELISA in priority mode</div>
-</div>
-<div class="paragraph">
-<p>Notice that the ELISA icon turns red to signify that you are in priority mode and your task list has shrunk from 5 tasks down to the 1 most important task.</p>
-</div>
-<div class="paragraph">
-<p>When you are done with your current task, just tell ELISA you are done by simply typing <code>done 1</code> and ELISA will generate the next task for you.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/AfterDone.PNG" alt="500" width="500">
-</div>
-<div class="title">Figure 4. ELISA after completing the first task</div>
-</div>
-<div class="paragraph">
-<p>Feeling less stressed? You can type <code>priority</code> again to bring you out of the priority mode and back into the normal task view. Or even better, finish all your undone tasks and you will be automatically brought out of priority mode.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/AllDone.PNG" alt="500" width="500">
-</div>
-<div class="title">Figure 5. ELISA after all tasks are completed</div>
-</div>
-<div class="paragraph">
-<p>Feeling lazy? You can also opt to turn off priority mode at a specific time by typing <code>priority dd/mm/yyyy hhmm</code> and ELISA will turn it off at that specific time for you.</p>
-</div>
-<div class="paragraph">
-<p>There is also an extreme focus mode for the easily distracted. Simply tell ELISA that you want to enter the extreme focus mode by attaching a <code>-f</code> flag to the back of the command. In the extreme focus mode, commands such as <code>show</code>, <code>sort</code>, <code>find</code>, <code>game</code>, <code>event</code> and <code>reminder</code> are banned.</p>
-</div>
-<div class="paragraph">
-<p>Format: <code>priority [DATETIME] [-f]</code></p>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>priority</code> - activates or deactivates the priority mode</p>
-</li>
-<li>
-<p><code>priority 30/10/2019 1200</code> - activates the priority mode and ask ELISA to turn it off on 30/10/2019 at noon</p>
-</li>
-<li>
-<p><code>priority 2.hour.later -f</code> - activates the focus mode and ask ELISA to turn it off 2 hours later</p>
-</li>
-</ul>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Note that this command can only be called in the task panel and when you have incomplete tasks to be completed.</p>
-</li>
-<li>
-<p>Note that if priority mode is currently on, any variation of <code>priority</code> will turn it off.</p>
-</li>
-<li>
-<p>Note that all command such as <code>edit</code>, <code>undo</code> and <code>redo</code> still works in priority mode. However, if a <code>done</code> or <code>delete</code> command takes you out of priority mode and then you <code>undo</code> it, it will only <code>undo</code> the command but will not take you back into priority mode.</p>
-</li>
-</ul>
-</div>
-</div>
+<img src="../images/icesiolz/UG4.png" alt="UG4">
 </div>
 </div>
 </div>
@@ -223,6 +242,7 @@
 <h2 id="contributions-to-the-developer-guide"><a class="link" href="#contributions-to-the-developer-guide">Contributions to the Developer Guide</a></h2>
 <div class="sectionbody">
 <table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 1. Game Feature</caption>
 <colgroup>
 <col style="width: 100%;">
 </colgroup>
@@ -232,283 +252,35 @@
 </tr>
 </tbody>
 </table>
-<div class="sect2">
-<h3 id="priority-mode"><a class="link" href="#priority-mode">Priority Mode</a></h3>
-<div class="sect3">
-<h4 id="implementation"><a class="link" href="#implementation">Implementation</a></h4>
 <div class="paragraph">
-<p>The priority mode is used to aid the user in focusing on the most pressing task that they have especially when they have many tasks in their list. As priority mode is only for clearing of tasks, the priority mode can only be activated at the task pane of the application.</p>
-</div>
-<div class="paragraph">
-<p>The priority mode is mainly controlled in the <code><code>ItemModelManager</code></code> and the following are the methods it uses within the <code><code>ItemModelManager</code></code>:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code><code>ItemModelManager#togglePriorityMode()</code></code> - Toggle the priority mode depending on whether it is on or off.</p>
-</li>
-<li>
-<p><code><code>ItemModelManager#toggleOnPriorityMode()</code></code> - Helper function to toggle on the priority mode.</p>
-</li>
-<li>
-<p><code><code>ItemModelManager#toggleOffPriorityMode()</code></code> - Helper function to toggle off the priority mode.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>There are two variants to the priority mode, a normal priority mode and a focus mode. The focus mode is more restrictive than the normal priority mode, preventing the user from doing any operations that are not relevant to the task list, such as adding a new event. This is currently implemented by having a separate <code>Parser</code> when ELISA is in focus mode. (Refer to <a href="#Priority-Design-Consideration">Design Consideration</a> for more details)</p>
-</div>
-<div class="paragraph">
-<p>There are two ways to trigger priority mode, a normal priority mode that is controlled fully by the user and a scheduled priority mode that is triggered by the user but is scheduled to turn off after a specific amount of time. In addition to the above three methods, the scheduled priority mode also uses the following method:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code><code>ItemModelManager#startTimer(LocalDateTime)</code></code> - Starts a timer to turn off the priority mode.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="example-run-of-priority-mode"><a class="link" href="#example-run-of-priority-mode">Example run of priority mode</a></h4>
-<div class="paragraph">
-<p>In this section, we will show a run of the priority mode and a overview of the mechanism at each step. In particular, we will be showing how the <code><code>ScheduledPriorityCommand</code></code> works as it has a more complicated implementation than the normal <code><code>PriorityCommand</code></code>.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>The user opens his Task panel and types in <code>priority 30.min.later</code>.</p>
-</li>
-<li>
-<p>The incomplete tasks are added to a <code><code>PriorityQueue</code></code> where they are ranked by their priority.</p>
-</li>
-<li>
-<p>Once all the items are added into the <code><code>PriorityQueue</code></code>, ELISA will peek the first task from the queue and present it to the user.</p>
-</li>
-<li>
-<p>The user can type <code><code>done 1</code></code> when he is done with the current task to retrieve the next task. This carries on until there is no more undone task left to do in the <code><code>PriorityQueue</code></code>. This is shown in the activity diagram below.</p>
-</li>
-</ol>
+<p>I updated the UI component of the DG as it had been refactored and new classes are added such as TaskListPanel, TaskListCard, ElisaDialogBox etc.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/PriorityModeActivityDiagram.png" alt="300" width="300">
+<img src="../images/icesiolz/DG4.png" alt="DG4">
 </div>
-<div class="title">Figure 6. Activity diagram for priority mode</div>
+<div class="title">Figure 5. UI component</div>
 </div>
-<div class="olist arabic">
-<ol class="arabic" start="5">
-<li>
-<p>ELISA will automatically disable the priority mode after 30 minutes and show <strong>all</strong> the task that the user have in his task list currently.</p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect3">
-<h4 id="internal-working-of-the-command"><a class="link" href="#internal-working-of-the-command">Internal working of the command</a></h4>
 <div class="paragraph">
-<p>The figure below shows the sequence diagram on what happens from a simple execution of the <code><code>priority 30.min.later</code></code> command. We will go through the internal mechanism of the execution of the <code><code>ScheduledPriorityCommand</code></code>.</p>
+<p>+</p>
+</div>
+<div class="paragraph">
+<p>I also updated the Game Features portion of the DG as it is a major feature that I have implemented.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/PriorityMode.png" alt="PriorityMode">
+<img src="../images/icesiolz/DG1.png" alt="DG1">
 </div>
-<div class="title">Figure 7. Sequence diagram for priority mode</div>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>When the user types in the command, the <code><code>LogicManager</code></code> takes in the command as a string and pass it to the <code><code>AddressBookParser</code></code></p>
-</li>
-<li>
-<p>The <code><code>AddressBookParser</code></code> parses the string and determine whether the command is that of a normal <code><code>PriorityCommand</code></code> or a <code><code>ScheduledPriorityCommand</code></code>. In this case,  a new <code><code>ScheduledPriorityCommand</code></code> is created and is passed back to the <code><code>LogicManager</code></code>.</p>
-</li>
-</ol>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The following steps (except step 4) are also applicable to <code><code>PriorityCommand</code></code>.
-</td>
-</tr>
-</table>
-</div>
-<div class="olist arabic">
-<ol class="arabic" start="3">
-<li>
-<p>Within the <code><code>LogicManager</code></code>, the <code><code>ScheduledPriorityCommand#execute()</code></code> method is called and the command is executed.</p>
-</li>
-<li>
-<p>The <code><code>ScheduledPriorityCommand</code></code> calls the <code><code>ItemModel#scheduleOffPriorityMethod()</code></code> which creates a new <code><code>Timer</code></code> object and a new <code><code>TimerTask</code></code> object. The <code><code>TimerTask</code></code> object will be scheduled to fire off at a specific time, which in this case is 30 minutes later (as defined by the user).</p>
-</li>
-<li>
-<p>The <code><code>SchedulePriorityCommand</code></code> then calls <code><code>ItemModel#togglePriorityMode()</code></code> which calls the private method <code><code>ItemModel#toggleOnPriorityMode()</code></code> (since the current state of the priority mode is false).</p>
-</li>
-<li>
-<p>This creates a new <code><code>TaskList</code></code> which will have the task with the highest priority added to it. This <code><code>TaskList</code></code> will be displayed to the user.</p>
-</li>
-<li>
-<p>A <code><code>CommandResult</code></code> is passed to the <code><code>ScheduledPriorityCommand</code></code> and then back to the <code><code>LogicManager</code></code> to be passed into the <code><code>Ui</code></code>, informing the user that the priority mode is activate.</p>
-</li>
-</ol>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-A normal <code><code>PriorityCommand</code></code> will end at this point and will only be deactivated by the user&#8217;s input of <code>priority</code> again.
-</td>
-</tr>
-</table>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/PriorityMode2.png" alt="300" width="300">
-</div>
-<div class="title">Figure 8. Sequence diagram for the scheduled turning off of priority mode</div>
-</div>
-<div class="olist arabic">
-<ol class="arabic" start="8">
-<li>
-<p>As the <code><code>Timer</code></code> within the <code><code>ItemModelManager</code></code> is still running on a separate thread, it will trigger the <code><code>TimerTask#run()</code></code> when the user defined time is reached.</p>
-</li>
-<li>
-<p>The <code><code>TimerTask</code></code> will call <code><code>ItemModelManager#toggleOffPriorityMode()</code></code> which will cancel the <code><code>Timer</code></code> and destroy the <code><code>Timer</code></code>. This is to ensure proper cleanup of the thread.</p>
-</li>
-<li>
-<p>All the items are added back into the <code><code>TaskList</code></code> and shown to the user. The priority mode is deactivated.</p>
-</li>
-</ol>
+<img src="../images/icesiolz/DG2.png" alt="DG2">
 </div>
 </div>
-<div class="sect3">
-<h4 id="Priority-Design-Consideration"><a class="link" href="#Priority-Design-Consideration">Design Consideration</a></h4>
-<div class="paragraph">
-<p><strong>Aspect: How to restrict commands for focus mode</strong></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Alternative 1: Storing a boolean within the <code>ItemModelManager</code> to check if the application is in focus mode or normal mode. Commands that are not allowed to be called in focus mode will check against this boolean to determine if the command is allowed.</p>
-</li>
-</ul>
-</div>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Pros</th>
-<th class="tableblock halign-left valign-top">Cons</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">This implementation will contain the changes within the class of the <code><code>Command</code></code> itself and will ensure that they do not interfere with each other. This will make it easier to maintain the code.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">This implementation is not scalable as each new <code><code>Command</code></code> that is added will need to be checked to see if they are allowed in focus mode. There is also the additional overhead of checking the state of the <code><code>ItemModelManager</code></code> at every call of <code><code>Command#execute()</code></code>.</p></td>
-</tr>
-</tbody>
-</table>
-<div class="ulist">
-<ul>
-<li>
-<p>Alternative 2 (Current implementation): Create a new <code><code>FocusElisaParser</code></code> that extends from the current <code><code>ElisaParser</code></code> but prevent the parsing of commands that are not allowed in focus mode.</p>
-</li>
-</ul>
-</div>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Pros</th>
-<th class="tableblock halign-left valign-top">Cons</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">This implementation stops the creation of the <code><code>Command</code></code> at the <code><code>Parser</code></code> level which will reduce the computational cost to the application.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">There might be difficulty in maintaining the <code><code>Parser#parse()</code></code> method of the two <code><code>Parser</code></code>.</p></td>
-</tr>
-</tbody>
-</table>
-<div class="paragraph">
-<p>Both methods are not scalable in the long run, but at this moment, alternative 2 is favoured as it prevents the command from even being parsed or created, which saves the computing time. At the same time, it is easier to maintain as one only needs to edit the <code><code>Parser#parse()</code></code> method instead of having an if-else loop in all the command that are banned.</p>
-</div>
-<div class="paragraph">
-<p><strong>Aspect: How to turn off the priority mode after a fixed time</strong></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Alternative 1: Storing the timer within the <code><code>ScheduledPriorityCommand</code></code>.</p>
-</li>
-</ul>
-</div>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Pros</th>
-<th class="tableblock halign-left valign-top">Cons</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Adheres to the SLAP principle with each class having it&#8217;s own implementation of the <code><code>Command#execute(ItemModel)</code></code>. It is easier to maintain the code and prevents overloading the <code><code>ItemModelManager</code></code>.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">There is no way to end the schedule priority mode prematurely as the timer is kept within the command and so cannot be referenced after the execution of the command.</p></td>
-</tr>
-</tbody>
-</table>
-<div class="ulist">
-<ul>
-<li>
-<p>Alternative 2 (Current implementation): Storing the timer within the <code><code>ItemModelManager</code></code>.</p>
-</li>
-</ul>
-</div>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Pros</th>
-<th class="tableblock halign-left valign-top">Cons</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The timer can be referenced from the <code><code>ItemModelManager</code></code> and so it can be cancelled prematurely if the user chooses to do so.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">This implementation will clutter the <code><code>ItemModelManager</code></code> further and make it harder for maintaining the code.</p></td>
-</tr>
-</tbody>
-</table>
-<div class="paragraph">
-<p>Alternative 2 was chosen as we believe that the ability to cancel a scheduled priority mode prematurely is more important than the maintainability of the code at the moment.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="possible-extension"><a class="link" href="#possible-extension">Possible extension</a></h4>
-<div class="paragraph">
-<p>At the moment, the user is not able to keep track of the amount of time that he has before the schedule priority mode is over. This can be improved by including a countdown timer in the Ui when the user toggles on the scheduled priority mode.</p>
+<div class="imageblock">
+<div class="content">
+<img src="../images/icesiolz/DG3.png" alt="DG3">
 </div>
 </div>
 </div>
-</div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 06:18:49 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 07:31:11 UTC</div></div></div></body></html>
