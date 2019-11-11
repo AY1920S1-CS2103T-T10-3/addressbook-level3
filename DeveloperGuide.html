@@ -28,9 +28,12 @@
 <li><a href="#implemented-undo-redo-feature">3.4. [Implemented] Undo/Redo Feature</a></li>
 <li><a href="#previous-undo-redo-feature">3.5. [Previous] Undo/Redo feature</a></li>
 <li><a href="#priority-mode">3.6. Priority Mode</a></li>
-<li><a href="#proposed-data-encryption">3.7. [Proposed] Data Encryption</a></li>
-<li><a href="#logging">3.8. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.9. Configuration</a></li>
+<li><a href="#add-task-event-feature-2">3.7. Add Task/Event feature</a></li>
+<li><a href="#rescheduling-of-recurring-events-automatically-2">3.8. Rescheduling of recurring Events automatically</a></li>
+<li><a href="#add-reminder-feature">3.9. Add Reminder feature</a></li>
+<li><a href="#snooze-reminder-feature">3.10. Snooze Reminder feature</a></li>
+<li><a href="#logging">3.11. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.12. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a></li>
@@ -130,6 +133,31 @@ The following class plays an important role at the architecture level:</p>
 </li>
 </ul>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ItemClassDiagram.png" alt="ItemClassDiagram">
+</div>
+<div class="title">Figure 2. Class Diagram of the Item</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>An <code>Item</code> can contain an task, event or reminder. However it must contain at least one of the three.</p>
+</li>
+<li>
+<p>The <code>ItemBuilder</code> class ensures the validation of the above rule when <code>build()</code> is called..</p>
+</li>
+<li>
+<p>An <code>Item</code> is immutable in order to support thread safety.</p>
+</li>
+<li>
+<p>An <code>Item</code> is created via the ItemBuilder class.</p>
+</li>
+<li>
+<p>Setter methods of <code>Item</code> create a new <code>Item</code> through <code>ItemBuilder</code> to ensure immutability.</p>
+</li>
+</ul>
+</div>
 <div class="paragraph">
 <p>The rest of the App consists of four components.</p>
 </div>
@@ -173,7 +201,7 @@ The following class plays an important role at the architecture level:</p>
 <div class="content">
 <img src="images/ArchitectureSequenceDiagram.png" alt="ArchitectureSequenceDiagram">
 </div>
-<div class="title">Figure 2. Component interactions for <code>delete 1</code> command</div>
+<div class="title">Figure 3. Component interactions for <code>delete 1</code> command</div>
 </div>
 <div class="paragraph">
 <p>The sections below give more details of each component.</p>
@@ -185,7 +213,7 @@ The following class plays an important role at the architecture level:</p>
 <div class="content">
 <img src="images/UiClassDiagram.png" alt="UiClassDiagram">
 </div>
-<div class="title">Figure 3. Structure of the UI Component</div>
+<div class="title">Figure 4. Structure of the UI Component</div>
 </div>
 <div class="paragraph">
 <p><strong>API</strong> : <a href="https://github.com/AY1920S1-CS2103T-T10-3/main/src/main/java/seedu/address/ui/Ui.java"><code>Ui.java</code></a></p>
@@ -216,7 +244,7 @@ The following class plays an important role at the architecture level:</p>
 <div class="content">
 <img src="images/LogicComponentUML.png" alt="LogicComponentUML">
 </div>
-<div class="title">Figure 4. Structure of the Logic Component</div>
+<div class="title">Figure 5. Structure of the Logic Component</div>
 </div>
 <div class="paragraph">
 <p><strong>API</strong> :
@@ -251,7 +279,7 @@ The following class plays an important role at the architecture level:</p>
 <div class="content">
 <img src="images/ModelClassDiagram.png" alt="500" width="500">
 </div>
-<div class="title">Figure 5. Structure of the Model Component</div>
+<div class="title">Figure 6. Structure of the Model Component</div>
 </div>
 <div class="paragraph">
 <p><strong>API</strong> : <a href="https://github.com/AY1920S1-CS2103T-T10-3/main/blob/master/src/main/java/seedu/elisa/model/ItemModel.java"><code>ItemModel.java</code></a></p>
@@ -288,7 +316,7 @@ The following class plays an important role at the architecture level:</p>
 <div class="content">
 <img src="images/StorageClassDiagram.png" alt="StorageClassDiagram">
 </div>
-<div class="title">Figure 6. Structure of the Storage Component</div>
+<div class="title">Figure 7. Structure of the Storage Component</div>
 </div>
 <div class="paragraph">
 <p><strong>API</strong> : <a href="https://github.com/AY1920S1-CS2103T-T10-3/main/src/main/java/seedu/address/storage/Storage.java"><code>Storage.java</code></a></p>
@@ -336,7 +364,7 @@ The following activity diagram shows the how a task can be added, depending on t
 <div class="content">
 <img src="images/AddTaskActivity.png" alt="200" width="600">
 </div>
-<div class="title">Figure 7. Activity Diagram of adding a Task</div>
+<div class="title">Figure 8. Activity Diagram of adding a Task</div>
 </div>
 <div class="paragraph">
 <p>This shows how we can easily add Task, Event and Reminder with a <em>single</em> command.
@@ -363,7 +391,7 @@ Step 6. Upon the successful execution of AddCommand, a CommandResult is returned
 <div class="content">
 <img src="images/AddCommandPart_1.png" alt="AddCommandPart 1">
 </div>
-<div class="title">Figure 8. Call execute in LogicManager to create an AddTaskCommand</div>
+<div class="title">Figure 9. Call execute in LogicManager to create an AddTaskCommand</div>
 </div>
 <div class="paragraph">
 <p>This diagram shows how <code>execute</code> is carried out in the <code>Logic</code> component.
@@ -373,7 +401,7 @@ The following diagram shows how the same command is continued onto the <code>Mod
 <div class="content">
 <img src="images/AddCommandPart_2.png" alt="AddCommandPart 2">
 </div>
-<div class="title">Figure 9. LogicManager executes the AddTaskCommand and returns CommandResult</div>
+<div class="title">Figure 10. LogicManager executes the AddTaskCommand and returns CommandResult</div>
 </div>
 <div class="paragraph">
 <p>This shows how <code>execute(model)</code> affects the <code>Model</code> component. It then returns a <code>CommandResult</code> r, which is the result of calling LogicManager#execute("task shower -d 1.hour.later").</p>
@@ -487,7 +515,7 @@ The classes involved in the above rescheduling are:<br></p>
 <div class="content">
 <img src="images/AutoRescheduleClassDiagram.png" alt="100" width="500">
 </div>
-<div class="title">Figure 10. Class Diagram of classes involved in AutoReschedule function</div>
+<div class="title">Figure 11. Class Diagram of classes involved in AutoReschedule function</div>
 </div>
 </div>
 <div class="sect3">
@@ -512,7 +540,7 @@ The first diagram shows the adding of an Event, which may appear familiar as it 
 <div class="content">
 <img src="images/AutoRescheduleSequence_1.png" alt="AutoRescheduleSequence 1">
 </div>
-<div class="title">Figure 11. Call execute in LogicManager and create an AddEventCommand</div>
+<div class="title">Figure 12. Call execute in LogicManager and create an AddEventCommand</div>
 </div>
 <div class="paragraph">
 <p>As mentioned, the key points to take note of in the diagram above is <code>Event#setAutoReschedule(true)</code> and <code>Event#setReschedulePeriod(period)</code>.<br>
@@ -522,7 +550,7 @@ The significance of these methods will be shown in the continuing diagram below:
 <div class="content">
 <img src="images/AutoRescheduleSequence_2.png" alt="100" width="700">
 </div>
-<div class="title">Figure 12. LogicManager executing AddEventCommand and create task for AutoRescheduleManager</div>
+<div class="title">Figure 13. LogicManager executing AddEventCommand and create task for AutoRescheduleManager</div>
 </div>
 <div class="paragraph">
 <p>From the above diagram, we can see that the presence of <code>AutoReschedulePeriod</code> in Event results in the creation of <code>RescheduleTask</code> which would be queued into the Timer managed by <code>AutoRescheduleManager</code>.</p>
@@ -557,7 +585,7 @@ The significance of these methods will be shown in the continuing diagram below:
 <div class="content">
 <img src="images/GameActivityDiagram.png" alt="500" width="600">
 </div>
-<div class="title">Figure 13. Activity diagram for game mode</div>
+<div class="title">Figure 14. Activity diagram for game mode</div>
 </div>
 </div>
 <div class="sect3">
@@ -587,7 +615,7 @@ Step 9. startgame() creates a new thread to run the game.<br></p>
 <div class="content">
 <img src="images/CreatingGameSequenceDiagram.png" alt="500" width="600">
 </div>
-<div class="title">Figure 14. Sequence Diagram for game creation</div>
+<div class="title">Figure 15. Sequence Diagram for game creation</div>
 </div>
 </div>
 <div class="sect3">
@@ -911,7 +939,7 @@ If the size of <code>ElisaStateHistory</code> is 1, that is, only containing the
 <div class="content">
 <img src="images/PriorityModeActivityDiagram.png" alt="300" width="300">
 </div>
-<div class="title">Figure 15. Activity diagram for priority mode</div>
+<div class="title">Figure 16. Activity diagram for priority mode</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic" start="5">
@@ -930,7 +958,7 @@ If the size of <code>ElisaStateHistory</code> is 1, that is, only containing the
 <div class="content">
 <img src="images/PriorityMode.png" alt="PriorityMode">
 </div>
-<div class="title">Figure 16. Sequence diagram for priority mode</div>
+<div class="title">Figure 17. Sequence diagram for priority mode</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -989,7 +1017,7 @@ A normal <code><code>PriorityCommand</code></code> will end at this point and wi
 <div class="content">
 <img src="images/PriorityMode2.png" alt="300" width="300">
 </div>
-<div class="title">Figure 17. Sequence diagram for the scheduled turning off of priority mode</div>
+<div class="title">Figure 18. Sequence diagram for the scheduled turning off of priority mode</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic" start="8">
@@ -1128,20 +1156,293 @@ A normal <code><code>PriorityCommand</code></code> will end at this point and wi
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.7. [Proposed] Data Encryption</a></h3>
+<h3 id="add-task-event-feature-2"><a class="link" href="#add-task-event-feature-2">3.7. Add Task/Event feature</a></h3>
 <div class="paragraph">
-<p><em>{Explain here how the data encryption feature will be implemented}</em></p>
+<p>Task, Events and Reminders are all Items and can be added using the <strong>same</strong> command. Adding of Items is facilitated by ItemModel#add(Item).<br></p>
+</div>
+<div class="sect3">
+<h4 id="implementation-6"><a class="link" href="#implementation-6">3.7.1. Implementation</a></h4>
+<div class="paragraph">
+<p>A Task with a deadline flag <code>-d</code> will be considered an Event. A Task with a reminder flag <code>-r</code> will be considered a Reminder.<br>
+The following activity diagram shows the how a task can be added, depending on the flags present:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/AddTaskActivity.png" alt="200" width="600">
+</div>
+<div class="title">Figure 19. Activity Diagram of adding a Task</div>
+</div>
+<div class="paragraph">
+<p>This shows how we can easily add Task, Event and Reminder with a <em>single</em> command.
+However, in this section, we will only show how Task and Event is added. Adding of Reminders is shown in a separate section as it includes other steps.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="internal-workings-of-the-command-3"><a class="link" href="#internal-workings-of-the-command-3">3.7.2. Internal workings of the command</a></h4>
+<div class="paragraph">
+<p>Given below is an example usage scenario of how add behaves at each step:<br></p>
+</div>
+<div class="paragraph">
+<p>Step 1. The user enters the command <code>"task shower -d 1.hour.later"</code>.<br>
+Step 2. The LogicManager creates an ELISAParser to parse the user input.<br>
+Step 3. ELISAParser creates a AddTaskCommandParser which parses the input and returns an AddCommand.<br>
+Step 4. LogicManager will execute the AddCommand. AddCommand will then invoke <code>ItemModel#add(Item)</code>, which adds Task to its TaskList and Event to its EventList.<br>
+Step 5. AddCommand will also trigger a change in view by calling <code>ItemModel#setVisualList(taskList)</code>
+Step 6. Upon the successful execution of AddCommand, a CommandResult is returned to the LogicManager, which will then be returned to the Ui to render the appropriate view.</p>
+</div>
+<div class="paragraph">
+<p>The figures below shows the sequence diagram on what happens from a simple execution of <code>task shower -d 1.min.later</code> user command:<br></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/AddCommandPart_1.png" alt="AddCommandPart 1">
+</div>
+<div class="title">Figure 20. Call execute in LogicManager to create an AddTaskCommand</div>
+</div>
+<div class="paragraph">
+<p>This diagram shows how <code>execute</code> is carried out in the <code>Logic</code> component.
+The following diagram shows how the same command is continued onto the <code>Model</code> component:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/AddCommandPart_2.png" alt="AddCommandPart 2">
+</div>
+<div class="title">Figure 21. LogicManager executes the AddTaskCommand and returns CommandResult</div>
+</div>
+<div class="paragraph">
+<p>This shows how <code>execute(model)</code> affects the <code>Model</code> component. It then returns a <code>CommandResult</code> r, which is the result of calling LogicManager#execute("task shower -d 1.hour.later").</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.7.3. Design considerations</a></h4>
+<div class="paragraph">
+<p>The design considerations for the classes are shown below:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Alternatives:</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pros:</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cons:</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1. Placing all fields into an Item object and retrieving the specific fields when needed.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Easy to implement. Reduce dependencies between classes as everything is in one class. Editing can be done all in one object.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Does not separate out the different functionalities of Task, Event and Reminder.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2. Having separate classes for Task, Event, Reminder</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reduce dependencies as well as having functionalities separated.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Some attributes and methods overlap. Repetition of code for same functionality. Have to add all three objects individually. Editing of an item would require searching, obtaining and individually editing all 3 objects.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3. <strong>(Current)</strong> Having a general Item class which comprise of <code>Optional&lt;&gt;</code> fields Task, Event, Reminder</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Similar fields such as description and priority can be placed in Item. This makes adding an Item more convenient. Related task/event/reminder can have access to each other.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Increase coupling and dependency amongst Task, Event, Reminder classes.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>As of now, these are the considered designs and the current design seems to work well for our purpose. However, there could be better designs which are unexplored that could mitigate our cons and we welcome them.<br></p>
+</div>
+<div class="paragraph">
+<p>This is end of the section of adding a Task and Event. As mentioned above, adding of Reminder will be shown in a separate section due it having extra features. Do look out for it if you&#8217;re interested.</p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.8. Logging</a></h3>
+<h3 id="rescheduling-of-recurring-events-automatically-2"><a class="link" href="#rescheduling-of-recurring-events-automatically-2">3.8. Rescheduling of recurring Events automatically</a></h3>
+<div class="paragraph">
+<p>This section talks about how the <code>autoReschedule</code> function is implemented. This feature aims to provide users with greater convenience when scheduling events that occur periodically (eg. weekly deadlines, monthly appointments).</p>
+</div>
+<div class="sect3">
+<h4 id="implementation-7"><a class="link" href="#implementation-7">3.8.1. Implementation</a></h4>
+<div class="paragraph">
+<p>To reschedule a task, we need a deadline as we need to be able to calculate the next date. Recall that any Task with a deadline is considered an Event. As such, <strong>only Events can be rescheduled.</strong></p>
+</div>
+<div class="paragraph">
+<p>To automatically reschedule an Event, when creating the Event, include the <code>-auto</code> flag along with its reschedule period (eg <code>-auto day</code> for daily rescheduling)<br>
+The accepted parameters for <code>-auto</code> is <code>day</code>, <code>week</code>, <code>month</code> and the format of <code>10.min.later</code>.</p>
+</div>
+<div class="paragraph">
+<p>The following diagram shows the process of adding an Event with -auto flag:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/AutoRescheduleActivity.png" alt="100" width="400">
+</div>
+<div class="title">Figure 22. Activity diagram of adding an Event with -auto flag</div>
+</div>
+<div class="paragraph">
+<p>In the diagram, when we add the Event initially, we would check the start time of the Event and update it accordingly.
+However, this is not the only place where rescheduling occurs.</p>
+</div>
+<div class="paragraph">
+<p><strong>3 places where rescheduling can occur:</strong><br></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>When the event is created, as shown in the diagram above.</p>
+</li>
+<li>
+<p>While the app is running, the Event&#8217;s start time will be continuously updated when it has passed.<br>
+This is done using <code>Timer</code> and <code>TimerTask</code>, using <code>Timer#scheduleAtFixedRate()</code>.</p>
+</li>
+<li>
+<p>When the app is started and Events are loaded from the storage. The stored Event time might already be over, as such the time has to be updated to the latest upcoming one.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>To illustrate how they work, first we need to know what classes are involved before we can understand the sequence of actions carried out.<br>
+The classes involved in the above rescheduling are:<br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>AutoReschedulePeriod</code>&#8201;&#8212;&#8201;Represents the period of every reschedule (eg day/week/month)</p>
+</li>
+<li>
+<p><code>RescheduleTask</code>&#8201;&#8212;&#8201;Represents the action to perform when rescheduling its associated event.</p>
+</li>
+<li>
+<p><code>AutoRescheduleManager</code>&#8201;&#8212;&#8201;Manages all the rescheduling tasks. There is only one of such manager.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>To better understand its underlying structure, we can look at the class diagram below:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/AutoRescheduleClassDiagram.png" alt="100" width="500">
+</div>
+<div class="title">Figure 23. Class Diagram of classes involved in AutoReschedule function</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="internal-workings-of-the-command-4"><a class="link" href="#internal-workings-of-the-command-4">3.8.2. Internal workings of the command</a></h4>
+<div class="paragraph">
+<p>Now we are ready to look at the sequence of actions. Given below is an example usage scenario of how add behaves at each step:<br></p>
+</div>
+<div class="paragraph">
+<p>Step 1. The user enters the command <code>event CS2103T Quiz -d 23/09/2019 2359 -auto week</code>.<br>
+Step 2. The Event is created, following the sequence of steps in the section <em>Adding Task/Event</em>. However there are now some extra steps from Step 3 onwards that occur concurrently from the object creation of Event.<br>
+Step 3a. The presence of the <code>-auto week</code> creates an AutoReschedulePeriod, which is stored in the Event created. This can be seen in the Class Diagram above.<br>
+Step 3b. If the start time of this Event is already over, the Event&#8217;s start time will be modified to show the next start time, using this Event&#8217;s AutoReschedulePeriod.
+Step 4. When <code>LogicManager#execute(model)</code> is called, the presence of AutoReschedulePeriod in the Event triggers the creation of a RescheduleTask, which represents the task of rescheduling this Event.<br>
+Step 5. This RescheduleTask is added to an AutoRescheduleManager, which manages all RescheduleTasks.<br>
+Step 6. When the start time of this Event has passed, AutoRescheduleManager will call <code>RescheduleTask#run()</code>, and this updates the Event start time, which will be reflected in the Ui.<br></p>
+</div>
+<div class="paragraph">
+<p>The following diagrams show how the command <code>event Quiz -d 10.hour.later -auto week</code> is executed from the Logic component.
+The first diagram shows the adding of an Event, which may appear familiar as it has a sequence similar to the adding of task in <a href="#add-task-event-feature">Section 3.1, &#8220;Add Task/Event feature&#8221;</a>. However, there are some minor differences due to the presence of <code>-auto</code> which should be noted.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/AutoRescheduleSequence_1.png" alt="AutoRescheduleSequence 1">
+</div>
+<div class="title">Figure 24. Call execute in LogicManager and create an AddEventCommand</div>
+</div>
+<div class="paragraph">
+<p>As mentioned, the key points to take note of in the diagram above is <code>Event#setAutoReschedule(true)</code> and <code>Event#setReschedulePeriod(period)</code>.<br>
+The significance of these methods will be shown in the continuing diagram below:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/AutoRescheduleSequence_2.png" alt="AutoRescheduleSequence 2">
+</div>
+<div class="title">Figure 25. LogicManager executing AddEventCommand and create task for AutoRescheduleManager</div>
+</div>
+<div class="paragraph">
+<p>From the above diagram, we can see that the presence of <code>AutoReschedulePeriod</code> in Event results in the creation of <code>RescheduleTask</code> which would be queued into the Timer managed by <code>AutoRescheduleManager</code>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">3.8.3. Design considerations</a></h4>
+<div class="paragraph">
+<p>The design considerations for the classes are shown below:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Alternatives:</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pros:</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cons:</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Creating a AutoRescheduleManager for every RescheduleTask</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Easy for the Timer in AutoRescheduleManager to keep track of its TimerTask.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">There could potentially be many Timer threads.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>(Current)</strong> Singleton pattern for AutoRescheduleManager</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ensure that only one instance can be instantiated as there should only be one manager for all the RescheduleTask. If there are multiple managers, it would be hard to keep track of all of them and it would be difficult to coordinate all the tasks.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Difficult to create tests for AutoResheduleManager. Could have many hidden dependencies, which makes code harder to maintain.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="add-reminder-feature"><a class="link" href="#add-reminder-feature">3.9. Add Reminder feature</a></h3>
+<div class="paragraph">
+<p>Step 1. The user enters the command <code>"reminder John&#8217;s Birthday -r 3.day.later"</code>.<br>
+Step 2. The LogicManager creates an ELISAParser to parse the user input.<br>
+Step 3. ELISAParser creates a AddReminderCommandParser which parses the input and returns an ReminderCommand.<br>
+Step 4. LogicManager will execute the ReminderCommand. AddCommand will then invoke <code>ItemModel#add(Item)</code>, which adds the Item that contains the reminder to the <code>RemindersList</code> and the <code>futureRemindersList</code>.<br>
+Step 5. Each time an Item is added to the <code>futureRemindersList</code>, the Items in futureRemindersList is sorted according to the <code>occurrenceDateTime</code> of its Reminder in order of recency.<br>
+Step 6. AddCommand will also trigger a change in view by calling <code>ItemModel#setVisualList(taskList)</code><br>
+Step 7. Upon the successful execution of AddCommand, a CommandResult is returned to the LogicManager, which will then be returned to the Ui to render the appropriate view.<br></p>
+</div>
+<div class="paragraph">
+<p>When the application is launched, the LogicManager also creates a separate thread using the <code>ScheduledThreadPoolExecutor</code> that constantly runs checkTask every 5 seconds.<br>
+CheckTask is a runnable that monitors the ItemModelManager to see if there are any reminders in <code>futureRemindersList</code> that have an <code>occurrenceDateTime</code> after <code>LocalDateTime#now()</code>.<br>
+If there is, it transfers those reminders to <code>activeRemindersList</code> which is an ObservableList.<br></p>
+</div>
+<div class="paragraph">
+<p>Meanwhile, the MainWindow binds a listener <code>activeRemindersList</code> in order to observe if any Items with Reminders have been added to it.<br>
+If so, it will add <code>ReminderDialogBox</code> with the appropriate details for the added Items to the <code>resultDisplay</code>.<br></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="snooze-reminder-feature"><a class="link" href="#snooze-reminder-feature">3.10. Snooze Reminder feature</a></h3>
+<div class="paragraph">
+<p>We can see how snooze is performed through the activity diagram below.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/SnoozeActivityDiagram.png" alt="SnoozeActivityDiagram">
+</div>
+<div class="title">Figure 26. Activity Diagram to snooze a reminder</div>
+</div>
+<div class="paragraph">
+<p>From the image above, we can see that there 2 guard conditions.<br>
+The first checks whether there is a reminder to snooze (either via an index or recently occurred reminder). If there isn&#8217;t, an exception is thrown.<br>
+The second checks if the <code>newReminderOccurrenceIsValid</code> (i.e. reminder does not occur in the past). Otherwise, it throws an exception.<br>
+If the duration of the reminder is not specified, then the default duration for the snooze is 5 minutes.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="logging"><a class="link" href="#logging">3.11. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.9, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.12, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -1172,7 +1473,7 @@ A normal <code><code>PriorityCommand</code></code> will end at this point and wi
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.9. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.12. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -2235,7 +2536,7 @@ Expected: Last undone change should be re-applied</p>
 <div class="content">
 <img src="images/SnakeGame.PNG" alt="500" width="600">
 </div>
-<div class="title">Figure 18. Entering game mode (easy)</div>
+<div class="title">Figure 27. Entering game mode (easy)</div>
 </div>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
@@ -2257,7 +2558,7 @@ Expected: Same as above.</p>
 <div class="content">
 <img src="images/snakegamehard.PNG" alt="500" width="600">
 </div>
-<div class="title">Figure 19. Entering game mode (hard)</div>
+<div class="title">Figure 28. Entering game mode (hard)</div>
 </div>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
@@ -2411,4 +2712,4 @@ Expected: ELISA will reverse the undo command and a new task is generated.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 15:13:47 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 15:32:30 UTC</div></div></div></body></html>

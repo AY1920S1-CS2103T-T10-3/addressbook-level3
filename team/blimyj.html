@@ -1,0 +1,413 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Bryan Lim Yan Jie - Project Portfolio</title><link rel="stylesheet" href="../stylesheets/gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="seedu-header"><nav class="navbar navbar-lg navbar-light bg-lighter"><div class="container"><a class="navbar-brand" href="https://se-edu.github.io/"><img src="../images/SeEduLogo.png" alt="SE-EDU"></a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level1">AB-1</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level2">AB-2</a></li><li class="nav-item"><a class="nav-link active" href="../index.html">AB-3</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level4">AB-4</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/collate">Collate</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/se-book">Book</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/learningresources">Resources</a></li></ul></div></nav></div><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="../index.html">AddressBook-Level3</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="../DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="../LearningOutcomes.html">LOs</a></li><li class="nav-item"><a class="nav-link active" href="../AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="../ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/se-edu/addressbook-level3"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Bryan Lim Yan Jie - Project Portfolio</h1></div><div id="content"><div class="sect1">
+<h2 id="project-elisa"><a class="link" href="#project-elisa">PROJECT: ELISA</a></h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>My team of 5 were tasked with morphing or enhancing a basic command line interace (CLI) desktop address book application for our Software Engineering Project.</p>
+</div>
+<div class="paragraph">
+<p>We were all computing students who were experiencing high amounts of stress from juggling the never-ending list of responsibilities we had.
+We then realised that this was not a problem that was unique to ourselves, thus we resolved to develop an application to help reduce the stress of individuals like us.
+We decided to morph the project into a student assistant we called ELISA. Our Extremely Intelligent n' Loud Student Assistant.
+We decided that ELISA could help us through 5 ways.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>She could help keep track of our tasks &amp; events</p>
+</li>
+<li>
+<p>She could help us focus on one task at a time when we feel overwhelmed.</p>
+</li>
+<li>
+<p>She could remind us so that we don&#8217;t have to constantly scan through the lists to ensure that we remember everything we need to.</p>
+</li>
+<li>
+<p>She could entertain us.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>This is how our user interface looks like:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/blimyjUI.png" alt="blimyjUI">
+</div>
+</div>
+<div class="paragraph">
+<p>My role was to implement the reminder and snooze functionality as well as to design the underlying commons classes used by my teammates.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="summary-of-contributions"><a class="link" href="#summary-of-contributions">Summary of contributions</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this section, I will be briefly going through my contributions to this team project. For the full extent of my contributions to the project, please visit <a href="https://nus-cs2103-ay1920s1.github.io/tp-dashboard/#=undefined&amp;search=blimyj">here</a>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Major enhancement</strong>: added <strong>the ability to</strong> set and snooze reminders</p>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: allows the user to remind himself of details of tasks or events when needed.</p>
+</li>
+<li>
+<p>Justification: This feature improves the product significantly because the user now no longer needs to constantly scan through lists in order to remember information at the right time. Instead ELISA will now remind him when it&#8217;s time.</p>
+</li>
+<li>
+<p>Highlights: This enhancement had to deal with multiple threads and had to handle the occurrence of reminders correctly. Due to the undo / redo feature, it required an in-depth analysis of thread-safety and time-sensitive behaviour analysis. The implementation was challenging as it required modifications to other components such as the ItemModelManager in order to ensure the correct handling of reminders when edited, undone or redone.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Minor enhancement</strong>: add <strong>commons classes</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: Contains the details required for tasks, events &amp; reminders.</p>
+</li>
+<li>
+<p>Justification: It allowed for cross-reference of information between the lists so that details of the  tasks, events &amp; reminders could be accessed regardless of the type of list being viewed without cyclic dependencies.</p>
+</li>
+<li>
+<p>Highlights: This enhancement had to support immutability in order ensure thread-safety as well as to make the code easier to maintain.</p>
+</li>
+<li>
+<p>Credits:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ideas for considering builder pattern [<a href="https://stackoverflow.com/questions/29881135/difference-between-builder-pattern-and-constructor">StackOverflow</a></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Other contributions</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Project management:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Managed releases <code>v1.1</code> - <code>v1.3.5</code> (5 releases, excluding <code>v1.3.4</code>) on GitHub</p>
+</li>
+<li>
+<p>Managed team meetings &amp; agendas. (Week 4-10)</p>
+</li>
+<li>
+<p>Managed bug allocation for PE.</p>
+</li>
+<li>
+<p>Managed Github team repo. (Setting up of branch protection &amp; tools mentioned below)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Documentation:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Updated the developer guide by giving the implementation of the undo function as well as filling in use cases and user stories</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Reviewed the following pull requests:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/AY1920S1-CS2103T-T10-3/main/pull/82">PR #82</a>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Suggested abstraction of arePrefixesPresent method to adhere to DRY principle.</p>
+</li>
+<li>
+<p>Suggested usage of Optional to prevent potential error.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/AY1920S1-CS2103T-T10-3/main/pull/116">PR #116</a>: Suggested changes in function naming in order to maintain code consistency which were eventually implemented.</p>
+</li>
+<li>
+<p><a href="https://github.com/AY1920S1-CS2103T-T10-3/main/pull/266">PR #266</a>: Spotted potential conflict with reminder due to repeated addition from autoReschedule event.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Tools:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Integrated AppVeyor &amp; Coveralls to the team repo [<a href="https://github.com/AY1920S1-CS2103T-T10-3/main/pull/281">#281</a>]</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-user-guide"><a class="link" href="#contributions-to-the-user-guide">Contributions to the User Guide</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users.</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="reminder-feature"><a class="link" href="#reminder-feature">Reminder Feature</a></h3>
+<div class="paragraph">
+<p>So focused on your work that you forget the other tasks in your life?
+Don&#8217;t worry! You can ask ELISA to remind you to do what you need to do, when you need to do it!</p>
+</div>
+<div class="sect3">
+<h4 id="adding-a-reminder-code-reminder-code"><a class="link" href="#adding-a-reminder-code-reminder-code">Adding a reminder: <code>reminder</code></a></h4>
+<div class="paragraph">
+<p>Simply add your reminder with this command:
+<code>reminder John’s Birthday -r 11/11/2019 1440</code><br>
+ and ELISA will carry it out!</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/BeforeReminderCommand.PNG" alt="BeforeReminderCommand">
+</div>
+</div>
+<div class="paragraph">
+<p>Once it&#8217;s time for you to be reminded, ELISA will remind you!
+Best of all, ELISA will play a chime so you won&#8217;t need to have ELISA open in order to be reminded!</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/AfterReminderCommand.PNG" alt="AfterReminderCommand">
+</div>
+</div>
+<div class="paragraph">
+<p>More specifically, the reminder command format is: <code>reminder DESCRIPTION -r REMINDER [-t TAG]</code></p>
+</div>
+<div class="paragraph">
+<p>Here are some other ways you could use this command!:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>reminder Finish UG -r 11/10/2019 1400</code></p>
+</li>
+<li>
+<p><code>reminder Get John’s Birthday gift -r 2019-09-19T14:00 -t friend</code></p>
+</li>
+<li>
+<p><code>reminder Study for 2103T Exam -r 3.day.later</code></p>
+<div class="olist NOTE">
+<ol class="NOTE">
+<li>
+<p>It is currently not possible to set a reminder for events with an autoreschedule flag. We intend to include this in v2.0 .</p>
+</li>
+<li>
+<p>It is not possible to set a reminder in the past.</p>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/FailReminderCommand.PNG" alt="FailReminderCommand">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="snoozing-a-reminder-code-snooze-code"><a class="link" href="#snoozing-a-reminder-code-snooze-code">Snoozing a reminder: <code>snooze</code></a></h4>
+<div class="paragraph">
+<p>If you&#8217;re in the groove of working but still want to be reminded again of a reminder that just occurred, you can use the snooze command!</p>
+</div>
+<div class="paragraph">
+<p><code>snooze</code> will snooze the most recent reminder for a duration of time (5 minutes by default)</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/BeforeSnoozeCommand.PNG" alt="BeforeSnoozeCommand">
+</div>
+</div>
+<div class="paragraph">
+<p>And ELISA will remind you again once it&#8217;s time!</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/AfterSnoozeCommand.PNG" alt="AfterSnoozeCommand">
+</div>
+</div>
+<div class="paragraph">
+<p>More specifically the format of this command is: 'snooze [INDEX] [-s SNOOZE_DURATION]'<br></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>This snoozes a reminder.<br></p>
+</li>
+<li>
+<p>The index refers to the it&#8217;s index in the reminder list.<br></p>
+</li>
+<li>
+<p>If an index is not provided, the most recently occurred reminder will be snoozed.<br></p>
+</li>
+<li>
+<p>If a snooze duration is not specified, the reminder will be snoozed at the default duration of 5 min.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Here are some examples you can try out!
+* <code>snooze 1</code>
+* <code>snooze 3 -s 10.min.later</code>
+* <code>snooze -s 10/10/2020 1400</code></p>
+</div>
+<div class="olist NOTE">
+<ol class="NOTE">
+<li>
+<p>It is possible to snooze the same reminder multiple times if you wish.<br></p>
+</li>
+<li>
+<p>It is not possible to snooze (without specifying index) if no reminder has occurred yet.<br>
+However, if you use the snooze command incorrectly, ELISA will first attempt to correct your usage of the snooze command.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-developer-guide"><a class="link" href="#contributions-to-the-developer-guide">Contributions to the Developer Guide</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project.</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><a href="#Design-Commons"><strong><code>Commons</code></strong></a> represents a collection of classes used by multiple other components.
+The following class plays an important role at the architecture level:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Item</code> : Used by classes to represent a task, event, reminder or any combination of the three.</p>
+</li>
+<li>
+<p><code>Task</code> : Used by classes to store, access and modify details regarding tasks.</p>
+</li>
+<li>
+<p><code>Events</code> : Used by classes to store, access and modify details regarding events.</p>
+</li>
+<li>
+<p><code>Reminders</code> : Used by classes to store, access and modify details regarding reminders.</p>
+</li>
+<li>
+<p><code>LogsCenter</code> : Used by many classes to write log messages to the App&#8217;s log file.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/ItemClassDiagram.png" alt="ItemClassDiagram">
+</div>
+<div class="title">Figure 1. Class Diagram of the Item</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>An <code>Item</code> can contain an task, event or reminder. However it must contain at least one of the three.</p>
+</li>
+<li>
+<p>The <code>ItemBuilder</code> class ensures the validation of the above rule when <code>build()</code> is called..</p>
+</li>
+<li>
+<p>An <code>Item</code> is immutable in order to support thread safety.</p>
+</li>
+<li>
+<p>An <code>Item</code> is created via the ItemBuilder class.</p>
+</li>
+<li>
+<p>Setter methods of <code>Item</code> create a new <code>Item</code> through <code>ItemBuilder</code> to ensure immutability.</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="add-reminder-feature"><a class="link" href="#add-reminder-feature">Add Reminder feature</a></h3>
+<div class="paragraph">
+<p>Step 1. The user enters the command <code>"reminder John&#8217;s Birthday -r 3.day.later"</code>.<br>
+Step 2. The LogicManager creates an ELISAParser to parse the user input.<br>
+Step 3. ELISAParser creates a AddReminderCommandParser which parses the input and returns an ReminderCommand.<br>
+Step 4. LogicManager will execute the ReminderCommand. AddCommand will then invoke <code>ItemModel#add(Item)</code>, which adds the Item that contains the reminder to the <code>RemindersList</code> and the <code>futureRemindersList</code>.<br>
+Step 5. Each time an Item is added to the <code>futureRemindersList</code>, the Items in futureRemindersList is sorted according to the <code>occurrenceDateTime</code> of its Reminder in order of recency.<br>
+Step 6. AddCommand will also trigger a change in view by calling <code>ItemModel#setVisualList(taskList)</code><br>
+Step 7. Upon the successful execution of AddCommand, a CommandResult is returned to the LogicManager, which will then be returned to the Ui to render the appropriate view.<br></p>
+</div>
+<div class="paragraph">
+<p>When the application is launched, the LogicManager also creates a separate thread using the <code>ScheduledThreadPoolExecutor</code> that constantly runs checkTask every 5 seconds.<br>
+CheckTask is a runnable that monitors the ItemModelManager to see if there are any reminders in <code>futureRemindersList</code> that have an <code>occurrenceDateTime</code> after <code>LocalDateTime#now()</code>.<br>
+If there is, it transfers those reminders to <code>activeRemindersList</code> which is an ObservableList.<br></p>
+</div>
+<div class="paragraph">
+<p>Meanwhile, the MainWindow binds a listener <code>activeRemindersList</code> in order to observe if any Items with Reminders have been added to it.<br>
+If so, it will add <code>ReminderDialogBox</code> with the appropriate details for the added Items to the <code>resultDisplay</code>.<br></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="snooze-reminder-feature"><a class="link" href="#snooze-reminder-feature">Snooze Reminder feature</a></h3>
+<div class="paragraph">
+<p>We can see how snooze is performed through the activity diagram below.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/SnoozeActivityDiagram.png" alt="SnoozeActivityDiagram">
+</div>
+<div class="title">Figure 2. Activity Diagram to snooze a reminder</div>
+</div>
+<div class="paragraph">
+<p>From the image above, we can see that there 2 guard conditions.<br>
+The first checks whether there is a reminder to snooze (either via an index or recently occurred reminder). If there isn&#8217;t, an exception is thrown.<br>
+The second checks if the <code>newReminderOccurrenceIsValid</code> (i.e. reminder does not occur in the past). Otherwise, it throws an exception.<br>
+If the duration of the reminder is not specified, then the default duration for the snooze is 5 minutes.</p>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 15:32:30 UTC</div></div></div></body></html>
