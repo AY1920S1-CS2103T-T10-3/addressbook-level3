@@ -4,7 +4,7 @@
 <div class="sectionbody">
 <div class="imageblock">
 <div class="content">
-<img src="images/ug_title.png" alt="ug title">
+<img src="images/ug_title.PNG" alt="ug title">
 </div>
 </div>
 <div class="paragraph">
@@ -50,7 +50,7 @@ Licence: <code>NUS</code></p>
 <div class="sectionbody">
 <div class="imageblock">
 <div class="content">
-<img src="images/ug_introduction.png" alt="ug introduction">
+<img src="images/ug_introduction.PNG" alt="ug introduction">
 </div>
 </div>
 <div class="paragraph">
@@ -72,7 +72,7 @@ Licence: <code>NUS</code></p>
 <div class="sectionbody">
 <div class="imageblock">
 <div class="content">
-<img src="images/ug_quickstart.png" alt="ug quickstart">
+<img src="images/ug_quickstart.PNG" alt="ug quickstart">
 </div>
 </div>
 <div class="olist arabic">
@@ -107,9 +107,63 @@ Licence: <code>NUS</code></p>
 <div class="sectionbody">
 <div class="imageblock">
 <div class="content">
-<img src="images/ug_legend.png" alt="ug legend">
+<img src="images/ug_legend.PNG" alt="ug legend">
 </div>
 </div>
+<div class="paragraph">
+<p>Here are the icons that will be used in the app:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/Completed.PNG" alt="Done" title="Done"></span> shows that you&#8217;ve completed this task.<br>
+<span class="image"><img src="images/Uncompleted.PNG" alt="Not done" title="Not done"></span> shows that you have yet to complete this task.<br></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Legend_difference.PNG" alt="Legend difference">
+</div>
+<div class="title">Figure 2. Difference between Task, Event, Reminder</div>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 1. Legend description</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">What it creates:</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Example command:</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1) Task only</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">task shower</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2) Event only</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">event christmas -d 25/12/2019 0000</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3) Reminder only</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">reminder shower -r 10.min.later</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4) Task and Reminder</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">task shower -r 10.min.later</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">5) Event and Reminder</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">event christmas -d 25/12/2019 0000 -r 24/12/2019 0000</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">6) Task and Event</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">task CS2103T Quiz -d 11/11/2019 2359</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">7) Task, Event, Reminder</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">task CS2103T Quiz -d 11/11/2019 2359 -r 10/11/2019 1200</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="sect1">
@@ -130,7 +184,7 @@ For your viewing pleasure, we&#8217;ve collated it nicely into a quick starter p
 <p>This table shows the basic rules for the formatting the input:</p>
 </div>
 <table class="tableblock frame-all grid-all spread">
-<caption class="title">Table 1. Command Guidelines</caption>
+<caption class="title">Table 2. Command Guidelines</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -207,7 +261,7 @@ For your viewing pleasure, we&#8217;ve collated it nicely into a quick starter p
 </ul>
 </div>
 <table class="tableblock frame-all grid-all spread">
-<caption class="title">Table 2. Flags Overview</caption>
+<caption class="title">Table 3. Flags Overview</caption>
 <colgroup>
 <col style="width: 10%;">
 <col style="width: 20%;">
@@ -292,7 +346,7 @@ For your viewing pleasure, we&#8217;ve collated it nicely into a quick starter p
 <p>There are three other flags that do not take in any parameters and are only used for the edit command. They are listed below:</p>
 </div>
 <table class="tableblock frame-all grid-all spread">
-<caption class="title">Table 3. Additional flags</caption>
+<caption class="title">Table 4. Additional flags</caption>
 <colgroup>
 <col style="width: 10%;">
 <col style="width: 90%;">
@@ -327,14 +381,6 @@ Not all tags work for every command. Please check the specific command for more 
 </td>
 </tr>
 </table>
-</div>
-<div class="paragraph">
-<p>Here are the icons that will be used in the app:</p>
-</div>
-<div class="paragraph">
-<p><span class="image"><img src="images/Completed.PNG" alt="Done" title="Done"></span> shows that you&#8217;ve completed this task.<br>
-<span class="image"><img src="images/Uncompleted.PNG" alt="Not done" title="Not done"></span> shows that you have yet to complete this task.<br>
-<span class="image"><img src="images/EventIcon.PNG" alt="Event" title="Event"></span> shows that this is an Event with the date shown in its eyes.<br></p>
 </div>
 <div class="admonitionblock warning">
 <table>
@@ -604,11 +650,8 @@ Deletes the 2nd reminder in the shown reminder list.</p>
 <div class="sect2">
 <h3 id="autoreschedule-feature"><a class="link" href="#autoreschedule-feature">4.2. AutoReschedule Feature</a></h3>
 <div class="paragraph">
-<p>Do you have to go to the supermarket weekly? Complete a quiz weekly? Jog daily?<br>
-Well this would definitely make your life much easier!<br></p>
-</div>
-<div class="paragraph">
-<p>Your events can now update its own time when it is already over! All you need to do is to add a <code>-auto</code> flag, along with a time period.</p>
+<p>Do you have to go to the supermarket weekly? Complete a quiz weekly? Jog daily? Well this would definitely make your life much easier!<br>
+Your events can now update its own time when it is already over! All you need to do is to add a <code>-auto</code> flag, along with a time period.</p>
 </div>
 <div class="paragraph">
 <p>Here is how you can do it. You might have weekly quizzes due on the same day every week, the command you can enter is <code>event CS2103T Quiz -d 23/11/2019 2359 -auto week</code>.<br>
@@ -621,7 +664,7 @@ This is what I mean. If you add an event that is already over, eg. <code>event q
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/edit-5.PNG" alt="edit 5">
+<img src="images/edit-5.PNG" alt="100" width="500">
 </div>
 </div>
 <div class="paragraph">
@@ -780,7 +823,7 @@ Although, the ESC key can close too, we do not advise doing so as ELISA may be c
 <div class="content">
 <img src="images/themewhite.PNG" alt="themewhite">
 </div>
-<div class="title">Figure 2. White theme of ELISA</div>
+<div class="title">Figure 3. White theme of ELISA</div>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -822,7 +865,7 @@ Although, the ESC key can close too, we do not advise doing so as ELISA may be c
 <div class="content">
 <img src="images/calendar.PNG" alt="calendar">
 </div>
-<div class="title">Figure 3. Calendar feature of ELISA</div>
+<div class="title">Figure 4. Calendar feature of ELISA</div>
 </div>
 </div>
 <div class="sect2">
@@ -845,7 +888,7 @@ Although, the ESC key can close too, we do not advise doing so as ELISA may be c
 <div class="content">
 <img src="images/SnakeGame.PNG" alt="Snake" width="600" height="600">
 </div>
-<div class="title">Figure 4. Snake game <code>EASY</code><br></div>
+<div class="title">Figure 5. Snake game <code>EASY</code><br></div>
 </div>
 <div class="paragraph">
 <p><code>EASY</code></p>
@@ -857,7 +900,7 @@ Although, the ESC key can close too, we do not advise doing so as ELISA may be c
 <div class="content">
 <img src="images/snakegamehard.PNG" alt="SnakeHard" width="600" height="600">
 </div>
-<div class="title">Figure 5. Snake game <code>HARD</code><br></div>
+<div class="title">Figure 6. Snake game <code>HARD</code><br></div>
 </div>
 <div class="paragraph">
 <p><code>HARD</code></p>
@@ -1021,13 +1064,13 @@ Format: <code>redo</code></p>
 <div class="content">
 <img src="images/BeforeFind.PNG" alt="BeforeFind">
 </div>
-<div class="title">Figure 6. ELISA before find command</div>
+<div class="title">Figure 7. ELISA before find command</div>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/AfterFind.PNG" alt="AfterFind">
 </div>
-<div class="title">Figure 7. ELISA after find command</div>
+<div class="title">Figure 8. ELISA after find command</div>
 </div>
 <div class="paragraph">
 <p>Format: <code>find &lt;keyword&gt;</code></p>
@@ -1055,7 +1098,7 @@ Format: <code>redo</code></p>
 <div class="content">
 <img src="images/BeforePriority.PNG" alt="500" width="500">
 </div>
-<div class="title">Figure 8. ELISA before priority mode with a long list of tasks</div>
+<div class="title">Figure 9. ELISA before priority mode with a long list of tasks</div>
 </div>
 <div class="paragraph">
 <p>By simply typing <code>priority</code> into the command box, you will be given one single task of the highest priority among your task list. This task is chosen by ELISA base on priority and the order in which the task was added to the list.</p>
@@ -1064,7 +1107,7 @@ Format: <code>redo</code></p>
 <div class="content">
 <img src="images/AfterPriority.PNG" alt="500" width="500">
 </div>
-<div class="title">Figure 9. ELISA in priority mode</div>
+<div class="title">Figure 10. ELISA in priority mode</div>
 </div>
 <div class="paragraph">
 <p>Notice that the ELISA icon turns red to signify that you are in priority mode and your task list has shrunk from 5 tasks down to the 1 most important task.</p>
@@ -1076,7 +1119,7 @@ Format: <code>redo</code></p>
 <div class="content">
 <img src="images/AfterDone.PNG" alt="500" width="500">
 </div>
-<div class="title">Figure 10. ELISA after completing the first task</div>
+<div class="title">Figure 11. ELISA after completing the first task</div>
 </div>
 <div class="paragraph">
 <p>To go back to the normal task view, simply type <code>priority</code> again. Or even better, complete all your tasks and you will be automatically brought out of priority mode.</p>
@@ -1085,7 +1128,7 @@ Format: <code>redo</code></p>
 <div class="content">
 <img src="images/AllDone.PNG" alt="500" width="500">
 </div>
-<div class="title">Figure 11. ELISA after all tasks are completed</div>
+<div class="title">Figure 12. ELISA after all tasks are completed</div>
 </div>
 <div class="paragraph">
 <p>Feeling lazy? You can also opt to turn off priority mode at a specific time by typing <code>priority dd/mm/yyyy hhmm</code> and ELISA will turn it off at that specific time for you.</p>
@@ -1189,4 +1232,4 @@ There is no need to save manually.</p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 13:28:31 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 14:33:32 UTC</div></div></div></body></html>
