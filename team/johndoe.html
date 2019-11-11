@@ -176,6 +176,69 @@ Deletes the 2nd reminder in the shown reminder list.</p>
 </div>
 </div>
 <div class="sect2">
+<h3 id="autoreschedule-feature"><a class="link" href="#autoreschedule-feature">AutoReschedule Feature</a></h3>
+<div class="paragraph">
+<p>Do you have to go to the supermarket weekly? Complete a quiz weekly? Jog daily?<br>
+Well this would definitely make your life much easier!<br></p>
+</div>
+<div class="paragraph">
+<p>Your events can now update its own time when it is already over! All you need to do is to add a <code>-auto</code> flag, along with a time period.</p>
+</div>
+<div class="paragraph">
+<p>Here is how you can do it. You might have weekly quizzes due on the same day every week, the command you can enter is <code>event CS2103T Quiz -d 23/11/2019 2359 -auto week</code>.<br>
+This creates an event whose date will change every week.
+Convenient isn&#8217;t it! Now you no longer have to manually change their dates after it is over.</p>
+</div>
+<div class="paragraph">
+<p>That&#8217;s not it! If you add an AutoReschedule event with a date that is already over, ELISA would automatically update its date to show the upcoming one.<br>
+This is what I mean. If you add an event that is already over, eg. <code>event quiz 11/08/2019 2359 -auto week</code>:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/edit-5.PNG" alt="edit 5">
+</div>
+</div>
+<div class="paragraph">
+<p>ELISA immediately changes it to show the upcoming date for this week. ELISA shows 10 NOV as it is 9 NOV at this point.</p>
+</div>
+<div class="paragraph">
+<p>Also, are you worried that the events wouldn&#8217;t be updated if you leave the app? No worries as ELISA&#8217;s got you covered!<br>
+When you come back again, you would see that all the events that have AutoReschedule would show the upcoming date.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+But there is a small drawback&#8230;&#8203; AutoReschedule currently does not work with reminders. That means that if you add an <code>-auto</code> flag for an event, you would not be able to add a <code>-r</code> flag for reminders.
+This also means that reminders cannot be created with the <code>-auto</code> flag. But you can look forward to this in V2.0 of ELISA!
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>For the rescheduling period, you can use <code>hour</code>, <code>day</code>, <code>week</code> or the <code>10.min.later</code> format.</p>
+</div>
+<div class="paragraph">
+<p>Here are some interesting commands you can try:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>event grocery shopping -d 9/9/2019 1200 -auto week</code></p>
+</li>
+<li>
+<p><code>event jog -d 23/11/2019 0800 -auto day</code></p>
+</li>
+<li>
+<p><code>event smile -d 1.min.later -auto 1.min.later</code> (it&#8217;s good to be happy)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
 <h3 id="reminder-feature"><a class="link" href="#reminder-feature">Reminder Feature</a></h3>
 <div class="sect3">
 <h4 id="snoozing-a-reminder-code-snooze-code"><a class="link" href="#snoozing-a-reminder-code-snooze-code">Snoozing a reminder: <code>snooze</code></a></h4>
@@ -690,6 +753,18 @@ There is no need to save manually.</p>
 </div>
 </div>
 <div class="sect1">
+<h2 id="coming-in-v2-0"><a class="link" href="#coming-in-v2-0">Coming in V2.0</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Events with AutoReschedule can have reminders that will be rescheduled along with it.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="contributions-to-the-developer-guide"><a class="link" href="#contributions-to-the-developer-guide">Contributions to the Developer Guide</a></h2>
 <div class="sectionbody">
 <table class="tableblock frame-all grid-all spread">
@@ -1095,7 +1170,11 @@ The classes involved in the above rescheduling are:<br></p>
 <div class="paragraph">
 <p>Step 1. The user enters the command <code>event CS2103T Quiz -d 23/09/2019 2359 -auto week</code>.<br>
 Step 2. The Event is created, following the sequence of steps in the section <em>Adding Task/Event</em>. However there are now some extra steps from Step 3 onwards that occur concurrently from the object creation of Event.<br>
-Step 3. &#8230;&#8203; <em>{work in progress}</em><br></p>
+Step 3a. The presence of the <code>-auto week</code> creates an AutoReschedulePeriod, which is stored in the Event created. This can be seen in the Class Diagram above.<br>
+Step 3b. If the start time of this Event is already over, the Event&#8217;s start time will be modified to show the next start time, using this Event&#8217;s AutoReschedulePeriod.
+Step 4. When <code>LogicManager#execute(model)</code> is called, the presence of AutoReschedulePeriod in the Event triggers the creation of a RescheduleTask, which represents the task of rescheduling this Event.<br>
+Step 5. This RescheduleTask is added to an AutoRescheduleManager, which manages all RescheduleTasks.<br>
+Step 6. When the start time of this Event has passed, AutoRescheduleManager will call <code>RescheduleTask#run()</code>, and this updates the Event start time, which will be reflected in the Ui.<br></p>
 </div>
 <div class="paragraph">
 <p>The following diagrams show how the command <code>event Quiz -d 10.hour.later -auto week</code> is executed from the Logic component.
@@ -1168,4 +1247,4 @@ The significance of these methods will be shown in the continuing diagram below:
 <p><em>{Optionally, you may include other projects in your portfolio.}</em></p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 18:37:58 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 06:18:49 UTC</div></div></div></body></html>
