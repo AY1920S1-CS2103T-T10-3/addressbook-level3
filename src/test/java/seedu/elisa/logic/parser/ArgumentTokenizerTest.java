@@ -1,21 +1,35 @@
 package seedu.elisa.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+
+
+import org.junit.jupiter.api.Test;
 
 public class ArgumentTokenizerTest {
-    /*
+
     private final Prefix unknownPrefix = new Prefix("--u");
-    private final Prefix pSlash = new Prefix("p/");
-    private final Prefix dashT = new Prefix("-t");
-    private final Prefix hatQ = new Prefix("^Q");
+    private final Prefix deadline = new Prefix("-d");
+    private final Prefix reminder = new Prefix("-r");
 
     @Test
     public void tokenize_emptyArgsString_noValues() {
         String argsString = "  ";
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(argsString, pSlash);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(argsString, deadline);
 
         assertPreambleEmpty(argMultimap);
-        assertArgumentAbsent(argMultimap, pSlash);
+        assertArgumentAbsent(argMultimap, deadline);
     }
+
+    @Test
+    public void tokenize_deadlineArgsString() {
+        String argsString = "dummy description -d 10.min.later";
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(argsString, deadline);
+
+        assertDeadlinePresent(argMultimap);
+    }
+
 
     private void assertPreamblePresent(ArgumentMultimap argMultimap, String expectedPreamble) {
         assertEquals(expectedPreamble, argMultimap.getPreamble());
@@ -23,6 +37,10 @@ public class ArgumentTokenizerTest {
 
     private void assertPreambleEmpty(ArgumentMultimap argMultimap) {
         assertTrue(argMultimap.getPreamble().isEmpty());
+    }
+
+    private void assertDeadlinePresent(ArgumentMultimap argumentMultimap) {
+        assertTrue(argumentMultimap.getValue(deadline).isPresent());
     }
 
 
@@ -55,7 +73,7 @@ public class ArgumentTokenizerTest {
         assertPreamblePresent(argMultimap, argsString.trim());
 
     }
-
+/*
     @Test
     public void tokenize_oneArgument() {
         // Preamble present

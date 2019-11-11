@@ -7,21 +7,8 @@
 == PROJECT: ELISA
 
 == Overview
-Table of Contents:
 
-. <<About the Project, About the Project>>
-.. <<Context, Context>>
-.. <<About ELISA, About ELISA>>
-. <<Summary of Contributions, Summary of Contributions>>
-.. <<My Role, My Role>>
-.. <<Other Contributions, Other Contributions>>
-. <<Contributions to the User Guide, Contributions to the User Guide>>
-. <<Contributions to the Developer's Guide, Contributions to the Developer's Guide>>
-.. Design Considerations
-.. UML Diagrams
-. <<Conclusion, Conclusion>>
-
-== About the Project
+=== About the Project
 My team of 5 software engineering students were tasked with enhancing a basic command line interface (CLI) desktop address book application for our Software Engineering project.
 
 === Context
